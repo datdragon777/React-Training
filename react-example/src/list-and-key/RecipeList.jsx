@@ -17,8 +17,7 @@ const recipes = [
   },
 ];
 
-// eslint-disable-next-line no-unused-vars
-const Recipe = ({id, name, ingredients}) => {
+const Recipe = ({name, ingredients}) => {
     return (
         <div>
             <h2>{name}</h2>
