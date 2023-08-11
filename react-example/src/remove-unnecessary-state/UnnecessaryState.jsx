@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 
-function UnnecessaryState() {
-  function handleClick() {
+const UnnecessaryState = () => {
+  const handleClick = () => {
     const name = prompt('What is your name?');
     alert(`Hello, ${name}!`);
   }

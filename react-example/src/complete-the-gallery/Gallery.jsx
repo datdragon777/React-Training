@@ -74,15 +74,15 @@ const sculptureList = [{
     alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
   }];  
 
-function Gallery() {
+const Gallery = () => {
     const [index, setIndex] = useState(0);
     const [showMore, setShowMore] = useState(false);
   
-    function handleNextClick() {
+    const handleNextClick = () => {
       setIndex(index + 1);
     }
   
-    function handleMoreClick() {
+    const handleMoreClick = () => {
       setShowMore(!showMore);
     }
   

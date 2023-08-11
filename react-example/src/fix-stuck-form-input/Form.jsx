@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-export default function Form() {
+const Form = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
   
-    function handleFirstNameChange(e) {
+    const handleFirstNameChange = (e) => {
       setFirstName(e.target.value);
     }
   
-    function handleLastNameChange(e) {
+    const handleLastNameChange = (e) => {
       setLastName(e.target.value);
     }
   
-    function handleReset() {
+    const handleReset = () => {
       setFirstName('')
       setLastName('')
     }
@@ -34,3 +34,4 @@ export default function Form() {
       </form>
     );
 }
+export default Form

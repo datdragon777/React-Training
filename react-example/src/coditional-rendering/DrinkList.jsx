@@ -12,7 +12,7 @@ const drinks = {
 };
 
 // eslint-disable-next-line react/prop-types
-function Drink({ name }) {
+const Drink = ({ name }) => {
   const info = drinks[name];
   return (
     <section>
@@ -29,7 +29,7 @@ function Drink({ name }) {
   );
 }
 
-export default function DrinkList() {
+const DrinkList = () => {
   return (
     <div>
       <Drink name="tea" />
@@ -37,3 +37,5 @@ export default function DrinkList() {
     </div>
   );
 }
+
+export default DrinkList

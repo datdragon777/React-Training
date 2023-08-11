@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-function getImageUrl(imageId, size = "s") {
+const getImageUrl = (imageId, size = "s") => {
   return "https://i.imgur.com/" + imageId + size + ".jpg";
 }
 
-function Profile({ imageId, name, profession, awards, discovery, imageSize = 70 }) {
+const Profile = ({ imageId, name, profession, awards, discovery, imageSize = 70 }) => {
   return (
     <section className="profile">
       <h2>{name}</h2>
@@ -24,7 +24,7 @@ function Profile({ imageId, name, profession, awards, discovery, imageSize = 70 
   );
 }
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>Notable Scientists</h1>
