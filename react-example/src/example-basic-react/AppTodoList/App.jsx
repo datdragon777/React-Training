@@ -3,6 +3,7 @@ import Textfield from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
 import { useState, useCallback, useEffect } from "react";
 import { v4 } from "uuid";
+import './App.css'
 
 const TODO_APP_STORAGE_KEY = "TODO_APP";
 
