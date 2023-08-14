@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom/client'
 // import Form from './fix-stuck-form-input/Form'
 // import LightSwitch from './responding-to-events/LightSwitch'
 // import DrinkList from './coditional-rendering/DrinkList'
-import RecipeList from './list-and-key/RecipeList'
+// import RecipeList from './list-and-key/RecipeList'
+import App from './example-basic-react/AppTodoList/App'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <Form /> */}
     {/* <LightSwitch /> */}
     {/* <DrinkList /> */}
-    <RecipeList />
+    {/* <RecipeList /> */}
+    <App />
   </React.StrictMode>,
 )
