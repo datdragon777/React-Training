@@ -9,8 +9,9 @@ import ReactDOM from 'react-dom/client'
 // import RecipeList from './list-and-key/RecipeList'
 // import App from './example-basic-react/AppTodoList/App'
 // import FormValidation from './form-validation/FormValidation'
-import FilterableList from './sharing-state-between-components/FilterableList'
-import SyncedInputs from './sharing-state-between-components/SyncedInputs'
+// import FilterableList from './sharing-state-between-components/FilterableList'
+// import SyncedInputs from './sharing-state-between-components/SyncedInputs'
+import AppReact from './thinking-in-react/AppReact'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -24,7 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <RecipeList /> */}
     {/* <App /> */}
     {/* <FormValidation /> */}
-    <FilterableList />
-    <SyncedInputs />
+    {/* <FilterableList /> */}
+    {/* <SyncedInputs /> */}
+    <AppReact />
   </React.StrictMode>,
 )
