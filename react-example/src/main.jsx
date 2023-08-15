@@ -8,7 +8,9 @@ import ReactDOM from 'react-dom/client'
 // import DrinkList from './coditional-rendering/DrinkList'
 // import RecipeList from './list-and-key/RecipeList'
 // import App from './example-basic-react/AppTodoList/App'
-import FormValidation from './form-validation/FormValidation'
+// import FormValidation from './form-validation/FormValidation'
+import FilterableList from './sharing-state-between-components/FilterableList'
+import SyncedInputs from './sharing-state-between-components/SyncedInputs'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,6 +23,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <DrinkList /> */}
     {/* <RecipeList /> */}
     {/* <App /> */}
-    <FormValidation />
+    {/* <FormValidation /> */}
+    <FilterableList />
+    <SyncedInputs />
   </React.StrictMode>,
 )
