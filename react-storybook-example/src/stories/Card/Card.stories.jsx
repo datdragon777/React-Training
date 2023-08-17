@@ -1,43 +1,24 @@
-import Card from "./Card";
+import { Card } from "./Card";
 import { options } from "./constants";
+import styles from './Card.module.css'
+import { getListTemplate, getOptionsArgTypes, getTemplate } from "../../../helpers/storybook";
+
+
+const Template = getTemplate(Card, styles)
+const ListTemplate = getListTemplate(Card, styles)
 
 export default {
   title: "Card",
   component: Card,
+  tags: ["autodocs"],
   args: {
-    children: "Mlem hehe",
+    children: "This is CARD",
   },
   argTypes: {
-    color: {
-      description: "**options:**",
-      table: {
-        type: {
-          summary: options.colors.map((option) => `'${option}'`).join("|"),
-        },
-      },
-      control: {
-        type: "select",
-        options: options.colors,
-      },
-    },
-    size: {
-      description: "**options:**",
-      table: {
-        type: {
-          summary: options.sizes.map((option) => `'${option}'`).join("|"),
-        },
-      },
-      control: {
-        type: "select",
-        options: options.sizes,
-      },
-    },
+    color: getOptionsArgTypes(options.colors),
+    size: getOptionsArgTypes(options.sizes),
   },
 };
-
-const Template = (args) => <Card {...args} />;
-const ListTemplate = ({ items, ...args }) =>
-  items.map((item, index) => <Card key={index} {...args} {...item} />);
 
 export const Default = Template.bind({});
 
@@ -46,9 +27,9 @@ Clickable.args = {
   isClickable: true,
 };
 
-export const Dragable = Template.bind({});
-Dragable.args = {
-  isDragable: true,
+export const Draggable = Template.bind({});
+Draggable.args = {
+  isDraggable: true,
 };
 
 export const Colors = ListTemplate.bind({});

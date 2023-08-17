@@ -1,39 +1,61 @@
-import 'minireset.css'
-import '../styles/global.css'
-import '../styles/tokens.css'
+import "minireset.css";
+import "../styles/global.css";
+import "../styles/tokens.css";
+import { disableGlobalArgTypes } from "../helpers/storybook";
 
-const styles = {
+const getStyles = ({ __sb }) => ({
   display: "flex",
-  flexDirection: "column",
-  maxHeight: "auto",
+  flexDirection: __sb?.fd || "column",
+  maxHeight: __sb?.mh || "auto",
   justifyContent: "flex-start",
   alignItem: "flex-start",
-  flexWrap: "wrap",
+  flexWrap: __sb?.fw || "wrap",
   height: "100%",
   gap: "10px 30px",
-  background: "tomato",
-  padding: "20px"
-}
+  padding: "20px",
+});
 
 export const decorators = [
-  (Story) => (
-    <div style={styles}>
-      <Story />
-    </div>
-  )
-]
+  (Story, { parameters }) =>
+    disableGlobalArgTypes(parameters)("getStyles") || (
+      <div style={getStyles(parameters)}>
+        <Story />
+      </div>
+    ),
+];
 
-/** @type { import('@storybook/react').Preview } */
-const preview = {
-  parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
+// /** @type { import('@storybook/react').Preview } */
+// export const preview = {
+//   parameters: {
+//     // argTypes: {
+//     //   getStyles: {
+//     //     table: {disable: true}
+//     //   }
+//     // },
+//     actions: { argTypesRegex: "^on[A-Z].*" },
+//     controls: {
+//       matchers: {
+//         color: /(background|color)$/i,
+//         date: /Date$/,
+//       },
+//     },
+//   },
+// };
+
+export const parameters = {
+  argTypes: {
+    getStyles: {
+      table: {disable: true}
+    }
+  },
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
     },
   },
-};
+}
+export default parameters
 
-export default preview;
+// export default preview;
