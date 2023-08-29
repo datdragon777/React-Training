@@ -6,14 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LeftSidebar = () => {
   return (
-    <div className="left-sidebar">
+    <div className="left-sidebar">   
       <ul>
         {tag_links.map((tag_link) => {
           const { icon, name, path } = tag_link;
 
           return (
             <li key={uuidv4()}>
-              <TagLink icon={icon} name={name} link={path} />
+              <TagLink icon={icon} name={name} path={path} />
             </li>
           );
         })}

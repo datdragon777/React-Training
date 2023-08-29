@@ -1,20 +1,18 @@
 import TagLink from "./TagLink";
-import Dashboard from "../../assets/images/dashboard.svg"
-
 import { BrowserRouter } from 'react-router-dom';
-import { addDecorator } from '@storybook/react';
-
-
+import Dashboard from "../../assets/images/dashboard.svg"
 
 export default {
   title: "Components/Tag Link",
   component: TagLink,
   tags: ["autodocs"]
 };
-addDecorator(storyFn => (
-  <BrowserRouter>{storyFn()}</BrowserRouter>
-));
-const Template = args => <TagLink {...args} />
+
+const Template = (args) => (
+  <BrowserRouter>
+    <TagLink {...args} />
+  </BrowserRouter>
+);
 
 export const Default = Template.bind({})
 Default.args = {
@@ -30,5 +28,4 @@ Active.args = {
     name: "Active Link",
     path: "/",
     isActive: true
-
 }
