@@ -1,51 +1,51 @@
-import Dashboard from "../assets/images/dashboard.svg";
-import Analytics from "../assets/images/analytics.svg";
-import Invoice from "../assets/images/invoice.svg";
-import Schedule from "../assets/images/schedule.svg";
-import Calendar from "../assets/images/calendar.svg";
-import Messages from "../assets/images/messages.svg";
-import Notification from "../assets/images/notification.svg";
-import Setting from "../assets/images/setting.svg";
+import dashboard from "../assets/images/dashboard.svg";
+import analytics from "../assets/images/analytics.svg";
+import invoice from "../assets/images/invoice.svg";
+import schedule from "../assets/images/schedule.svg";
+import calendar from "../assets/images/calendar.svg";
+import messages from "../assets/images/messages.svg";
+import notification from "../assets/images/notification.svg";
+import setting from "../assets/images/setting.svg";
 
-export const tag_links = [
+export const TAG_LINKS = [
   {
     name: "Dashboard",
-    icon: Dashboard,
+    icon: dashboard,
     path: "/"
   },
   {
     name: "Analytics",
-    icon: Analytics,
+    icon: analytics,
     path: "/analytics"
   },
   {
     name: "Invoice",
-    icon: Invoice,
+    icon: invoice,
     path: "/invoice"
   },
   {
     name: "Schedule",
-    icon: Schedule,
+    icon: schedule,
     path: "/schedule"
   },
   {
     name: "Calendar",
-    icon: Calendar,
+    icon: calendar,
     path: "/calendar"
   },
   {
     name: "Messages",
-    icon: Messages,
+    icon: messages,
     path: "/messages"
   },
   {
     name: "Notification",
-    icon: Notification,
+    icon: notification,
     path: "/notification"
   },
   {
     name: "Settings",
-    icon: Setting,
+    icon: setting,
     path: "/settings"
   },
 ];
