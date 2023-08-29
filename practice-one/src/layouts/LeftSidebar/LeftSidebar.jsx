@@ -1,7 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./LeftSidebar.css";
-import TagLink from "../../components/TagLink/TagLink";
+import { TagLink } from "@components";
 import { tag_links } from "../../data/tagLinks";
 import LogoBrand from "../../assets/images/wons-logo.svg";
 import Lantern from "../../assets/images/lantern.svg";

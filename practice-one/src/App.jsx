@@ -3,9 +3,8 @@ import {
   Routes,
   BrowserRouter as Router,
 } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Analytics from "./pages/Analytics/Analytics";
-import LeftSidebar from "./layouts/LeftSidebar/LeftSidebar";
+import { LeftSidebar } from "@layouts";
+import { Home, Analytics } from "@pages";
 
 function App() {
   return (
