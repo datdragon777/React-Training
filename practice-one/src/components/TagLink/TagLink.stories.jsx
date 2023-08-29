@@ -1,6 +1,6 @@
 import TagLink from "./TagLink";
 import { BrowserRouter } from 'react-router-dom';
-import Dashboard from "../../assets/images/dashboard.svg"
+import dashboard from "../../assets/images/dashboard.svg"
 
 export default {
   title: "Components/Tag Link",
@@ -16,7 +16,7 @@ const Template = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-    icon: Dashboard,
+    icon: dashboard,
     name: "Default Link",
     path: "/",
     isActive: false
@@ -24,7 +24,7 @@ Default.args = {
 
 export const Active = Template.bind({})
 Active.args = {
-    icon: Dashboard,
+    icon: dashboard,
     name: "Active Link",
     path: "/",
     isActive: true

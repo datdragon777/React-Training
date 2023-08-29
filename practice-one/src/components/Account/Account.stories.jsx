@@ -9,6 +9,4 @@ export default {
 const Template = (args) => <Account {...args} />
 
 export const Default = Template.bind({})
-Default.args = {
-    
-}
+Default.args = {}
