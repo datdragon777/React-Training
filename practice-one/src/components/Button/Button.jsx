@@ -2,20 +2,18 @@ import React from "react";
 import "./Button.css";
 import PropTypes from "prop-types";
 
-const Button = (props) => {
-  const {
-    type,
-    children,
-    width,
-    height,
-    color,
-    background,
-    fontSize,
-    fontWeight,
-    icon,
-    border,
-    align,
-  } = props;
+const Button = ({
+  children,
+  width,
+  height,
+  color,
+  background,
+  fontSize,
+  fontWeight,
+  icon,
+  border,
+  align,
+}) => {
   const buttonClasses = `btn ${color} ${background} ${border} ${fontSize} ${fontWeight} ${align}`;
   const buttonSizes = {
     "--btn-width": width,
@@ -23,7 +21,7 @@ const Button = (props) => {
   };
   return (
     <button
-      type={type ? type : "button"}
+      type="button"
       className={buttonClasses}
       style={buttonSizes}
     >
