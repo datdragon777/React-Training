@@ -2,9 +2,9 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./LeftSidebar.css";
 import { TagLink } from "@components";
-import LogoBrand from "../../assets/images/wons-logo.svg";
-import Lantern from "../../assets/images/lantern.svg";
-import LightLantern from "../../assets/images/light-lantern.svg";
+import logoBrand from "../../assets/images/wons-logo.svg";
+import lantern from "../../assets/images/lantern.svg";
+import lightLantern from "../../assets/images/light-lantern.svg";
 import { TAG_LINKS } from "../../data/tagLinks";
 
 
@@ -13,7 +13,7 @@ const LeftSidebar = () => {
     <div className="left-sidebar">
       <div className="sidebar__brand">
         <a href="/" className="brand__link">
-          <img src={LogoBrand} alt="Wons" className="brand__img" />
+          <img src={logoBrand} alt="Wons" className="brand__img" />
           <p className="brand__text">Wons</p>
         </a>
       </div>
@@ -30,9 +30,9 @@ const LeftSidebar = () => {
 
       <div className="sidebar__decoration">
         <div className="decoration__img">
-          <img src={Lantern} className="decoration__lantern" alt="lantern" />
+          <img src={lantern} className="decoration__lantern" alt="lantern" />
           <img
-            src={LightLantern}
+            src={lightLantern}
             className="decoration__light-lantern"
             alt="lignt lantern"
           />
