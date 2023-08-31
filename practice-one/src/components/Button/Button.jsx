@@ -33,7 +33,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  children: "Edit",
+  children: "Update now",
   variant: "primary",
 };
 

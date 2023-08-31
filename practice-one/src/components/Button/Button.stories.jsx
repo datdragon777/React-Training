@@ -25,12 +25,14 @@ Secondary.args = {
 
 export const AlignLeftEdit = Template.bind({})
 AlignLeftEdit.args = {
+  children: "Edit",
   variant: BUTTON_VARIANTS.EDIT,
   icon: editIcon
 }
 
 export const AlignLeftDelete = Template.bind({})
 AlignLeftDelete.args = {
+  children: "Delete",
   variant: BUTTON_VARIANTS.DELETE,
   icon: deleteIcon
 }
