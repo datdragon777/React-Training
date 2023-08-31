@@ -8,6 +8,7 @@ import lightLantern from "../../assets/images/light-lantern.svg";
 import { TAG_LINKS } from "../../data/tagLinks";
 import Button from "../../components/Button/Button";
 import { BUTTON_VARIANTS } from "../../constants/buttons";
+import Account from "../../components/Account/Account";
 
 
 const LeftSidebar = () => {
@@ -43,6 +44,8 @@ const LeftSidebar = () => {
           <Button variant={BUTTON_VARIANTS.PRIMARY} >Update now</Button>
         </div>
       </div>
+
+      <Account />
     </div>
   );
 };

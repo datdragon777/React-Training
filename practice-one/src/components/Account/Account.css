@@ -1,0 +1,32 @@
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 18px;
+    padding-bottom: 30px;
+}
+
+.account__avatar {
+    width: 45px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.info__name,
+.info__desc {
+    font-size: var(--fs-xx-sm);
+    font-weight: var(--fw-sm);
+    line-height: normal;
+}
+
+.info__desc {
+    color: #99b2c6;
+}
+
+.account__icon {
+
+}
+
+.icon__logout {
+
+}
