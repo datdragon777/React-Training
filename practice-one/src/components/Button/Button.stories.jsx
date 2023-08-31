@@ -8,6 +8,7 @@ export default {
   title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
+  argTypes: { onClick: {action: "handleClick"} }
 };
 
 const Template = (args) => <Button {...args} />;

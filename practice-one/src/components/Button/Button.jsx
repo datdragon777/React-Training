@@ -4,9 +4,13 @@ import PropTypes from "prop-types";
 import { getButtonVariant } from "../../helpers/metrics";
 import { BUTTON_VARIANTS } from "../../constants/buttons";
 
-const Button = ({ children, variant = "primary", icon }) => {
+const Button = ({
+  children,
+  variant = BUTTON_VARIANTS.PRIMARY,
+  icon,
+  onClick,
+}) => {
   const buttonVariant = getButtonVariant(variant);
-
   const buttonStyle = {
     backgroundColor: buttonVariant.bgColor,
     color: buttonVariant.color,
@@ -19,7 +23,7 @@ const Button = ({ children, variant = "primary", icon }) => {
   };
 
   return (
-    <button type="button" className="btn" style={buttonStyle}>
+    <button type="button" className="btn" style={buttonStyle} onClick={onClick}>
       {icon && <img className="btn__icon" src={icon} />}
       {children}
     </button>
