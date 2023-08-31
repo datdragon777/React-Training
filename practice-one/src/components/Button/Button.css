@@ -1,0 +1,14 @@
+.btn {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  width: var(--btn-width, auto);
+  height: var(--btn-height, auto);
+}
+
+.btn__icon {
+  margin-right: 7px;
+}
