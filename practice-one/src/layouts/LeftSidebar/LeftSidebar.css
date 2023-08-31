@@ -63,4 +63,8 @@
   height: 10.0625rem;
   background-color: var(--cl-light-female);
   border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding-bottom: 15px;
 }

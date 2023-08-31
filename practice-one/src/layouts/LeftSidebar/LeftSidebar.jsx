@@ -6,6 +6,8 @@ import logoBrand from "../../assets/images/wons-logo.svg";
 import lantern from "../../assets/images/lantern.svg";
 import lightLantern from "../../assets/images/light-lantern.svg";
 import { TAG_LINKS } from "../../data/tagLinks";
+import Button from "../../components/Button/Button";
+import { BUTTON_VARIANTS } from "../../constants/buttons";
 
 
 const LeftSidebar = () => {
@@ -37,7 +39,9 @@ const LeftSidebar = () => {
             alt="lignt lantern"
           />
         </div>
-        <div className="decoration__wrapper"></div>
+        <div className="decoration__wrapper">
+          <Button variant={BUTTON_VARIANTS.PRIMARY} >Update now</Button>
+        </div>
       </div>
     </div>
   );
