@@ -1,8 +1,8 @@
 import React from "react";
 import "./Button.css";
 import PropTypes from "prop-types";
-import { getButtonVariant } from "../../helpers/metrics";
-import { BUTTON_VARIANTS } from "../../constants/buttons";
+import { getButtonVariant } from "@themes/metrics";
+import { BUTTON_VARIANTS } from "@constants/buttons";
 
 const Button = ({
   children,

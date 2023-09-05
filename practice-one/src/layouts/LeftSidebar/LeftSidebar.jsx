@@ -1,12 +1,16 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./LeftSidebar.css";
-import { TagLink } from "@components";
-import logoBrand from "../../assets/images/wons-logo.svg";
-import lantern from "../../assets/images/lantern.svg";
-import lightLantern from "../../assets/images/light-lantern.svg";
-import { TAG_LINKS } from "../../data/tagLinks";
-
+import { TagLink, Button, Account } from "@components";
+import {
+  logoBrand,
+  lantern,
+  lightLantern,
+  logoutIcon,
+  accountAvatar,
+} from "@assets/images";
+import { TAG_LINKS } from "@data/tagLinks";
+import { BUTTON_VARIANTS } from "@constants/buttons";
 
 const LeftSidebar = () => {
   return (
@@ -37,8 +41,17 @@ const LeftSidebar = () => {
             alt="lignt lantern"
           />
         </div>
-        <div className="decoration__wrapper"></div>
+        <div className="decoration__wrapper">
+          <Button variant={BUTTON_VARIANTS.PRIMARY}>Update now</Button>
+        </div>
       </div>
+
+      <Account
+        username="Easin Arafat"
+        avatar={accountAvatar}
+        desc="Free Account"
+        icon={logoutIcon}
+      />
     </div>
   );
 };

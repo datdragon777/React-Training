@@ -1,4 +1,7 @@
 .left-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 218px;
   height: 100vh;
   background-color: var(--cl-primary);
@@ -63,4 +66,8 @@
   height: 10.0625rem;
   background-color: var(--cl-light-female);
   border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding-bottom: 15px;
 }
