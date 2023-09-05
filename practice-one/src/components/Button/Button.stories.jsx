@@ -1,7 +1,5 @@
 import Button from "./Button";
-import plusIcon from "@assets/images/plus.svg"
-import editIcon from "@assets/images/edit.svg"
-import deleteIcon from "@assets/images/delete.svg"
+import { plusIcon, editIcon, deleteIcon } from "@assets/images"
 import { BUTTON_VARIANTS } from "@constants/buttons";
 
 export default {

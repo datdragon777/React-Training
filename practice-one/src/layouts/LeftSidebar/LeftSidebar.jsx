@@ -2,11 +2,13 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./LeftSidebar.css";
 import { TagLink, Button, Account } from "@components";
-import logoBrand from "@assets/images/wons-logo.svg";
-import lantern from "@assets/images/lantern.svg";
-import lightLantern from "@assets/images/light-lantern.svg";
-import logoutIcon from "@assets/images/logout.svg";
-import accountAvatar from "@assets/images/account-avatar.png";
+import {
+  logoBrand,
+  lantern,
+  lightLantern,
+  logoutIcon,
+  accountAvatar,
+} from "@assets/images";
 import { TAG_LINKS } from "@data/tagLinks";
 import { BUTTON_VARIANTS } from "@constants/buttons";
 
