@@ -1,15 +1,14 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./LeftSidebar.css";
-import { TagLink } from "@components";
-import logoBrand from "../../assets/images/wons-logo.svg";
-import lantern from "../../assets/images/lantern.svg";
-import lightLantern from "../../assets/images/light-lantern.svg";
-import { TAG_LINKS } from "../../data/tagLinks";
-import Button from "../../components/Button/Button";
-import { BUTTON_VARIANTS } from "../../constants/buttons";
-import Account from "../../components/Account/Account";
-
+import { TagLink, Button, Account } from "@components";
+import logoBrand from "@assets/images/wons-logo.svg";
+import lantern from "@assets/images/lantern.svg";
+import lightLantern from "@assets/images/light-lantern.svg";
+import logoutIcon from "@assets/images/logout.svg";
+import accountAvatar from "@assets/images/account-avatar.png";
+import { TAG_LINKS } from "@data/tagLinks";
+import { BUTTON_VARIANTS } from "@constants/buttons";
 
 const LeftSidebar = () => {
   return (
@@ -41,11 +40,16 @@ const LeftSidebar = () => {
           />
         </div>
         <div className="decoration__wrapper">
-          <Button variant={BUTTON_VARIANTS.PRIMARY} >Update now</Button>
+          <Button variant={BUTTON_VARIANTS.PRIMARY}>Update now</Button>
         </div>
       </div>
 
-      <Account />
+      <Account
+        username="Easin Arafat"
+        avatar={accountAvatar}
+        desc="Free Account"
+        icon={logoutIcon}
+      />
     </div>
   );
 };
