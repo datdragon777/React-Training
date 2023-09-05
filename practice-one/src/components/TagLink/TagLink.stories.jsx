@@ -1,6 +1,6 @@
 import TagLink from "./TagLink";
 import { BrowserRouter } from 'react-router-dom';
-import dashboard from "../../assets/images/dashboard.svg"
+import dashboard from "@assets/images/dashboard.svg"
 
 export default {
   title: "Components/Tag Link",
