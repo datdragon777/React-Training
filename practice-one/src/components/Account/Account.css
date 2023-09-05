@@ -20,5 +20,5 @@
 }
 
 .info__desc {
-    color: #99b2c6;
+    color: var(--cl-light-blue);
 }
