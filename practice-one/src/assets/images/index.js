@@ -5,6 +5,7 @@ export { default as dashboard } from "./dashboard.svg";
 export { default as deleteIcon } from "./delete.svg";
 export { default as editIcon } from "./edit.svg";
 export { default as email } from "./email.svg";
+export { default as arrowDown } from "./arrow-down.svg"
 export { default as invoice } from "./invoice.svg";
 export { default as lantern } from "./lantern.svg";
 export { default as lightLantern } from "./light-lantern.svg";
