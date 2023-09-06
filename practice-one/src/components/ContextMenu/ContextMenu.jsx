@@ -10,14 +10,14 @@ const ContextMenu = () => {
       <Button
         variant={BUTTON_VARIANTS.EDIT}
         icon={editIcon}
-        onClick={() => console.log("Clicked edit button")}
+        onClick={() => {}}
       >
         Edit
       </Button>
       <Button
         variant={BUTTON_VARIANTS.DELETE}
         icon={deleteIcon}
-        onClick={() => console.log("Clicked delete button")}
+        onClick={() => {}}
       >
         Delete
       </Button>
