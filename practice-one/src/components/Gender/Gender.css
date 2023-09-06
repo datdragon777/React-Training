@@ -1,5 +1,5 @@
 .gender__wrapper {
-  display: inline-block;
+  width: fit-content;
   padding: 7px 14px;
   border-radius: 33px;
   font-size: var(--fs-sm);

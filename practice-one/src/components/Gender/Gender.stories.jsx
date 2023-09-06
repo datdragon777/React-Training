@@ -4,6 +4,12 @@ export default {
   title: "Components/Gender",
   component: Gender,
   tags: ["autodocs"],
+  argTypes: {
+    gender: {
+      options: ["Male", "Female"],
+      control: { type: "radio" },
+    },
+  },
 };
 
 const Template = (args) => <Gender {...args} />;
