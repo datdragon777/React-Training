@@ -1,0 +1,11 @@
+.expand__wrapper {
+  display: flex;
+  align-items: center;
+  color: var(--cl-sort);
+}
+
+.expand__name {
+  font-weight: var(--fw-sm);
+  font-size: var(--fs-x-sm);
+  margin-right: 6px;
+}
