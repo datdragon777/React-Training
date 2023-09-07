@@ -1,0 +1,23 @@
+.customer__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.customer__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-right: 11px;
+}
+
+.customer__img {
+  width: 100%;
+  height: auto;
+}
+
+.customer__name {
+  color: var(--cl-secondary);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-sm);
+}
