@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./LeftSidebar.css";
+import "./Sidebar.css";
 import { TagLink, Button, Account } from "@components";
 import {
   logoBrand,
@@ -12,7 +12,7 @@ import {
 import { TAG_LINKS } from "@data/tagLinks";
 import { BUTTON_VARIANTS } from "@constants/buttons";
 
-const LeftSidebar = () => {
+const Sidebar = () => {
   return (
     <div className="left-sidebar">
       <div className="sidebar__brand">
@@ -56,4 +56,4 @@ const LeftSidebar = () => {
   );
 };
 
-export default LeftSidebar;
+export default Sidebar;

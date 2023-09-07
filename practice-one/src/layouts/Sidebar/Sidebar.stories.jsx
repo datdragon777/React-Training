@@ -1,15 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
-import LeftSidebar from "./LeftSidebar";
+import Sidebar from "./Sidebar";
 
 export default {
-  title: "Layouts/Left Sidebat",
-  component: LeftSidebar,
+  title: "Layouts/Sidebar",
+  component: Sidebar,
   tags: ["autodocs"],
 };
 
 const Template = (args) => (
   <BrowserRouter>
-    <LeftSidebar {...args} />
+    <Sidebar {...args} />
   </BrowserRouter>
 );
 
