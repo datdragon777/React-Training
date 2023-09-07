@@ -5,6 +5,12 @@ export default {
   title: "Components/Account",
   component: Account,
   tags: ["autodocs"],
+  argTypes: {
+    username: { control: "text" },
+    avatar: { control: { type: "file", accept: "image/*" } },
+    desc: { control: "text" },
+    icon: { control: { type: "file", accept: ".svg" } },
+  },
 };
 
 const Template = (args) => <Account {...args} />;
