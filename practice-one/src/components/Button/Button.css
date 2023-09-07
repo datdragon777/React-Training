@@ -11,5 +11,7 @@
 }
 
 .btn__icon {
+  width: 7.5px;
+  height: auto;
   margin-right: 7px;
 }
