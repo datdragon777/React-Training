@@ -5,7 +5,7 @@ const Account = ({username, avatar, desc, icon}) => {
   return (
     <div className="account">
       <div className="account__avatar">
-        <img src={avatar} alt="account-avatar" />
+        <img className="avatar__img" src={avatar} alt="account-avatar" />
       </div>
       <div className="account__info">
         <p className="info__name">{username}</p>
