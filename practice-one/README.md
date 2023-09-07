@@ -42,23 +42,26 @@ practice-one
             |-- ...
         |-- images
             |-- ...
+            |-- index.js
     |-- components
         |-- Account
         |-- Button
         |-- Contact
         |-- ContactDetail
         |-- ContextMenu
-        |-- CustomerAvatar
+        |-- CustomerInfo
         |-- Gender
         |-- Info
-        |-- Sort
+        |-- Expand
         |-- TagLink
+        |-- index.js
+    |-- constants
+        |-- ...
     |-- data
         |-- tagLink.jsx
     |-- layouts
-        |-- LeftSidebar
-        |-- MainContent
-        |-- RightSidebar
+        |-- Sidebar
+        |-- index.js
     |-- styles
         |-- abtracts
             |-- all.css
@@ -69,6 +72,8 @@ practice-one
             |-- base.css
             |-- reset.css
         |-- index.css
+    |-- themes
+        |-- metrics.js
     |-- App.jsx
     |-- main.jsx
 |-- .eslintrc.cjs
