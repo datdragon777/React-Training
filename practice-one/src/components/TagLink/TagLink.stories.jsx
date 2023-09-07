@@ -5,7 +5,13 @@ import dashboard from "@assets/images/dashboard.svg"
 export default {
   title: "Components/Tag Link",
   component: TagLink,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  argTypes: {
+    icon: {control: { type: "file", accept: ".svg" }},
+    name: {control: "text"},
+    path: {control: "text"},
+    isActive: {control: "boolean"}
+  }
 };
 
 const Template = (args) => (
@@ -18,7 +24,7 @@ export const Default = Template.bind({})
 Default.args = {
     icon: dashboard,
     name: "Default Link",
-    path: "/",
+    path: "https://www.youtube.com/",
     isActive: false
 }
 

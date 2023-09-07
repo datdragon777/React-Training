@@ -7,7 +7,7 @@ export default {
   argTypes: {
     gender: {
       options: ["Male", "Female"],
-      control: { type: "radio" },
+      control: { type: "select" },
     },
   },
 };
