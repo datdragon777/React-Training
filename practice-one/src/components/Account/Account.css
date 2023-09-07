@@ -6,8 +6,12 @@
     padding-bottom: 30px;
 }
 
+.account__avatar {
+    max-width: 45px;
+}
+
 .avatar__img{
-    width: 45px;
+    width: 100%;
     height: auto;
     border-radius: 12px;
 }
