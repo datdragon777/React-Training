@@ -1,0 +1,19 @@
+.customer__info {
+    display: grid;
+    gap: 38px;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 0.5fr 0.25fr 0.25fr;
+    padding: 17px 20px;
+    background: var(--cl-primary);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.customer__option {
+    width: fit-content;
+    padding: 12px 10px;
+    display: flex;
+    justify-self: flex-end;
+}
+
