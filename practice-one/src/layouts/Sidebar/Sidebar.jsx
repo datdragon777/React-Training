@@ -9,12 +9,12 @@ import {
   logoutIcon,
   accountAvatar,
 } from "@assets/images";
-import { TAG_LINKS } from "@data/tagLinks";
+import { TAG_LINKS } from "@data";
 import { BUTTON_VARIANTS } from "@constants/buttons";
 
 const Sidebar = () => {
   return (
-    <div className="left-sidebar">
+    <aside className="left-sidebar">
       <div className="sidebar__brand">
         <a href="/" className="brand__link">
           <img src={logoBrand} alt="Wons" className="brand__img" />
@@ -52,7 +52,7 @@ const Sidebar = () => {
         desc="Free Account"
         icon={logoutIcon}
       />
-    </div>
+    </aside>
   );
 };
 
