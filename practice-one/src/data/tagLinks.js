@@ -9,7 +9,7 @@ import {
   setting,
 } from "@assets/images";
 
-export const TAG_LINKS = [
+const TAG_LINKS = [
   {
     name: "Dashboard",
     icon: dashboard,
@@ -51,3 +51,4 @@ export const TAG_LINKS = [
     path: "/settings",
   },
 ];
+export default TAG_LINKS;
