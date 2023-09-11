@@ -37,3 +37,15 @@
   font-size: var(--fs-xxx-lg);
   font-weight: var(--fw-lg);
 }
+
+.analytics__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: var(--cl-primary);
+  padding: 50px 25px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

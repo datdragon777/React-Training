@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 const Analytics = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState(null);
+  const [errorPopup, setErrorPopup] = useState(true);
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -23,6 +24,7 @@ const Analytics = () => {
         const data = await response.json();
         setCustomers(data);
         setError(null);
+        setErrorPopup(false)
       } catch (error) {
         setError(error.message);
       }
@@ -30,6 +32,11 @@ const Analytics = () => {
 
     getAllCustomers();
   }, []);
+
+  const handleCloseError = () => {
+    setError(null);
+    setErrorPopup(false);
+  };
 
   const renderList = () => {
     return (
@@ -52,11 +59,14 @@ const Analytics = () => {
   return (
     <div className="analytics">
       <div className="analytics__header">
-        <h1 className="analytics__title">Customer List</h1>
+        <h2 className="analytics__title">Customer List</h2>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
-      {error ? (
-        <p className="error__message">{error}</p>
+      {errorPopup && error ? (
+        <div className="analytics__error">
+          <p className="error__message">{error}</p>
+          <Button variant={BUTTON_VARIANTS.SECONDARY} onClick={handleCloseError}>Close</Button>
+        </div>
       ) : customers.length ? (
         <div className="customer__table">
           {/* Start sort title */}
@@ -71,7 +81,7 @@ const Analytics = () => {
         </div>
       ) : (
         // Show message when list is empty
-          <p className="empty__message">Customer list is empty!</p>
+        <p className="empty__message">Customer list is empty!</p>
       )}
     </div>
   );
