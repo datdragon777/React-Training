@@ -4,10 +4,10 @@ import { menuDot } from "@assets/images";
 import { CustomerInfo, Gender, ContextMenu } from "@components";
 
 const CustomerItem = ({ avatar, name, email, phoneNumber, gender }) => {
-  const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
   const handleContextMenuClick = () => {
-    setIsContextMenuVisible(!isContextMenuVisible);
+    setIsShow(!isShow);
   };
 
   return (
@@ -21,7 +21,7 @@ const CustomerItem = ({ avatar, name, email, phoneNumber, gender }) => {
           <img src={menuDot} alt="dot icon" />
         </div>
       </div>
-      {isContextMenuVisible && <ContextMenu />}
+      {isShow && <ContextMenu />}
     </>
   );
 };
