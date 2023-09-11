@@ -5,7 +5,7 @@ export { default as dashboard } from "./dashboard.svg";
 export { default as deleteIcon } from "./delete.svg";
 export { default as editIcon } from "./edit.svg";
 export { default as email } from "./email.svg";
-export { default as arrowDown } from "./arrow-down.svg"
+export { default as arrowDown } from "./arrow-down.svg";
 export { default as invoice } from "./invoice.svg";
 export { default as lantern } from "./lantern.svg";
 export { default as lightLantern } from "./light-lantern.svg";
@@ -18,3 +18,4 @@ export { default as plusIcon } from "./plus.svg";
 export { default as schedule } from "./schedule.svg";
 export { default as setting } from "./setting.svg";
 export { default as logoBrand } from "./wons-logo.svg";
+export { default as infoAvatar } from "./info-avatar.jpg";
