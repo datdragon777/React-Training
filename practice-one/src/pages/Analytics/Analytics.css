@@ -1,3 +1,7 @@
+.analytics {
+  height: 100vh;
+}
+
 .analytics__header {
   display: flex;
   align-items: center;
@@ -16,12 +20,19 @@
 
 .customer__sort {
   display: grid;
-  gap: 58px;
-  grid-template-columns: 1fr 1fr 0.5fr 0.25fr 0.25fr;
+  gap: 30px;
+  grid-template-columns: 1fr 1fr 0.5fr 0.5fr 0.25fr;
   margin-left: 20px;
   margin-bottom: 14px;
 }
 
 .customer__item {
   position: relative;
+}
+
+.empty__message {
+  color: var(--cl-dark-blue);
+  text-align: center;
+  font-size: var(--fs-xxx-lg);
+  font-weight: var(--fw-lg);
 }
