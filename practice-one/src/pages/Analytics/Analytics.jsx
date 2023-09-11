@@ -6,11 +6,12 @@ import { plusIcon } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Analytics = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState(null);
-  const [errorPopup, setErrorPopup] = useState(true);
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -24,19 +25,23 @@ const Analytics = () => {
         const data = await response.json();
         setCustomers(data);
         setError(null);
-        setErrorPopup(false)
       } catch (error) {
         setError(error.message);
+        toast.error("Having some error. Please try again!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     };
 
     getAllCustomers();
   }, []);
-
-  const handleCloseError = () => {
-    setError(null);
-    setErrorPopup(false);
-  };
 
   const renderList = () => {
     return (
@@ -62,12 +67,8 @@ const Analytics = () => {
         <h2 className="analytics__title">Customer List</h2>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
-      {errorPopup && error ? (
-        <div className="analytics__error">
-          <p className="error__message">{error}</p>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} onClick={handleCloseError}>Close</Button>
-        </div>
-      ) : customers.length ? (
+      {error && <ToastContainer />}
+      {customers.length ? (
         <div className="customer__table">
           {/* Start sort title */}
           <div className="customer__sort">
