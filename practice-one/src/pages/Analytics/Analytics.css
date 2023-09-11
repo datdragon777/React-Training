@@ -30,6 +30,7 @@
   position: relative;
 }
 
+.error__message,
 .empty__message {
   color: var(--cl-dark-blue);
   text-align: center;

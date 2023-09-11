@@ -9,13 +9,25 @@ import { v4 as uuidv4 } from "uuid";
 
 const Analytics = () => {
   const [customers, setCustomers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getAllCustomers = async () => {
-      // Call getAllCustomerService function to get all data
-      const data = await getAllCustomerService();
-      setCustomers(data);
+      try {
+        // Call getAllCustomerService function to get all data
+        const response = await getAllCustomerService();
+        if (!response.ok) {
+          throw new Error("Sorry! Having some error, please try again");
+        }
+
+        const data = await response.json();
+        setCustomers(data);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+      }
     };
+
     getAllCustomers();
   }, []);
 
@@ -43,7 +55,9 @@ const Analytics = () => {
         <h1 className="analytics__title">Customer List</h1>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
-      {customers.length > 0 ? (
+      {error ? (
+        <p className="error__message">{error}</p>
+      ) : customers.length ? (
         <div className="customer__table">
           {/* Start sort title */}
           <div className="customer__sort">
@@ -57,9 +71,7 @@ const Analytics = () => {
         </div>
       ) : (
         // Show message when list is empty
-        <div className="empty__list">
           <p className="empty__message">Customer list is empty!</p>
-        </div>
       )}
     </div>
   );

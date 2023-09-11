@@ -1,9 +1,11 @@
+import { BASE_URL, PATH } from "@constants";
+
 export const getAllCustomerService = async () => {
   try {
     const response = await fetch(
-      "https://64e70a09b0fd9648b78f3e0a.mockapi.io/customers"
+      `${BASE_URL}/${PATH}`
     );
-    return response.json();
+    return response;
   } catch (error) {
     console.log(error);
   }
