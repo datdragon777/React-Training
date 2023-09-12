@@ -19,3 +19,4 @@ export { default as schedule } from "./schedule.svg";
 export { default as setting } from "./setting.svg";
 export { default as logoBrand } from "./wons-logo.svg";
 export { default as infoAvatar } from "./info-avatar.jpg";
+export { default as phone } from "./phone.svg"

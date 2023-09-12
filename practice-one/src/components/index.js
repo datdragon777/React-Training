@@ -6,3 +6,5 @@ export { default as CustomerItem } from "./CustomerItem/CustomerItem";
 export { default as Gender } from "./Gender/Gender";
 export { default as ContextMenu } from "./ContextMenu/ContextMenu";
 export { default as CustomerInfo } from "./CustomerInfo/CustomerInfo";
+export { default as Contact } from "./Contact/Contact";
+export { default as ContactDetail } from "./ContactDetail/ContactDetail";
