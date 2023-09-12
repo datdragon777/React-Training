@@ -43,7 +43,7 @@ const Analytics = () => {
     getAllCustomers();
   }, []);
 
-  const renderList = () => {
+  const renderCustomerList = () => {
     return (
       <ul className="customer__list">
         {customers.map((customer) => (
@@ -67,7 +67,6 @@ const Analytics = () => {
         <h2 className="analytics__title">Customer List</h2>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
-      {error && <ToastContainer />}
       {customers.length ? (
         <div className="customer__table">
           {/* Start sort title */}
@@ -78,12 +77,13 @@ const Analytics = () => {
               </div>
             ))}
           </div>
-          {renderList()}
+          {renderCustomerList()}
         </div>
       ) : (
         // Show message when list is empty
         <p className="empty__message">Customer list is empty!</p>
       )}
+      {error && <ToastContainer limit={1} />}
     </div>
   );
 };
