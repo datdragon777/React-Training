@@ -21,4 +21,5 @@
   padding: 12px 10px;
   display: flex;
   justify-self: flex-end;
+  cursor: pointer;
 }

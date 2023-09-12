@@ -8,8 +8,8 @@ const Account = ({username, avatar, desc, icon}) => {
         <img className="avatar__img" src={avatar} alt="account-avatar" />
       </div>
       <div className="account__info">
-        <p className="info__name">{username}</p>
-        <p className="info__desc">{desc}</p>
+        <p className="account__name">{username}</p>
+        <p className="account__desc">{desc}</p>
       </div>
       <div className="account__icon">
         <img className="icon__logout" src={icon} alt="logout" />
