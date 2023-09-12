@@ -8,3 +8,4 @@ export { default as ContextMenu } from "./ContextMenu/ContextMenu";
 export { default as CustomerInfo } from "./CustomerInfo/CustomerInfo";
 export { default as Contact } from "./Contact/Contact";
 export { default as ContactDetail } from "./ContactDetail/ContactDetail";
+export { default as Info } from "./Info/Info"

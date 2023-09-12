@@ -1,7 +1,7 @@
 import React from "react";
 import "./Routers.css";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { Sidebar } from "@layouts";
+import { Sidebar, ProfileInfo } from "@layouts";
 import { Home, Analytics } from "@pages";
 
 const Routers = () => {
@@ -15,6 +15,7 @@ const Routers = () => {
             <Route path="/analytics" element={<Analytics />} />
           </Routes>
         </main>
+        <ProfileInfo />
       </div>
     </Router>
   );
