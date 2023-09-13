@@ -1,13 +1,23 @@
 import React from "react";
 import "./ProfileInfo.css";
 import { Info, Contact } from "@components";
-import { infoAvatar } from "@assets/images";
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ selectedCustomer }) => {
+
   return (
     <div className="profile-info">
-      <Info avatar={infoAvatar} name="John Deo" job="UI/UX Designer" />
-      <Contact />
+      {selectedCustomer ? (
+        <>
+          <Info
+            avatar={selectedCustomer.avatar}
+            name={selectedCustomer.name}
+            job={selectedCustomer.description}
+          />
+          <Contact selectedCustomer={selectedCustomer} />
+        </>
+      ) : (
+        <p>No customer selected.</p>
+      )}
     </div>
   );
 };

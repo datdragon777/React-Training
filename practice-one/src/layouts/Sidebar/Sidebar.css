@@ -38,6 +38,10 @@
   padding: 18px 0;
 }
 
+.sidebar__item--not-allowed{
+  cursor: not-allowed;
+}
+
 .sidebar__decoration {
   padding: 0 28px;
   padding-top: 46px;

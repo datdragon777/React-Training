@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Analytics.css";
 import { Button, Expand, CustomerItem } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
-import { plusIcon } from "@assets/images";
+import { plusIcon, infoAvatar } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
@@ -14,6 +14,12 @@ const Analytics = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const shouldShowProfileInfo = !!selectedCustomer;
+
+  const handleCustomerClick = (customer) => {
+    setSelectedCustomer(customer);
+  };
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -51,7 +57,7 @@ const Analytics = () => {
     return (
       <ul className="customer__list">
         {customers.map((customer) => (
-          <li className="customer__item" key={uuidv4()}>
+          <li className="customer__item" key={uuidv4()} onClick={() => handleCustomerClick(customer)}>
             <CustomerItem
               avatar={customer.avatar}
               name={customer.name}
@@ -61,6 +67,87 @@ const Analytics = () => {
             />
           </li>
         ))}
+        <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
+          <li className="customer__item" key={uuidv4()} >
+            <CustomerItem
+              avatar={infoAvatar}
+              name="Pleeava"
+              email="Mlem_sans-delogmail.com"
+              phoneNumber="0551885658"
+              gender="Female"
+            />
+          </li>
       </ul>
     );
   };
@@ -70,7 +157,7 @@ const Analytics = () => {
       <div className="analytics">
         <div className="analytics__header">
           <h2 className="title__page">Customer List</h2>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
+          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>Add Customer</Button>
         </div>
         {loading ? ( 
           // Check loading status
@@ -93,7 +180,7 @@ const Analytics = () => {
         )}
         {error && <ToastContainer limit={1} />}
       </div>
-      <ProfileInfo />
+      {shouldShowProfileInfo && <ProfileInfo selectedCustomer={selectedCustomer} />}
     </>
   );
 };

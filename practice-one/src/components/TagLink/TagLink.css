@@ -6,6 +6,10 @@
   padding: 0 28px;
 }
 
+.link__wrapper--not-allowed {
+  cursor: not-allowed;
+}
+
 .link__icon {
   margin-right: 0.88rem;
   filter: invert(93%) sepia(4%) saturate(814%) hue-rotate(175deg)

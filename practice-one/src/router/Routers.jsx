@@ -1,9 +1,9 @@
 import React from "react";
 import "./Routers.css";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes, BrowserRouter as Router, Navigate } from "react-router-dom";
 import { Sidebar } from "@layouts";
 import {
-  Home,
+  // Home,
   Analytics,
   Invoice,
   Schedule,
@@ -20,7 +20,7 @@ const Routers = () => {
         <Sidebar />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route from="/" element={<Navigate to="/analytics" />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/schedule" element={<Schedule />} />
