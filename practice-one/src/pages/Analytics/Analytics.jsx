@@ -64,7 +64,7 @@ const Analytics = () => {
   return (
     <div className="analytics">
       <div className="analytics__header">
-        <h2 className="analytics__title">Customer List</h2>
+        <h2 className="title__page">Customer List</h2>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
       {customers.length ? (
@@ -72,7 +72,7 @@ const Analytics = () => {
           {/* Start sort title */}
           <div className="customer__sort">
             {EXPAND_TITLES.map((EXPAND_TITLE) => (
-              <div className="sort__item" key={EXPAND_TITLE.id}>
+              <div className="sort__item" key={uuidv4()}>
                 <Expand expandName={EXPAND_TITLE.title} />
               </div>
             ))}

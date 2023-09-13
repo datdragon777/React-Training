@@ -9,11 +9,6 @@
   padding-bottom: 30px;
 }
 
-.analytics__title {
-  font-size: var(--fs-xxx-lg);
-  font-weight: var(--fw-lg);
-}
-
 .customer__table {
   width: 100%;
 }

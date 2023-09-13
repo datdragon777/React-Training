@@ -1,0 +1,6 @@
+.profile-info {
+  width: 302px;
+  height: 100vh;
+  background-color: var(--cl-primary);
+  padding: 0 25px;
+}

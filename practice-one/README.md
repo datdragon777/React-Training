@@ -50,6 +50,7 @@ practice-one
         |-- ContactDetail
         |-- ContextMenu
         |-- CustomerInfo
+        |-- CustomerItem
         |-- Gender
         |-- Info
         |-- Expand
@@ -58,10 +59,19 @@ practice-one
     |-- constants
         |-- ...
     |-- data
-        |-- tagLink.jsx
+        |-- ...
     |-- layouts
+        |-- ProfileInfo
         |-- Sidebar
         |-- index.js
+    |-- pages
+        |-- Analytics
+        |-- Home
+        |-- index.js
+    |-- router
+        |-- ...
+    |-- services
+        |-- ...
     |-- styles
         |-- abtracts
             |-- all.css

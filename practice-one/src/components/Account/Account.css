@@ -16,13 +16,17 @@
     border-radius: 12px;
 }
 
-.info__name,
-.info__desc {
+.account__name,
+.account__desc {
     font-size: var(--fs-xx-sm);
     font-weight: var(--fw-sm);
     line-height: normal;
 }
 
-.info__desc {
+.account__desc {
     color: var(--cl-light-blue);
+}
+
+.account__icon {
+    cursor: pointer;
 }
