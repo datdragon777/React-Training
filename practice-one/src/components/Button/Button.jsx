@@ -24,7 +24,7 @@ const Button = ({
 
   return (
     <button type="button" className="btn" style={buttonStyle} onClick={onClick}>
-      {icon && <img className="btn__icon" src={icon} />}
+      {icon && <img className="btn__icon" alt={children} src={icon} />}
       {children}
     </button>
   );
