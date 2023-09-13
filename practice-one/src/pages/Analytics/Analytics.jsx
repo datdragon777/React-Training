@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Analytics.css";
 import { Button, Expand, CustomerItem } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
-import { plusIcon } from "@assets/images";
+import { plusIcon, loadingData } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
@@ -57,7 +57,11 @@ const Analytics = () => {
     return (
       <ul className="customer__list">
         {customers.map((customer) => (
-          <li className="customer__item" key={uuidv4()} onClick={() => handleCustomerClick(customer)}>
+          <li
+            className="customer__item"
+            key={uuidv4()}
+            onClick={() => handleCustomerClick(customer)}
+          >
             <CustomerItem
               avatar={customer.avatar}
               name={customer.name}
@@ -73,14 +77,20 @@ const Analytics = () => {
 
   return (
     <>
-      <div className={`analytics ${isShowProfileInfo ? 'analytics--profile' : ''}`}>
+      <div
+        className={`analytics ${isShowProfileInfo ? "analytics--profile" : ""}`}
+      >
         <div className="analytics__header">
           <h2 className="title__page">Customer List</h2>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>Add Customer</Button>
+          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>
+            Add Customer
+          </Button>
         </div>
-        {loading ? ( 
+        {loading ? (
           // Check loading status
-          <p className="loading__message">Please wait a second...</p>
+          <div className="customer__loading">
+            <img src={loadingData} className="loading__scene" alt="loading data..." />
+          </div>
         ) : customers.length ? (
           <div className="customer__table">
             {/* Start sort title */}

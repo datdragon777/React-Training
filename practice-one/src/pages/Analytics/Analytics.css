@@ -32,8 +32,6 @@
   margin-bottom: 10px;
 }
 
-.loading__message,
-.error__message,
 .empty__message {
   color: var(--cl-dark-blue);
   text-align: center;
@@ -41,14 +39,7 @@
   font-weight: var(--fw-lg);
 }
 
-.analytics__error {
+.customer__loading {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
-  background: var(--cl-primary);
-  padding: 50px 25px;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
