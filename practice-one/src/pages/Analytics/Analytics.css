@@ -1,5 +1,8 @@
 .analytics {
+  width: 100%;
   height: 100vh;
+  margin-right: 302px;
+  padding: 30px 30px 0 30px;
 }
 
 .analytics__header {
@@ -25,6 +28,7 @@
   position: relative;
 }
 
+.loading__message,
 .error__message,
 .empty__message {
   color: var(--cl-dark-blue);

@@ -6,11 +6,13 @@ import { plusIcon } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
+import { ProfileInfo } from "@layouts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Analytics = () => {
   const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -25,6 +27,7 @@ const Analytics = () => {
         const data = await response.json();
         setCustomers(data);
         setError(null);
+        setLoading(false);
       } catch (error) {
         setError(error.message);
         toast.error("Having some error. Please try again!", {
@@ -37,6 +40,7 @@ const Analytics = () => {
           progress: undefined,
           theme: "dark",
         });
+        setLoading(false);
       }
     };
 
@@ -62,29 +66,35 @@ const Analytics = () => {
   };
 
   return (
-    <div className="analytics">
-      <div className="analytics__header">
-        <h2 className="title__page">Customer List</h2>
-        <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
-      </div>
-      {customers.length ? (
-        <div className="customer__table">
-          {/* Start sort title */}
-          <div className="customer__sort">
-            {EXPAND_TITLES.map((EXPAND_TITLE) => (
-              <div className="sort__item" key={uuidv4()}>
-                <Expand expandName={EXPAND_TITLE.title} />
-              </div>
-            ))}
-          </div>
-          {renderCustomerList()}
+    <>
+      <div className="analytics">
+        <div className="analytics__header">
+          <h2 className="title__page">Customer List</h2>
+          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
         </div>
-      ) : (
-        // Show message when list is empty
-        <p className="empty__message">Customer list is empty!</p>
-      )}
-      {error && <ToastContainer limit={1} />}
-    </div>
+        {loading ? ( 
+          // Check loading status
+          <p className="loading__message">Please wait a second...</p>
+        ) : customers.length ? (
+          <div className="customer__table">
+            {/* Start sort title */}
+            <div className="customer__sort">
+              {EXPAND_TITLES.map((EXPAND_TITLE) => (
+                <div className="sort__item" key={uuidv4()}>
+                  <Expand expandName={EXPAND_TITLE.title} />
+                </div>
+              ))}
+            </div>
+            {renderCustomerList()}
+          </div>
+        ) : (
+          // Show message when list is empty
+          <p className="empty__message">Customer list is empty!</p>
+        )}
+        {error && <ToastContainer limit={1} />}
+      </div>
+      <ProfileInfo />
+    </>
   );
 };
 
