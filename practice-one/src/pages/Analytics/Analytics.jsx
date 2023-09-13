@@ -64,7 +64,7 @@ const Analytics = () => {
   return (
     <div className="analytics">
       <div className="analytics__header">
-        <h2 className="analytics__title">Customer List</h2>
+        <h2 className="title__page">Customer List</h2>
         <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon} />
       </div>
       {customers.length ? (
