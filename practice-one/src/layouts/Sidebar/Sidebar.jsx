@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <aside className="left-sidebar">
       <div className="sidebar__brand">
-        <a href="/analytics" className="brand__link">
+        <a href="/" className="brand__link">
           <img src={logoBrand} alt="Wons" className="brand__img" />
           <p className="brand__text">Wons</p>
         </a>

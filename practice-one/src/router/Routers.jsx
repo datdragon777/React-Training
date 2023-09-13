@@ -3,7 +3,7 @@ import "./Routers.css";
 import { Route, Routes, BrowserRouter as Router, Navigate } from "react-router-dom";
 import { Sidebar } from "@layouts";
 import {
-  // Home,
+  Home,
   Analytics,
   Invoice,
   Schedule,
@@ -20,7 +20,8 @@ const Routers = () => {
         <Sidebar />
         <main className="main-content">
           <Routes>
-            <Route from="/" element={<Navigate to="/analytics" />} />
+            <Route path="/" element={<Navigate to="/analytics" />} />
+            <Route path="/" element={<Home />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/schedule" element={<Schedule />} />

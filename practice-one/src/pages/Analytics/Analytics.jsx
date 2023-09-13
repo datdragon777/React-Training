@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Analytics.css";
 import { Button, Expand, CustomerItem } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
-import { plusIcon, infoAvatar } from "@assets/images";
+import { plusIcon } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
@@ -15,7 +15,7 @@ const Analytics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const shouldShowProfileInfo = !!selectedCustomer;
+  const isShowProfileInfo = !!selectedCustomer;
 
   const handleCustomerClick = (customer) => {
     setSelectedCustomer(customer);
@@ -67,94 +67,13 @@ const Analytics = () => {
             />
           </li>
         ))}
-        <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
-          <li className="customer__item" key={uuidv4()} >
-            <CustomerItem
-              avatar={infoAvatar}
-              name="Pleeava"
-              email="Mlem_sans-delogmail.com"
-              phoneNumber="0551885658"
-              gender="Female"
-            />
-          </li>
       </ul>
     );
   };
 
   return (
     <>
-      <div className="analytics">
+      <div className={`analytics ${isShowProfileInfo ? 'analytics--profile' : ''}`}>
         <div className="analytics__header">
           <h2 className="title__page">Customer List</h2>
           <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>Add Customer</Button>
@@ -180,7 +99,7 @@ const Analytics = () => {
         )}
         {error && <ToastContainer limit={1} />}
       </div>
-      {shouldShowProfileInfo && <ProfileInfo selectedCustomer={selectedCustomer} />}
+      {isShowProfileInfo && <ProfileInfo selectedCustomer={selectedCustomer} />}
     </>
   );
 };
