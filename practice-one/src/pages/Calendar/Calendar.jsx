@@ -1,7 +1,7 @@
 import React from "react";
 
-const Home = () => {
+const Calendar = () => {
   return <p className="title__page">The page is under development!</p>;
 };
 
-export default Home;
+export default Calendar;
