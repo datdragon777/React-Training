@@ -18,7 +18,7 @@ const CustomerItem = ({ avatar, name, email, phoneNumber, gender }) => {
         <p className="customer__text">{phoneNumber}</p>
         <Gender gender={gender} />
         <div className="customer__option" onClick={handleContextMenuClick}>
-          <img src={menuDot} alt="dot icon" />
+          <img src={menuDot} width="14" height="4" alt="dot icon" />
         </div>
       </div>
       {isShowContextMenu && <ContextMenu />}
