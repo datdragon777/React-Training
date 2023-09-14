@@ -12,7 +12,7 @@ const TagLink = ({ icon, name, path, isActive, isAnalytics }) => {
       style={{ pointerEvents: pointerEventsStyle }}
     >
       <div className="link__icon">
-        <img className="icon__item" src={icon} alt={name} />
+        <img className="icon__item" src={icon} width="24" height="24" alt={`${name}-icon`}/>
       </div>
       <span className="link__name">{name}</span>
     </NavLink>

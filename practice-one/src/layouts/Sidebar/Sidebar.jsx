@@ -18,7 +18,13 @@ const Sidebar = () => {
       <div className="sidebar__brand">
         <a href="/" className="brand__link">
           <div className="brand__logo">
-            <img src={logoBrand} alt="Wons" className="brand__img" />
+            <img
+              src={logoBrand}
+              alt="Wons-logo-brand"
+              className="brand__img"
+              width="44"
+              height="28"
+            />
           </div>
           <p className="brand__text">Wons</p>
         </a>
@@ -42,11 +48,19 @@ const Sidebar = () => {
 
       <div className="sidebar__decoration">
         <div className="decoration__img">
-          <img src={lantern} className="decoration__lantern" alt="lantern" />
+          <img
+            src={lantern}
+            width="150"
+            height="150"
+            className="decoration__lantern"
+            alt="lantern-decoration"
+          />
           <img
             src={lightLantern}
             className="decoration__light-lantern"
-            alt="lignt lantern"
+            alt="lignt-lantern"
+            width="127"
+            height="43"
           />
         </div>
         <div className="decoration__wrapper">

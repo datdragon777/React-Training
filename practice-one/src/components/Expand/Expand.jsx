@@ -6,7 +6,15 @@ const Expand = ({ expandName }) => {
   return (
     <div className="expand__wrapper">
       <p className="expand__name">{expandName}</p>
-      <img src={arrowDown} className="expand__icon" alt="arrow down" />
+      <div className="expand__icon">
+        <img
+          src={arrowDown}
+          className="icon__sort"
+          width="6"
+          height="6"
+          alt="arrow-down"
+        />
+      </div>
     </div>
   );
 };
