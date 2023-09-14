@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 218px;
+  min-width: 218px;
   height: 100vh;
   background-color: var(--cl-primary);
-  position: fixed;
+  position: sticky;
   top: 0;
 }
 
@@ -26,6 +26,11 @@
   flex-direction: column;
 }
 
+.brand__logo {
+  width: 44px;
+  height: 28px;
+}
+
 .brand__text {
   padding-top: 5px;
   font-size: var(--fs-x-lg);
@@ -38,7 +43,7 @@
   padding: 18px 0;
 }
 
-.sidebar__item--not-allowed{
+.sidebar__item--not-allowed {
   cursor: not-allowed;
 }
 

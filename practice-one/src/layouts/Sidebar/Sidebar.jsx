@@ -17,7 +17,9 @@ const Sidebar = () => {
     <aside className="left-sidebar">
       <div className="sidebar__brand">
         <a href="/" className="brand__link">
-          <img src={logoBrand} alt="Wons" className="brand__img" />
+          <div className="brand__logo">
+            <img src={logoBrand} alt="Wons" className="brand__img" />
+          </div>
           <p className="brand__text">Wons</p>
         </a>
       </div>
@@ -27,7 +29,12 @@ const Sidebar = () => {
           const isAnalytics = name === "Analytics";
           return (
             <li key={uuidv4()} className={`sidebar__item`}>
-              <TagLink icon={icon} name={name} path={path} isAnalytics={isAnalytics} />
+              <TagLink
+                icon={icon}
+                name={name}
+                path={path}
+                isAnalytics={isAnalytics}
+              />
             </li>
           );
         })}
