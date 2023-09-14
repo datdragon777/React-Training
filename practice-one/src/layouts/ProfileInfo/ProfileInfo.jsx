@@ -9,18 +9,13 @@ const ProfileInfo = ({ selectedCustomer, handleCloseProfileInfo }) => {
 
   return (
     <div className="profile-info">
-      {selectedCustomer ? (
-        <>
-          <Info
-            avatar={selectedCustomer.avatar}
-            name={selectedCustomer.name}
-            job={selectedCustomer.description}
-          />
-          <Contact selectedCustomer={selectedCustomer} />
-        </>
-      ) : (
-        <p>No customer selected.</p>
-      )}
+      <Info
+        avatar={selectedCustomer.avatar}
+        name={selectedCustomer.name}
+        job={selectedCustomer.description}
+      />
+      <Contact selectedCustomer={selectedCustomer} />
+
       <div className="profile__close">
         <Button onClick={handleCloseProfile}>Close</Button>
       </div>
