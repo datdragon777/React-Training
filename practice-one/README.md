@@ -19,10 +19,10 @@
 [Link](https://docs.google.com/document/d/1NKUkeOzYbv9VWXe4CGJbJI6IypWXaU60Llly4bPrGI0/edit?usp=sharing)
 
 ## Deploy: ##
-[Here](https://react-training-three.vercel.app/)
+[Here](https://practice-one-react-training.vercel.app/)
 
 ## Information: ##
-- Time line: 22/08/2023 -> 02/09/2023 (actually: 13/09/2023)
+- Time line: 22/08/2023 -> 31/08/2023 (actually: 14/09/2023)
 - Editor: Visual Studio Code
 - Supported browser: Chrome lasted
 
