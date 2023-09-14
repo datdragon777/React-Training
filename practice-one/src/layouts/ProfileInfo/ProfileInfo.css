@@ -6,3 +6,9 @@
   background-color: var(--cl-primary);
   padding: 0 25px;
 }
+
+.profile__close {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}

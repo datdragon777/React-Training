@@ -15,11 +15,16 @@ const Analytics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const isShowProfileInfo = !!selectedCustomer;
+  const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
 
   const handleCustomerClick = (customer) => {
     setSelectedCustomer(customer);
+    setIsShowProfileInfo(true)
   };
+
+  const handleCloseProfileInfo = () => {
+    setIsShowProfileInfo(false)
+  }
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -89,7 +94,11 @@ const Analytics = () => {
         {loading ? (
           // Check loading status
           <div className="customer__loading">
-            <img src={loadingData} className="loading__scene" alt="loading data..." />
+            <img
+              src={loadingData}
+              className="loading__scene"
+              alt="loading data..."
+            />
           </div>
         ) : customers.length ? (
           <div className="customer__table">
@@ -109,7 +118,12 @@ const Analytics = () => {
         )}
         {error && <ToastContainer limit={1} />}
       </div>
-      {isShowProfileInfo && <ProfileInfo selectedCustomer={selectedCustomer} />}
+      {isShowProfileInfo && (
+        <ProfileInfo
+          selectedCustomer={selectedCustomer}
+          handleCloseProfileInfo={handleCloseProfileInfo}
+        />
+      )}
     </>
   );
 };

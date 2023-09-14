@@ -16,9 +16,17 @@
 }
 
 .customer__option {
+  position: relative;
   width: fit-content;
   padding: 12px 10px;
   display: flex;
   justify-self: flex-end;
   cursor: pointer;
+}
+
+.customer__context-menu {
+  position: absolute;
+  z-index: 99;
+  right: -81px;
+  top: 28px;
 }
