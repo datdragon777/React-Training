@@ -21,15 +21,36 @@
 
 .customer__sort {
   display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr 1.25fr 0.75fr 0.5fr 0.25fr;
+  grid-template-columns: 0.9fr 1.15fr 0.7fr 0.69fr;
   margin-left: 20px;
   margin-bottom: 14px;
 }
 
 .customer__item {
+  display: flex;
+  justify-content: space-between;
   position: relative;
+  padding: 17px 20px;
+  background: var(--cl-primary);
+  border-radius: 10px;
+  cursor: pointer;
   margin-bottom: 10px;
+}
+
+.customer__option {
+  position: relative;
+  width: fit-content;
+  padding: 12px 10px;
+  display: flex;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.customer__context-menu {
+  position: absolute;
+  z-index: 99;
+  right: -42px;
+  top: 28px;
 }
 
 .empty__message {

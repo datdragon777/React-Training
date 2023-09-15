@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Analytics.css";
-import { Button, Expand, CustomerItem } from "@components";
+import { Button, Expand, CustomerItem, ContextMenu } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
-import { plusIcon, loadingData } from "@assets/images";
+import { plusIcon, loadingData, menuDot } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
 import { getAllCustomerService } from "../../services/customerService";
 import { v4 as uuidv4 } from "uuid";
@@ -16,14 +16,25 @@ const Analytics = () => {
   const [error, setError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
 
   const handleCustomerClick = (customer) => {
     setSelectedCustomer(customer);
-    setIsShowProfileInfo(true)
+    setIsShowProfileInfo(true);
   };
 
   const handleCloseProfileInfo = () => {
-    setIsShowProfileInfo(false)
+    setIsShowProfileInfo(false);
+  };
+
+  const handleShowContextMenu = (e, customerId) => {
+    e.stopPropagation()
+    if (selectedCustomerId === customerId) {
+      // If the clicked item is the same as the currently selected item, close the ContextMenu
+      setSelectedCustomerId(null);
+    } else {
+      setSelectedCustomerId(customerId); // Set the selected item
+    }
   }
 
   useEffect(() => {
@@ -74,6 +85,12 @@ const Analytics = () => {
               phoneNumber={customer.phoneNumber}
               gender={customer.gender}
             />
+            <div className="customer__option" onClick={(e) => handleShowContextMenu(e, customer.id)}>
+              <img src={menuDot} width="14" height="4" alt="dot icon" />
+              <div className="customer__context-menu">
+                {selectedCustomerId === customer.id && <ContextMenu />}
+              </div>
+            </div>
           </li>
         ))}
       </ul>
