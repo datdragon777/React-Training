@@ -28,14 +28,14 @@ const Analytics = () => {
   };
 
   const handleShowContextMenu = (e, customerId) => {
-    e.stopPropagation()
+    e.stopPropagation();
     if (selectedCustomerId === customerId) {
       // If the clicked item is the same as the currently selected item, close the ContextMenu
       setSelectedCustomerId(null);
     } else {
       setSelectedCustomerId(customerId); // Set the selected item
     }
-  }
+  };
 
   useEffect(() => {
     const getAllCustomers = async () => {
@@ -85,7 +85,10 @@ const Analytics = () => {
               phoneNumber={customer.phoneNumber}
               gender={customer.gender}
             />
-            <div className="customer__option" onClick={(e) => handleShowContextMenu(e, customer.id)}>
+            <div
+              className="customer__option"
+              onClick={(e) => handleShowContextMenu(e, customer.id)}
+            >
               <img src={menuDot} width="14" height="4" alt="dot icon" />
               <div className="customer__context-menu">
                 {selectedCustomerId === customer.id && <ContextMenu />}
@@ -114,7 +117,9 @@ const Analytics = () => {
             <img
               src={loadingData}
               className="loading__scene"
-              alt="loading data..."
+              alt="loading-data..."
+              width="200px"
+              height="200px"
             />
           </div>
         ) : customers.length ? (
