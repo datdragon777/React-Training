@@ -2,7 +2,6 @@ import React from "react";
 import "./Gender.css";
 import PropTypes from "prop-types";
 
-
 const Gender = ({ gender }) => {
   const genderStyle = `gender__wrapper gender__wrapper--${gender.toLowerCase()}`;
 
@@ -10,11 +9,11 @@ const Gender = ({ gender }) => {
 };
 
 Gender.propTypes = {
-  gender: PropTypes.oneOf(["Male", "Female"])
-}
+  gender: PropTypes.oneOf(["Male", "Female"]),
+};
 
 Gender.defaultProps = {
-  gender: "Male"
-}
+  gender: "Male",
+};
 
 export default Gender;

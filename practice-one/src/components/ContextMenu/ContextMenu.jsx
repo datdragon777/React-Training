@@ -7,11 +7,7 @@ import { editIcon, deleteIcon } from "@assets/images";
 const ContextMenu = () => {
   return (
     <div className="context-menu">
-      <Button
-        variant={BUTTON_VARIANTS.EDIT}
-        icon={editIcon}
-        onClick={() => {}}
-      >
+      <Button variant={BUTTON_VARIANTS.EDIT} icon={editIcon} onClick={() => {}}>
         Edit
       </Button>
       <Button

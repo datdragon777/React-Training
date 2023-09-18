@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./TagLink.css";
-import {PropTypes} from "prop-types"
+import { PropTypes } from "prop-types";
 import { dashboard } from "@assets/images";
 
 const TagLink = ({ icon, name, path, isActive, isAnalytics }) => {
@@ -14,7 +14,13 @@ const TagLink = ({ icon, name, path, isActive, isAnalytics }) => {
       style={{ pointerEvents: pointerEventsStyle }}
     >
       <div className="link__icon">
-        <img className="icon__item" src={icon} width="24" height="24" alt={`${name}-icon`}/>
+        <img
+          className="icon__item"
+          src={icon}
+          width="24"
+          height="24"
+          alt={`${name}-icon`}
+        />
       </div>
       <span className="link__name">{name}</span>
     </NavLink>
@@ -26,15 +32,15 @@ TagLink.propTypes = {
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
-  isAnalytics: PropTypes.bool
-}
+  isAnalytics: PropTypes.bool,
+};
 
 TagLink.defaultProps = {
   icon: dashboard,
   name: "Default Link",
   path: "/",
   isActive: false,
-  isAnalytics: false
-}
+  isAnalytics: false,
+};
 
 export default TagLink;

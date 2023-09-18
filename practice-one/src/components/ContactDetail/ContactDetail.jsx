@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./ContactDetail.css";
-import {email} from "@assets/images"
+import { email } from "@assets/images";
 
 const ContactDetail = ({ icon, info, type }) => {
   let hrefValue = "";
@@ -17,9 +17,22 @@ const ContactDetail = ({ icon, info, type }) => {
   return (
     <div className="contact-detail">
       <div className="contact-detail__icon">
-        <img className="icon__info" src={icon} width="16" height="15" alt="icon-info" />
+        <img
+          className="icon__info"
+          src={icon}
+          width="16"
+          height="15"
+          alt="icon-info"
+        />
       </div>
-      <a className="contact-detail__info" href={hrefValue} target="_blank" rel="noreferrer">{info}</a>
+      <a
+        className="contact-detail__info"
+        href={hrefValue}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {info}
+      </a>
     </div>
   );
 };
@@ -27,13 +40,13 @@ const ContactDetail = ({ icon, info, type }) => {
 ContactDetail.propTypes = {
   icon: PropTypes.node.isRequired,
   info: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["email", "phone", "address"]).isRequired
-}
+  type: PropTypes.oneOf(["email", "phone", "address"]).isRequired,
+};
 
 ContactDetail.defaultProps = {
   icon: email,
   info: "decker_ultra1402@gmail.com",
-  type: "email"
-}
+  type: "email",
+};
 
 export default ContactDetail;

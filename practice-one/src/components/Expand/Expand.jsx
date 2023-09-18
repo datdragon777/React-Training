@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Expand.css";
 import { arrowDown } from "@assets/images";
 import PropTypes from "prop-types";
@@ -11,7 +11,10 @@ const Expand = ({ expandName }) => {
   };
 
   return (
-    <div className={`expand__wrapper ${isExpanded ? "expanded" : ""}`} onClick={toggleExpand}>
+    <div
+      className={`expand__wrapper ${isExpanded ? "expanded" : ""}`}
+      onClick={toggleExpand}
+    >
       <p className="expand__name">{expandName}</p>
       <div className={`expand__icon ${isExpanded ? "expanded" : ""}`}>
         <img
@@ -27,11 +30,11 @@ const Expand = ({ expandName }) => {
 };
 
 Expand.propTypes = {
-  expandName: PropTypes.string.isRequired
-}
+  expandName: PropTypes.string.isRequired,
+};
 
 Expand.defaultProps = {
-  expandName: "Name"
-}
+  expandName: "Name",
+};
 
 export default Expand;

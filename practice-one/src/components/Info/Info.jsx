@@ -24,13 +24,13 @@ const Info = ({ avatar, name, job }) => {
 Info.propTypes = {
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  job: PropTypes.string.isRequired
-}
+  job: PropTypes.string.isRequired,
+};
 
 Info.defaultProps = {
   avatar: infoAvatar,
   name: "John Deo",
   job: "UI/UX Designer",
-}
+};
 
 export default Info;
