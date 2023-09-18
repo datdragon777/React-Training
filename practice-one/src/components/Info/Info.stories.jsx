@@ -12,9 +12,8 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{width: 302}}>
-<Info {...args} />
-
+  <div style={{ width: 302 }}>
+    <Info {...args} />
   </div>
 );
 

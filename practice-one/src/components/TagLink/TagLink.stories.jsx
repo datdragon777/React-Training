@@ -26,7 +26,7 @@ Default.args = {
   name: "Default Link",
   path: "https://www.youtube.com/",
   isActive: false,
-  isAnalytics: true
+  isAnalytics: true,
 };
 
 export const Active = Template.bind({});
@@ -35,5 +35,5 @@ Active.args = {
   name: "Active Link",
   path: "/",
   isActive: true,
-  isAnalytics: true
+  isAnalytics: true,
 };

@@ -7,7 +7,7 @@ export default {
   argTypes: {
     expandName: {
       options: ["Name", "Email", "Phone number", "Gender"],
-      control: {type: "select"},
+      control: { type: "select" },
     },
   },
 };

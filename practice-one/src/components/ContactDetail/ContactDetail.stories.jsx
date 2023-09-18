@@ -6,9 +6,9 @@ export default {
   component: ContactDetail,
   tags: ["autodocs"],
   argTypes: {
-    icon: { control: 'radio', options: [email, phone, location] },
+    icon: { control: "radio", options: [email, phone, location] },
     info: { control: "text" },
-    type: { control: 'radio', options: ["email", "phone", "address"] },
+    type: { control: "radio", options: ["email", "phone", "address"] },
   },
 };
 
@@ -18,5 +18,5 @@ export const Default = Template.bind({});
 Default.args = {
   icon: email,
   info: "decker_ultra1402@gmail.com",
-  type: "email"
+  type: "email",
 };
