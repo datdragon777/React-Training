@@ -1,13 +1,14 @@
 import ContactDetail from "./ContactDetail";
-import { email } from "@assets/images";
+import { email, phone, location } from "@assets/images";
 
 export default {
   title: "Components/ContactDetail",
   component: ContactDetail,
   tags: ["autodocs"],
   argTypes: {
-    icon: { control: { type: "file", accept: ".svg" } },
+    icon: { control: 'radio', options: [email, phone, location] },
     info: { control: "text" },
+    type: { control: 'radio', options: ["email", "phone", "address"] },
   },
 };
 
@@ -16,5 +17,6 @@ const Template = (args) => <ContactDetail {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   icon: email,
-  info: "kajope5182@ummoh.com",
+  info: "decker_ultra1402@gmail.com",
+  type: "email"
 };

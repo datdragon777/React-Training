@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { accountAvatar, logoutIcon } from "@assets/images"
 import "./Account.css"
 
 const Account = ({username, avatar, desc, icon}) => {
@@ -17,5 +19,19 @@ const Account = ({username, avatar, desc, icon}) => {
     </div>
   )
 };
+
+Account.propTypes = {
+  username: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired
+}
+
+Account.defaultProps = {
+  username: "Easin Arafat",
+  avatar: logoutIcon,
+  desc: "Free Account",
+  icon: accountAvatar
+}
 
 export default Account;

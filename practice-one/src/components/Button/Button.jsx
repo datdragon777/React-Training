@@ -41,9 +41,9 @@ const Button = ({
 };
 
 Button.propTypes = {
-  children: PropTypes.string,
-  variant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
-  icon: PropTypes.node,
+  children: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)).isRequired,
+  icon: PropTypes.string,
 };
 
 Button.defaultProps = {

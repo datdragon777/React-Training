@@ -11,7 +11,12 @@ export default {
   },
 };
 
-const Template = (args) => <Info {...args} />;
+const Template = (args) => (
+  <div style={{width: 302}}>
+<Info {...args} />
+
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./TagLink.css";
+import {PropTypes} from "prop-types"
+import { dashboard } from "@assets/images";
 
 const TagLink = ({ icon, name, path, isActive, isAnalytics }) => {
   const linkClassName = isActive ? "link__wrapper active" : "link__wrapper";
@@ -18,5 +20,21 @@ const TagLink = ({ icon, name, path, isActive, isAnalytics }) => {
     </NavLink>
   );
 };
+
+TagLink.propTypes = {
+  icon: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  isActive: PropTypes.bool,
+  isAnalytics: PropTypes.bool
+}
+
+TagLink.defaultProps = {
+  icon: dashboard,
+  name: "Default Link",
+  path: "/",
+  isActive: false,
+  isAnalytics: false
+}
 
 export default TagLink;

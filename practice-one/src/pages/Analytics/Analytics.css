@@ -20,8 +20,7 @@
 }
 
 .customer__sort {
-  display: grid;
-  grid-template-columns: 0.9fr 1.15fr 0.7fr 0.69fr;
+  display: flex;
   margin-left: 20px;
   margin-bottom: 14px;
 }
@@ -35,6 +34,27 @@
   border-radius: 10px;
   cursor: pointer;
   margin-bottom: 10px;
+  gap: 20px;
+}
+
+.customer__align {
+  display: flex;align-items: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-sm);
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.customer__text {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.customer__last {
+  display: flex;
+  justify-content: space-between;
 }
 
 .customer__option {

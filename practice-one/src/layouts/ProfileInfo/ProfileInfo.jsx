@@ -1,12 +1,8 @@
 import React from "react";
 import "./ProfileInfo.css";
-import { Info, Contact, Button } from "@components";
+import { Info, Contact } from "@components";
 
-const ProfileInfo = ({ selectedCustomer, handleCloseProfileInfo }) => {
-  const handleCloseProfile = () => {
-    handleCloseProfileInfo();
-  };
-
+const ProfileInfo = ({ selectedCustomer }) => {
   return (
     <div className="profile-info">
       <Info
@@ -15,10 +11,6 @@ const ProfileInfo = ({ selectedCustomer, handleCloseProfileInfo }) => {
         job={selectedCustomer.description}
       />
       <Contact selectedCustomer={selectedCustomer} />
-
-      <div className="profile__close">
-        <Button onClick={handleCloseProfile}>Close</Button>
-      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Analytics.css";
-import { Button, Expand, CustomerItem, ContextMenu } from "@components";
+import { Button, Expand, ContextMenu, Gender } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
 import { plusIcon, loadingData, menuDot } from "@assets/images";
 import { EXPAND_TITLES } from "@data";
@@ -9,8 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import { ProfileInfo } from "@layouts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CustomerInfo from "../../components/CustomerInfo/CustomerInfo";
 
 const Analytics = () => {
+  // State variables
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,15 +20,20 @@ const Analytics = () => {
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [selectedCustomerId, setSelectedCustomerId] = useState(null);
 
+  // Event handler for clicking a customer
   const handleCustomerClick = (customer) => {
-    setSelectedCustomer(customer);
-    setIsShowProfileInfo(true);
+    if (selectedCustomerId === customer.id) {
+      setIsShowProfileInfo(false);
+      setSelectedCustomer(null);
+      setSelectedCustomerId(null);
+    } else {
+      setIsShowProfileInfo(true);
+      setSelectedCustomer(customer);
+      setSelectedCustomerId(customer.id);
+    }
   };
 
-  const handleCloseProfileInfo = () => {
-    setIsShowProfileInfo(false);
-  };
-
+  // Event handler for showing context menu
   const handleShowContextMenu = (e, customerId) => {
     e.stopPropagation();
     if (selectedCustomerId === customerId) {
@@ -37,6 +44,7 @@ const Analytics = () => {
     }
   };
 
+  // Fetch data from the server when the component mounts
   useEffect(() => {
     const getAllCustomers = async () => {
       try {
@@ -69,6 +77,7 @@ const Analytics = () => {
     getAllCustomers();
   }, []);
 
+  // Render the list of customers
   const renderCustomerList = () => {
     return (
       <ul className="customer__list">
@@ -78,20 +87,24 @@ const Analytics = () => {
             key={uuidv4()}
             onClick={() => handleCustomerClick(customer)}
           >
-            <CustomerItem
-              avatar={customer.avatar}
-              name={customer.name}
-              email={customer.mail}
-              phoneNumber={customer.phoneNumber}
-              gender={customer.gender}
-            />
-            <div
-              className="customer__option"
-              onClick={(e) => handleShowContextMenu(e, customer.id)}
-            >
-              <img src={menuDot} width="14" height="4" alt="dot icon" />
-              <div className="customer__context-menu">
-                {selectedCustomerId === customer.id && <ContextMenu />}
+            <CustomerInfo avatar={customer.avatar} name={customer.name} />
+
+            <div className="col-3 col-md-3 customer__align">
+              <p className="customer__text">{customer.mail}</p>
+            </div>
+            <div className="col-3 col-md-3 customer__align">
+              <p className="customer__text">{customer.phoneNumber}</p>
+            </div>
+            <div className="col-3 col-md-3 customer__last">
+              <Gender gender={customer.gender} />
+              <div
+                className="customer__option"
+                onClick={(e) => handleShowContextMenu(e, customer.id)}
+              >
+                <img src={menuDot} width="14" height="4" alt="dot icon" />
+                <div className="customer__context-menu">
+                  {selectedCustomerId === customer.id && <ContextMenu />}
+                </div>
               </div>
             </div>
           </li>
@@ -127,7 +140,7 @@ const Analytics = () => {
             {/* Start sort title */}
             <div className="customer__sort">
               {EXPAND_TITLES.map((EXPAND_TITLE) => (
-                <div className="sort__item" key={uuidv4()}>
+                <div className="sort__item col-3" key={uuidv4()}>
                   <Expand expandName={EXPAND_TITLE.title} />
                 </div>
               ))}
@@ -143,7 +156,7 @@ const Analytics = () => {
       {isShowProfileInfo && (
         <ProfileInfo
           selectedCustomer={selectedCustomer}
-          handleCloseProfileInfo={handleCloseProfileInfo}
+          show={isShowProfileInfo}
         />
       )}
     </>

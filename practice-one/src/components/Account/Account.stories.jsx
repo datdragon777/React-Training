@@ -13,7 +13,11 @@ export default {
   },
 };
 
-const Template = (args) => <Account {...args} />;
+const Template = (args) => (
+  <div style={{ width: 218 }}>
+    <Account {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {

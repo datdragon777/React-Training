@@ -20,4 +20,7 @@
   color: var(--cl-secondary);
   font-size: var(--fs-sm);
   font-weight: var(--fw-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }

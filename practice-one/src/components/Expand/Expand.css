@@ -15,9 +15,15 @@
   display: flex;
   width: 6px;
   height: 6px;
+  transition: transform 0.5s;
 }
 
 .icon__sort {
   width: 100%;
   height: auto;
+}
+
+.expand__wrapper.expanded .expand__icon,
+.expand__wrapper.expanded .icon__sort {
+  transform: rotate(90deg);
 }
