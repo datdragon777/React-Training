@@ -49,7 +49,6 @@
 .customer__text {
   text-wrap: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 .customer__last {

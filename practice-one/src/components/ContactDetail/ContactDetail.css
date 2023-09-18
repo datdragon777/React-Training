@@ -20,7 +20,7 @@
 }
 
 .contact-detail__info {
-    color: var(--cl-dark-gray);
-    font-size: var(--fs-md);
-    font-weight: var(--fw-md);
+  color: var(--cl-dark-gray);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-md);
 }
