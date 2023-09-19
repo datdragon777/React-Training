@@ -14,33 +14,34 @@ import CustomerInfo from "../../components/CustomerInfo/CustomerInfo";
 const Analytics = () => {
   // State variables
   const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
-  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
+  const [isShowContextMenu, setIsShowContextMenu] = useState(false);
 
   // Event handler for clicking a customer
-  const handleCustomerClick = (customer) => {
-    if (selectedCustomerId === customer.id) {
-      setIsShowProfileInfo(false);
-      setSelectedCustomer(null);
-      setSelectedCustomerId(null);
+  const handleShowProfileInfo = (customer) => {
+    // If clicked on the same customer that is already selected, toggle the profile show
+    if (selectedCustomer && selectedCustomer.id === customer.id) {
+      setIsShowProfileInfo(!isShowProfileInfo);
     } else {
-      setIsShowProfileInfo(true);
+      // If clicked on a different customer, select the new customer and show the new profile
       setSelectedCustomer(customer);
-      setSelectedCustomerId(customer.id);
+      setIsShowProfileInfo(true);
     }
   };
 
   // Event handler for showing context menu
-  const handleShowContextMenu = (e, customerId) => {
+  const handleShowContextMenu = (e, customer) => {
     e.stopPropagation();
-    if (selectedCustomerId === customerId) {
-      // If the clicked item is the same as the currently selected item, close the ContextMenu
-      setSelectedCustomerId(null);
+    // If clicked on the same customer that is already selected, toggle the context menu show
+    if (selectedCustomer && selectedCustomer.id === customer.id) {
+      setIsShowContextMenu(!isShowContextMenu);
     } else {
-      setSelectedCustomerId(customerId); // Set the selected item
+      // If clicked on a different customer, select the new customer and show the new context menu
+      setSelectedCustomer(customer);
+      setIsShowContextMenu(true);
     }
   };
 
@@ -56,10 +57,10 @@ const Analytics = () => {
 
         const data = await response.json();
         setCustomers(data);
-        setError(null);
-        setLoading(false);
+        setIsError(null);
+        setIsLoading(false);
       } catch (error) {
-        setError(error.message);
+        setIsError(error.message);
         toast.error("Having some error. Please try again!", {
           position: "top-right",
           autoClose: 5000,
@@ -70,7 +71,7 @@ const Analytics = () => {
           progress: undefined,
           theme: "dark",
         });
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -85,7 +86,7 @@ const Analytics = () => {
           <li
             className="customer__item"
             key={uuidv4()}
-            onClick={() => handleCustomerClick(customer)}
+            onClick={() => handleShowProfileInfo(customer)}
           >
             <CustomerInfo avatar={customer.avatar} name={customer.name} />
 
@@ -99,11 +100,12 @@ const Analytics = () => {
               <Gender gender={customer.gender} />
               <div
                 className="customer__option"
-                onClick={(e) => handleShowContextMenu(e, customer.id)}
+                onClick={(e) => handleShowContextMenu(e, customer)}
               >
                 <img src={menuDot} width="14" height="4" alt="dot icon" />
                 <div className="customer__context-menu">
-                  {selectedCustomerId === customer.id && <ContextMenu />}
+                  {selectedCustomer?.id === customer.id &&
+                    isShowContextMenu && <ContextMenu />}
                 </div>
               </div>
             </div>
@@ -124,7 +126,7 @@ const Analytics = () => {
             Add Customer
           </Button>
         </div>
-        {loading ? (
+        {isLoading ? (
           // Check loading status
           <div className="customer__loading">
             <img
@@ -151,13 +153,10 @@ const Analytics = () => {
           // Show message when list is empty
           <p className="empty__message">Customer list is empty!</p>
         )}
-        {error && <ToastContainer limit={1} />}
+        {isError && <ToastContainer limit={1} />}
       </div>
-      {isShowProfileInfo && (
-        <ProfileInfo
-          selectedCustomer={selectedCustomer}
-          show={isShowProfileInfo}
-        />
+      {selectedCustomer && isShowProfileInfo && (
+        <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
     </>
   );

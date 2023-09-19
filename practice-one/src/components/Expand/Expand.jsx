@@ -6,14 +6,14 @@ import PropTypes from "prop-types";
 const Expand = ({ expandName }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpand = () => {
+  const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
     <div
       className={`expand__wrapper ${isExpanded ? "expanded" : ""}`}
-      onClick={toggleExpand}
+      onClick={handleToggleExpand}
     >
       <p className="expand__name">{expandName}</p>
       <div className={`expand__icon ${isExpanded ? "expanded" : ""}`}>
