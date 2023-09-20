@@ -45,7 +45,7 @@ ContactDetail.propTypes = {
 
 ContactDetail.defaultProps = {
   icon: email,
-  info: "decker_ultra1402@gmail.com",
+  info: "decker_ultra17@ultraman.com",
   type: "email",
 };
 
