@@ -9,8 +9,13 @@
 - Apply storybook
 - Using HTML-CSS training
 - Creating mocking data: write a JSON file and import it into your JSX
-- Deploy to vercel
+- Deploy to verce
 
+## Features: ##
+- Render UI
+- Call API (customer's list)
+- Show infor detail of each customer
+- Show context menu
 
 ## Design on figma: ##
 [Figma](https://www.figma.com/file/G8rQ1mN8oQSyNX0AtO1pEn/Admin-Dashboard-UI-Kit-(Community)?node-id=807%3A12064&mode=dev)
@@ -19,7 +24,8 @@
 [Link](https://docs.google.com/document/d/1NKUkeOzYbv9VWXe4CGJbJI6IypWXaU60Llly4bPrGI0/edit?usp=sharing)
 
 ## Deploy: ##
-[Here](https://practice-one-react-training.vercel.app/)
+- App: [Here](https://practice-one-react-training.vercel.app/)
+- Storybook: [Here](https://storybook-react-practice-one.vercel.app/?path=/docs/components-account--docs)
 
 ## Information: ##
 - Time line: 22/08/2023 -> 31/08/2023 (actually: 14/09/2023)
