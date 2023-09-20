@@ -38,7 +38,7 @@ const ContactDetail = ({ icon, info, type }) => {
 };
 
 ContactDetail.propTypes = {
-  icon: PropTypes.node.isRequired,
+  icon: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired,
   type: PropTypes.oneOf(["email", "phone", "address"]).isRequired,
 };
