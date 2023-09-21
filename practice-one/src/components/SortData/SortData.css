@@ -1,16 +1,16 @@
-.expand__wrapper {
+.sort__wrapper {
   display: flex;
   color: var(--cl-sort);
   cursor: pointer;
 }
 
-.expand__name {
+.sort__name {
   font-weight: var(--fw-sm);
   font-size: var(--fs-x-sm);
   margin-right: 6px;
 }
 
-.expand__icon {
+.sort__icon {
   margin-top: 4px;
   display: flex;
   width: 6px;
@@ -23,7 +23,7 @@
   height: auto;
 }
 
-.expand__wrapper.expanded .expand__icon,
-.expand__wrapper.expanded .icon__sort {
+.sort__wrapper.sorted .sort__icon,
+.sort__wrapper.sorted .icon__sort {
   transform: rotate(90deg);
 }

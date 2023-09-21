@@ -1,2 +1,2 @@
 export { default as TAG_LINKS } from "./tagLinks";
-export { default as EXPAND_TITLES } from "./expandTitles";
+export { default as SORT_TITLES } from "./sortTitles";

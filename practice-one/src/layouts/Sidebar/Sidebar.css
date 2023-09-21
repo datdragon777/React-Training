@@ -1,7 +1,6 @@
 .left-sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   min-width: 218px;
   height: 100vh;
   background-color: var(--cl-primary);
@@ -51,6 +50,7 @@
   padding: 0 28px;
   padding-top: 46px;
   height: 217px;
+  margin: 15px 0;
 }
 
 .decoration__img {

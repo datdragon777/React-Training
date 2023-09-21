@@ -1,15 +1,34 @@
+// Using react hook for Analytics component
 import React, { useState, useEffect } from "react";
+
+// Import style for Analytics component
 import "./Analytics.css";
-import { Button, Expand, ContextMenu, Gender } from "@components";
-import { BUTTON_VARIANTS } from "@constants/buttons";
-import { plusIcon, loadingData, menuDot } from "@assets/images";
-import { EXPAND_TITLES } from "@data";
-import { getAllCustomerService } from "../../services/customerService";
+
+// Import uuidv4 for making key of customer's list
 import { v4 as uuidv4 } from "uuid";
-import { ProfileInfo } from "@layouts";
+
+// Import service to call API
+import { getAllCustomerService } from "@services";
+
+// Import Toast librabry when getting data is errored
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CustomerInfo from "../../components/CustomerInfo/CustomerInfo";
+
+// Import images or icons
+import { plusIcon, loadingData } from "@assets/images";
+
+// Import components
+import { Button, SortData } from "@components";
+
+// Import constant for Button component
+import { BUTTON_VARIANTS } from "@constants/buttons";
+
+// Import list data for Expand component
+import { SORT_TITLES } from "@data";
+
+// Import layout
+import { ProfileInfo } from "@layouts";
+import CustomerItem from "../../components/CustomerItem/CustomerItem";
 
 const Analytics = () => {
   // State variables
@@ -48,19 +67,10 @@ const Analytics = () => {
   // Fetch data from the server when the component mounts
   useEffect(() => {
     const getAllCustomers = async () => {
-      try {
-        // Call getAllCustomerService function to get all data
-        const response = await getAllCustomerService();
-        if (!response.ok) {
-          throw new Error("Sorry! Having some error, please try again");
-        }
-
-        const data = await response.json();
-        setCustomers(data);
-        setIsError(null);
-        setIsLoading(false);
-      } catch (error) {
-        setIsError(error.message);
+      setIsLoading(true);
+      const data = await getAllCustomerService();
+      if (data instanceof Error) {
+        setIsError(data.message);
         toast.error("Having some error. Please try again!", {
           position: "top-right",
           autoClose: 5000,
@@ -71,8 +81,11 @@ const Analytics = () => {
           progress: undefined,
           theme: "dark",
         });
-        setIsLoading(false);
+      } else {
+        setCustomers(data);
+        setIsError(null);
       }
+      setIsLoading(false);
     };
 
     getAllCustomers();
@@ -88,27 +101,12 @@ const Analytics = () => {
             key={uuidv4()}
             onClick={() => handleShowProfileInfo(customer)}
           >
-            <CustomerInfo avatar={customer.avatar} name={customer.name} />
-
-            <div className="col-3 col-md-3 customer__align">
-              <p className="customer__text">{customer.mail}</p>
-            </div>
-            <div className="col-3 col-md-3 customer__align">
-              <p className="customer__text">{customer.phoneNumber}</p>
-            </div>
-            <div className="col-3 col-md-3 customer__last">
-              <Gender gender={customer.gender} />
-              <div
-                className="customer__option"
-                onClick={(e) => handleShowContextMenu(e, customer)}
-              >
-                <img src={menuDot} width="14" height="4" alt="dot icon" />
-                <div className="customer__context-menu">
-                  {selectedCustomer?.id === customer.id &&
-                    isShowContextMenu && <ContextMenu />}
-                </div>
-              </div>
-            </div>
+            <CustomerItem
+              customer={customer}
+              selectedCustomer={selectedCustomer}
+              isShowContextMenu={isShowContextMenu}
+              handleShowContextMenu={handleShowContextMenu}
+            />
           </li>
         ))}
       </ul>
@@ -141,9 +139,9 @@ const Analytics = () => {
           <div className="customer__table">
             {/* Start sort title */}
             <div className="customer__sort">
-              {EXPAND_TITLES.map((EXPAND_TITLE) => (
+              {SORT_TITLES.map((SORT_TITLE) => (
                 <div className="sort__item col-3" key={uuidv4()}>
-                  <Expand expandName={EXPAND_TITLE.title} />
+                  <SortData name={SORT_TITLE.title} />
                 </div>
               ))}
             </div>

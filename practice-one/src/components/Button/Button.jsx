@@ -12,8 +12,6 @@ const Button = ({
 }) => {
   const buttonVariant = getButtonVariant(variant);
   const buttonStyle = {
-    backgroundColor: buttonVariant.bgColor,
-    color: buttonVariant.color,
     fontSize: buttonVariant.fontSize,
     fontWeight: buttonVariant.fontWeight,
     width: buttonVariant.width,
@@ -23,7 +21,17 @@ const Button = ({
   };
 
   return (
-    <button type="button" className="btn" style={buttonStyle} onClick={onClick}>
+    <button
+      type="button"
+      style={buttonStyle}
+      onClick={onClick}
+      className={`btn ${
+        variant === BUTTON_VARIANTS.PRIMARY ||
+        variant === BUTTON_VARIANTS.DELETE
+          ? "btn__female"
+          : "btn__male"
+      }`}
+    >
       {icon && (
         <div className="btn__icon">
           <img

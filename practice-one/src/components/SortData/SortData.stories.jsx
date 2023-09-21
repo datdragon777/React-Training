@@ -1,20 +1,20 @@
-import Expand from "./Expand";
+import SortData from "./SortData";
 
 export default {
-  title: "Components/Expand",
-  component: Expand,
+  title: "Components/SortData",
+  component: SortData,
   tags: ["autodocs"],
   argTypes: {
-    expandName: {
+    name: {
       options: ["Name", "Email", "Phone number", "Gender"],
       control: { type: "select" },
     },
   },
 };
 
-const Template = (args) => <Expand {...args} />;
+const Template = (args) => <SortData {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  expandName: "Email",
+  name: "Email",
 };

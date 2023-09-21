@@ -1,4 +1,4 @@
-const EXPAND_TITLES = [
+const SORT_TITLES = [
   {
     title: "Name",
   },
@@ -12,4 +12,4 @@ const EXPAND_TITLES = [
     title: "Gender",
   },
 ];
-export default EXPAND_TITLES;
+export default SORT_TITLES;
