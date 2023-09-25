@@ -6,8 +6,7 @@ export default {
   tags: ["autodocs"],
   argTypes: {
     name: {
-      options: ["Name", "Email", "Phone number", "Gender"],
-      control: { type: "select" },
+      control: { type: "text" },
     },
   },
 };
@@ -16,5 +15,5 @@ const Template = (args) => <SortData {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  name: "Email",
+  name: "Name",
 };

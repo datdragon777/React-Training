@@ -30,11 +30,11 @@ const SortData = ({ name }) => {
 };
 
 SortData.propTypes = {
-  expandName: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 SortData.defaultProps = {
-  expandName: "Name",
+  name: "Name",
 };
 
 export default SortData;
