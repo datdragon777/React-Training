@@ -15,5 +15,5 @@ const Template = (args) => <SortData {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  name: "Name",
+  name: "Email",
 };

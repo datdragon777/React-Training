@@ -34,7 +34,7 @@ SortData.propTypes = {
 };
 
 SortData.defaultProps = {
-  name: "Name",
+  name: "Email",
 };
 
 export default SortData;
