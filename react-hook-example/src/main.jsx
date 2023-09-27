@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom/client'
 // import App from './hooks/useContext/App'
 // import SaveReference from './hooks/useRef/SaveReference'
 // import QueryToDOMElement from './hooks/useRef/QueryToDOMElement'
-import Lazy from './loading/lazy/Lazy'
+// import Lazy from './loading/lazy/Lazy'
+import App from './loading/suspense/App'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <App /> */}
     {/* <SaveReference /> */}
     {/* <QueryToDOMElement /> */}
-    <Lazy />
+    {/* <Lazy /> */}
+    <App />
   </React.StrictMode>,
 )
