@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
-export default function MarkdownPreview({ markdown }) {
+const MarkdownPreview = ({ markdown }) => {
   return <div className="content">{markdown}</div>;
-}
+};
+
+export default MarkdownPreview;
