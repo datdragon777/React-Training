@@ -9,11 +9,12 @@ import ReactDOM from "react-dom/client";
 // import App from './loading/suspense/App'
 // import PassingData from "./PassingData/PassingData";
 // import HoverOpacity from "./HOC/HoverOpacity";
-import AwesomeImage from "./HOC/AwesomeImage";
-import withHoverOpacity from "./HOC/withHoverOpacity";
+// import AwesomeImage from "./HOC/AwesomeImage";
+// import withHoverOpacity from "./HOC/withHoverOpacity";
+import CustomerHook from "./custom_hook/CustomerHook";
 
 // eslint-disable-next-line react-refresh/only-export-components
-const HoverOpacityAwesomeImage = withHoverOpacity(AwesomeImage, 0.2);
+// const HoverOpacityAwesomeImage = withHoverOpacity(AwesomeImage, 0.2);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <Lazy /> */}
     {/* <App /> */}
     {/* <PassingData /> */}
-    <HoverOpacityAwesomeImage src="https://picsum.photos/200/300" />
+    {/* <HoverOpacityAwesomeImage src="https://picsum.photos/200/300" /> */}
+    <CustomerHook />
   </React.StrictMode>
 );
