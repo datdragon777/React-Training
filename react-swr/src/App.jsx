@@ -1,5 +1,6 @@
 import "./App.css";
-import Pagination from "./swr/Pagination";
+// import Pagination from "./swr/Pagination";
+import SWRInfinite from "./swr/SWRInfinite";
 // import Content from "./components/Content";
 // import Nav from "./components/Nav";
 // import { SWRConfig } from "swr";
@@ -20,7 +21,8 @@ function App() {
     // <SWRConfig value={{ refreshInterval: 1000 }}>
     //   <HandleError />
     // </SWRConfig>
-    <Pagination />
+    // <Pagination />
+    <SWRInfinite />
   );
 }
 
