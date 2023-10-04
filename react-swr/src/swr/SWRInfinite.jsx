@@ -29,6 +29,7 @@ const SWRInfinite = () => {
 
   return (
     <div className="App">
+      
       <p>{totalPosts} posts listed</p>
       {data.map((posts) => {
         return posts.map((post) => <div key={post.id}>{post.title}</div>);
