@@ -29,7 +29,7 @@
 
 ## Requirments:
 
-[Link](https://docs.google.com/document/d/1NKUkeOzYbv9VWXe4CGJbJI6IypWXaU60Llly4bPrGI0/edit?usp=sharing)
+[Link](https://docs.google.com/document/d/19Qo4_oPJ_4RUChv-pWWiLWvEqAoTi4FqskiA1oz2Nfw/edit?usp=sharing)
 
 ## Deploy:
 
