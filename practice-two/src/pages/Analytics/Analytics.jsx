@@ -1,5 +1,5 @@
 // Using react hook for Analytics component
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // Import style for Analytics component
 import "./Analytics.css";
@@ -9,10 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 
 // Import service to call API
 import { getAllCustomerService } from "@services";
-
-// Import Toast librabry when getting data is errored
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // Import images or icons
 import { plusIcon, loadingData } from "@assets/images";
@@ -30,11 +26,16 @@ import { SORT_TITLES } from "@data";
 import { ProfileInfo } from "@layouts";
 import CustomerItem from "../../components/CustomerItem/CustomerItem";
 
+// SWR
+import useSWR from "swr";
+
+// Constants
+import { BASE_URL, PATH } from "@constants";
+
 const Analytics = () => {
   // State variables
-  const [customers, setCustomers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
+  // const [customers, setCustomers] = useState([]);
+  // const [isError, setIsError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
@@ -65,31 +66,36 @@ const Analytics = () => {
   };
 
   // Fetch data from the server when the component mounts
-  useEffect(() => {
-    const getAllCustomers = async () => {
-      setIsLoading(true);
-      const data = await getAllCustomerService();
-      if (data instanceof Error) {
-        setIsError(data.message);
-        toast.error("Having some error. Please try again!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      } else {
-        setCustomers(data);
-        setIsError(null);
-      }
-      setIsLoading(false);
-    };
+  // useEffect(() => {
+  //   const getAllCustomers = async () => {
+  //     setIsLoading(true);
+  //     const data = await getAllCustomerService();
+  //     if (data instanceof Error) {
+  //       setIsError(data.message);
+  //       toast.error("Having some error. Please try again!", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "dark",
+  //       });
+  //     } else {
+  //       setCustomers(data);
+  //       setIsError(null);
+  //     }
+  //     setIsLoading(false);
+  //   };
 
-    getAllCustomers();
-  }, []);
+  //   getAllCustomers();
+  // }, []);
+
+  const { data: customers, isLoading } = useSWR(
+    `${BASE_URL}/${PATH}`,
+    getAllCustomerService
+  );
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -131,7 +137,7 @@ const Analytics = () => {
               height='200px'
             />
           </div>
-        ) : customers.length ? (
+        ) : customers ? (
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>
@@ -147,7 +153,7 @@ const Analytics = () => {
           // Show message when list is empty
           <p className='empty__message'>Customer list is empty!</p>
         )}
-        {isError && <ToastContainer limit={1} />}
+        {/* {isError && <ToastContainer limit={1} />} */}
       </div>
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />

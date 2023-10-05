@@ -1,12 +1,16 @@
-import { BASE_URL, PATH } from "@constants";
+// import { BASE_URL, PATH } from "@constants";
 
-const getAllCustomerService = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/${PATH}`);
-    return response.json();
-  } catch (error) {
-    return new Error("Sorry! Having some error, please try again");
+const getAllCustomerService = async (url) => {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const error = new Error("An error occurred while fetching the data.");
+    error.info = await response.json();
+    error.status = response.status;
+    throw error;
   }
+
+  return response.json();
 };
 
 export default getAllCustomerService;
