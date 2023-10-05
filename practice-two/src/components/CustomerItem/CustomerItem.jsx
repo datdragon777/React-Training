@@ -9,31 +9,35 @@ const CustomerItem = ({
   selectedCustomer,
   isShowContextMenu,
   handleShowContextMenu,
+  handleShowProfileInfo
 }) => {
   return (
-    <>
+    <li
+      className='customer__item'
+      onClick={() => handleShowProfileInfo(customer)}
+    >
       <CustomerInfo avatar={customer.avatar} name={customer.name} />
-      <div className="col-3 col-md-3 customer__align">
-        <p className="customer__text">{customer.mail}</p>
+      <div className='col-3 col-md-3 customer__align'>
+        <p className='customer__text'>{customer.mail}</p>
       </div>
-      <div className="col-3 col-md-3 customer__align">
-        <p className="customer__text">{customer.phoneNumber}</p>
+      <div className='col-3 col-md-3 customer__align'>
+        <p className='customer__text'>{customer.phoneNumber}</p>
       </div>
-      <div className="col-3 col-md-3 customer__last">
+      <div className='col-3 col-md-3 customer__last'>
         <Gender gender={customer.gender} />
         <div
-          className="customer__option"
+          className='customer__option'
           onClick={(e) => handleShowContextMenu(e, customer)}
         >
-          <img src={menuDot} width="14" height="4" alt="dot icon" />
-          <div className="customer__context-menu">
+          <img src={menuDot} width='14' height='4' alt='dot icon' />
+          <div className='customer__context-menu'>
             {selectedCustomer?.id === customer.id && isShowContextMenu && (
               <ContextMenu />
             )}
           </div>
         </div>
       </div>
-    </>
+    </li>
   );
 };
 

@@ -94,20 +94,16 @@ const Analytics = () => {
   // Render the list of customers
   const renderCustomerList = () => {
     return (
-      <ul className="customer__list">
+      <ul className='customer__list'>
         {customers.map((customer) => (
-          <li
-            className="customer__item"
+          <CustomerItem
             key={uuidv4()}
-            onClick={() => handleShowProfileInfo(customer)}
-          >
-            <CustomerItem
-              customer={customer}
-              selectedCustomer={selectedCustomer}
-              isShowContextMenu={isShowContextMenu}
-              handleShowContextMenu={handleShowContextMenu}
-            />
-          </li>
+            customer={customer}
+            selectedCustomer={selectedCustomer}
+            isShowContextMenu={isShowContextMenu}
+            handleShowContextMenu={handleShowContextMenu}
+            handleShowProfileInfo={handleShowProfileInfo}
+          />
         ))}
       </ul>
     );
@@ -118,29 +114,29 @@ const Analytics = () => {
       <div
         className={`analytics ${isShowProfileInfo ? "analytics--profile" : ""}`}
       >
-        <div className="analytics__header">
-          <h2 className="title__page">Customer List</h2>
+        <div className='analytics__header'>
+          <h2 className='title__page'>Customer List</h2>
           <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>
             Add Customer
           </Button>
         </div>
         {isLoading ? (
           // Check loading status
-          <div className="customer__loading">
+          <div className='customer__loading'>
             <img
               src={loadingData}
-              className="loading__scene"
-              alt="loading-data..."
-              width="200px"
-              height="200px"
+              className='loading__scene'
+              alt='loading-data...'
+              width='200px'
+              height='200px'
             />
           </div>
         ) : customers.length ? (
-          <div className="customer__table">
+          <div className='customer__table'>
             {/* Start sort title */}
-            <div className="customer__sort">
+            <div className='customer__sort'>
               {SORT_TITLES.map((SORT_TITLE) => (
-                <div className="sort__item col-3" key={uuidv4()}>
+                <div className='sort__item col-3' key={uuidv4()}>
                   <SortData name={SORT_TITLE.title} />
                 </div>
               ))}
@@ -149,7 +145,7 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className="empty__message">Customer list is empty!</p>
+          <p className='empty__message'>Customer list is empty!</p>
         )}
         {isError && <ToastContainer limit={1} />}
       </div>
