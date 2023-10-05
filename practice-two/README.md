@@ -18,6 +18,10 @@
 - Call API (customer's list)
 - Show infor detail of each customer
 - Show context menu
+- Create customer
+- Update customer
+- Delete customer
+- Form validation
 
 ## Design on figma:
 
