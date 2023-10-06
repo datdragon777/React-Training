@@ -14,28 +14,31 @@ import { getAllCustomerService } from "@services";
 import { plusIcon, loadingData } from "@assets/images";
 
 // Import components
-import { Button, SortData } from "@components";
+import { Button, SortData, CustomerItem, Toast } from "@components";
 
-// Import constant for Button component
-import { BUTTON_VARIANTS } from "@constants/buttons";
+// Import constant
+import {
+  BUTTON_VARIANTS,
+  BASE_URL,
+  PATH,
+  ERROR_MESSAGE,
+  EMPTY_MESSAGE,
+} from "@constants";
 
 // Import list data for Expand component
 import { SORT_TITLES } from "@data";
 
 // Import layout
 import { ProfileInfo } from "@layouts";
-import CustomerItem from "../../components/CustomerItem/CustomerItem";
 
 // SWR
 import useSWR from "swr";
 
-// Constants
-import { BASE_URL, PATH } from "@constants";
+// Themes
+import { toastTheme } from "@themes";
 
 const Analytics = () => {
   // State variables
-  // const [customers, setCustomers] = useState([]);
-  // const [isError, setIsError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
@@ -66,36 +69,14 @@ const Analytics = () => {
   };
 
   // Fetch data from the server when the component mounts
-  // useEffect(() => {
-  //   const getAllCustomers = async () => {
-  //     setIsLoading(true);
-  //     const data = await getAllCustomerService();
-  //     if (data instanceof Error) {
-  //       setIsError(data.message);
-  //       toast.error("Having some error. Please try again!", {
-  //         position: "top-right",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "dark",
-  //       });
-  //     } else {
-  //       setCustomers(data);
-  //       setIsError(null);
-  //     }
-  //     setIsLoading(false);
-  //   };
-
-  //   getAllCustomers();
-  // }, []);
-
-  const { data: customers, isLoading } = useSWR(
-    `${BASE_URL}/${PATH}`,
-    getAllCustomerService
-  );
+  const {
+    data: customers,
+    error: isError,
+    isLoading,
+  } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
+    refreshInterval: 5000,
+    shouldRetryOnError: false,
+  });
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -151,9 +132,14 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>Customer list is empty!</p>
+          <p className='empty__message'>{EMPTY_MESSAGE.EMPTY_LIST}</p>
         )}
-        {/* {isError && <ToastContainer limit={1} />} */}
+        {isError && (
+          <Toast
+            message={ERROR_MESSAGE.ERROR_GET_API}
+            backgroundColor={toastTheme.error}
+          />
+        )}
       </div>
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
