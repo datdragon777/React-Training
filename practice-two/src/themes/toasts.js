@@ -1,4 +1,4 @@
 export const toastTheme = {
-  success: "#5cb85c",
-  error: "#d9534f",
+  success: "var(--cl-success)",
+  error: "var(--cl-error)",
 };

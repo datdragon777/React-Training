@@ -8,10 +8,13 @@ const Toast = ({ message, backgroundColor }) => {
   useEffect(() => {
     if (toastContainerRef.current) {
       const container = toastContainerRef.current;
-
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         container.classList.add("toast__close");
       }, 4000);
+  
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
   }, []);
 
@@ -33,7 +36,7 @@ Toast.propTypes = {
 
 Toast.defaultProps = {
   message: "Success",
-  backgroundColor: "#5cb85c",
+  backgroundColor: "var(--cl-success)",
 };
 
 export default Toast;
