@@ -1,11 +1,10 @@
-// Using react hook for Analytics component
+// Library
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import useSWR from "swr";
 
 // Import style for Analytics component
 import "./Analytics.css";
-
-// Import uuidv4 for making key of customer's list
-import { v4 as uuidv4 } from "uuid";
 
 // Import service to call API
 import { getAllCustomerService } from "@services";
@@ -30,9 +29,6 @@ import { SORT_TITLES } from "@data";
 
 // Import layout
 import { ProfileInfo } from "@layouts";
-
-// SWR
-import useSWR from "swr";
 
 // Themes
 import { toastTheme } from "@themes";
