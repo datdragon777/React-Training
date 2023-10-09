@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./Toast.css";
 import PropTypes from "prop-types";
+import { MESSAGES } from "@constants";
+import { toastTheme } from "@themes";
 
-const Toast = ({ message, backgroundColor }) => {
+const Toast = ({ message }) => {
   const toastContainerRef = useRef(null);
 
   useEffect(() => {
@@ -11,7 +13,7 @@ const Toast = ({ message, backgroundColor }) => {
       const timeoutId = setTimeout(() => {
         container.classList.add("toast__close");
       }, 4000);
-  
+
       return () => {
         clearTimeout(timeoutId);
       };
@@ -20,7 +22,11 @@ const Toast = ({ message, backgroundColor }) => {
 
   return (
     <div
-      style={{ backgroundColor: backgroundColor }}
+      style={{
+        backgroundColor: Object.values(MESSAGES.ERRORS).includes(message)
+          ? toastTheme.error
+          : toastTheme.success,
+      }}
       ref={toastContainerRef}
       className={`toast__container`}
     >
@@ -31,12 +37,10 @@ const Toast = ({ message, backgroundColor }) => {
 
 Toast.propTypes = {
   message: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
 };
 
 Toast.defaultProps = {
-  message: "Success",
-  backgroundColor: "var(--cl-success)",
+  message: MESSAGES.SUCCESSES.ADD_SUCCESSED,
 };
 
 export default Toast;

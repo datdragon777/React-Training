@@ -1,4 +1,4 @@
-import { toastTheme } from "../../themes";
+import { MESSAGES } from "@constants";
 import Toast from "./Toast";
 
 export default {
@@ -7,10 +7,6 @@ export default {
   tags: ["autodocs"],
   argTypes: {
     message: { control: "text" },
-    backgroundColor: {
-      control: "select",
-      options: { success: toastTheme.success, error: toastTheme.error },
-    },
   },
 };
 
@@ -18,12 +14,10 @@ const Template = (args) => <Toast {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  message: "Success",
-  backgroundColor: "#5cb85c",
+  message: MESSAGES.SUCCESSES.ADD_SUCCESSED,
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  message: "Error",
-  backgroundColor: "#d9534f",
+  message: MESSAGES.ERRORS.GET_API,
 };
