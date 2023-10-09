@@ -1,40 +1,31 @@
-// Using react hook for Analytics component
-import React, { useState, useEffect } from "react";
+// Library
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import useSWR from "swr";
 
 // Import style for Analytics component
 import "./Analytics.css";
 
-// Import uuidv4 for making key of customer's list
-import { v4 as uuidv4 } from "uuid";
-
 // Import service to call API
 import { getAllCustomerService } from "@services";
-
-// Import Toast librabry when getting data is errored
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // Import images or icons
 import { plusIcon, loadingData } from "@assets/images";
 
 // Import components
-import { Button, SortData } from "@components";
+import { Button, SortData, CustomerItem, Toast } from "@components";
 
-// Import constant for Button component
-import { BUTTON_VARIANTS } from "@constants/buttons";
+// Import constant
+import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from "@constants";
 
 // Import list data for Expand component
 import { SORT_TITLES } from "@data";
 
 // Import layout
 import { ProfileInfo } from "@layouts";
-import CustomerItem from "../../components/CustomerItem/CustomerItem";
 
 const Analytics = () => {
   // State variables
-  const [customers, setCustomers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
@@ -65,31 +56,14 @@ const Analytics = () => {
   };
 
   // Fetch data from the server when the component mounts
-  useEffect(() => {
-    const getAllCustomers = async () => {
-      setIsLoading(true);
-      const data = await getAllCustomerService();
-      if (data instanceof Error) {
-        setIsError(data.message);
-        toast.error("Having some error. Please try again!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      } else {
-        setCustomers(data);
-        setIsError(null);
-      }
-      setIsLoading(false);
-    };
-
-    getAllCustomers();
-  }, []);
+  const {
+    data: customers,
+    error: isError,
+    isLoading,
+  } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
+    refreshInterval: 1800000, // refresh component after 30 minutes
+    shouldRetryOnError: false, // avoiding call API continuously when occur error
+  });
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -131,7 +105,7 @@ const Analytics = () => {
               height='200px'
             />
           </div>
-        ) : customers.length ? (
+        ) : customers ? (
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>
@@ -145,9 +119,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>Customer list is empty!</p>
+          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
-        {isError && <ToastContainer limit={1} />}
+        {isError && <Toast message={MESSAGES.ERRORS.GET_API} />}
       </div>
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />

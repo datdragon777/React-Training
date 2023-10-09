@@ -9,3 +9,4 @@ export { default as CustomerItem } from "./CustomerItem/CustomerItem";
 export { default as Contact } from "./Contact/Contact";
 export { default as ContactDetail } from "./ContactDetail/ContactDetail";
 export { default as Info } from "./Info/Info";
+export { default as Toast } from "./Toast/Toast";

@@ -1,6 +1,6 @@
 import Button from "./Button";
 import { plusIcon, editIcon, deleteIcon } from "@assets/images";
-import { BUTTON_VARIANTS } from "@constants/buttons";
+import { BUTTON_VARIANTS } from "@constants";
 
 export default {
   title: "Components/Button",

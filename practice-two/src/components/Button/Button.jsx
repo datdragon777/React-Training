@@ -1,8 +1,8 @@
 import React from "react";
 import "./Button.css";
 import PropTypes from "prop-types";
-import { getButtonVariant } from "@themes/metrics";
-import { BUTTON_VARIANTS } from "@constants/buttons";
+import { getButtonVariant } from "@themes";
+import { BUTTON_VARIANTS } from "@constants";
 
 const Button = ({
   children,
@@ -22,7 +22,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type='button'
       style={buttonStyle}
       onClick={onClick}
       className={`btn ${
@@ -33,12 +33,12 @@ const Button = ({
       }`}
     >
       {icon && (
-        <div className="btn__icon">
+        <div className='btn__icon'>
           <img
-            className="icon__bonus"
+            className='icon__bonus'
             alt={`${children}-icon`}
-            width="10"
-            height="10"
+            width='10'
+            height='10'
             src={icon}
           />
         </div>
