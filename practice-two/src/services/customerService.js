@@ -2,15 +2,11 @@
 
 const getAllCustomerService = async (url) => {
   const response = await fetch(url);
-
   if (!response.ok) {
-    const error = new Error("An error occurred while fetching the data.");
-    error.info = await response.json();
-    error.status = response.status;
-    throw error;
+    throw new Error("An error occurred while fetching the data.");
   }
-
-  return response.json();
+  const data = await response.json();
+  return data;
 };
 
 export default getAllCustomerService;

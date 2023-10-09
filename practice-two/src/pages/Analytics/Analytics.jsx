@@ -16,22 +16,13 @@ import { plusIcon, loadingData } from "@assets/images";
 import { Button, SortData, CustomerItem, Toast } from "@components";
 
 // Import constant
-import {
-  BUTTON_VARIANTS,
-  BASE_URL,
-  PATH,
-  ERROR_MESSAGE,
-  EMPTY_MESSAGE,
-} from "@constants";
+import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from "@constants";
 
 // Import list data for Expand component
 import { SORT_TITLES } from "@data";
 
 // Import layout
 import { ProfileInfo } from "@layouts";
-
-// Themes
-import { toastTheme } from "@themes";
 
 const Analytics = () => {
   // State variables
@@ -70,8 +61,8 @@ const Analytics = () => {
     error: isError,
     isLoading,
   } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
-    refreshInterval: 5000,
-    shouldRetryOnError: false,
+    refreshInterval: 1800000, // refresh component after 30 minutes
+    shouldRetryOnError: false, // avoiding call API continuously when occur error
   });
 
   // Render the list of customers
@@ -128,14 +119,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{EMPTY_MESSAGE.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
-        {isError && (
-          <Toast
-            message={ERROR_MESSAGE.ERROR_GET_API}
-            backgroundColor={toastTheme.error}
-          />
-        )}
+        {isError && <Toast message={MESSAGES.ERRORS.GET_API} />}
       </div>
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
