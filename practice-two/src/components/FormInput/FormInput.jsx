@@ -19,9 +19,6 @@ const FormInput = (props) => {
         {...inputProps}
         onChange={onChange}
         onBlur={handleFocus}
-        onFocus={() =>
-          inputProps.name === 'confirmPassword' && setFocused(true)
-        }
         // eslint-disable-next-line react/no-unknown-property
         focused={focused.toString()}
       />

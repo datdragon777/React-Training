@@ -13,7 +13,7 @@ export const MESSAGES = {
     PHONENUMBER:
       'Invalid phone number. The phone number must have a maximum of 10 numbers.',
     DESCRIPTION:
-      "Job's name should be 3-16 characters and shouldn't include any special character!",
+      "Job's name should be 3-20 characters!",
     ADDRESS: 'The address must be at least 8 characters.',
   },
   SUCCESSES: {
