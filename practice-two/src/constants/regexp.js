@@ -4,6 +4,6 @@ export const REGEX = {
   AVATAR: '.*.(jpg|jpeg|png|gif|bmp|tiff|webp|svg|ico)$',
   EMAIL: '^[w-.]+@([w-]+.)+[w-]{2,4}$',
   PHONENUMBER: '\\d{10}',
-  DESCRIPTION: '^.{3,20}$',
+  DESCRIPTION: '.{3,}',
   ADDRESS: '.{8,}',
 };
