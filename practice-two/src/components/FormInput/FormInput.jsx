@@ -22,7 +22,9 @@ const FormInput = (props) => {
         // eslint-disable-next-line react/no-unknown-property
         focused={focused.toString()}
       />
-      <span className='error__message'>{errorMessage}</span>
+      {errorMessage && errorMessage !== '' && (
+        <span className='error__message'>{errorMessage}</span>
+      )}
     </div>
   );
 };
@@ -30,7 +32,7 @@ const FormInput = (props) => {
 FormInput.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'tel', 'email']),
+  type: PropTypes.oneOf(['text', 'number', 'email']),
   errorMessage: PropTypes.oneOf([
     MESSAGES.FORM.USERNAME,
     MESSAGES.FORM.AVATAR,
@@ -38,6 +40,7 @@ FormInput.propTypes = {
     MESSAGES.FORM.PHONENUMBER,
     MESSAGES.FORM.DESCRIPTION,
     MESSAGES.FORM.ADDRESS,
+    MESSAGES.FORM.EMPTY,
   ]),
   pattern: PropTypes.oneOf([
     REGEX.USERNAME,
