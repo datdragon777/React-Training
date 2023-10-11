@@ -15,6 +15,7 @@ export const MESSAGES = {
     DESCRIPTION:
       "Job's name should be 3-20 characters!",
     ADDRESS: 'The address must be at least 8 characters.',
+    EMPTY: ''
   },
   SUCCESSES: {
     ADD_SUCCESSED: 'Create new customer successfully',
