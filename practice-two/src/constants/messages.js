@@ -7,7 +7,7 @@ export const MESSAGES = {
   },
   FORM: {
     USERNAME:
-      "Username should be 3-16 characters and shouldn't include any special character!",
+      "Username should be 3-16 characters.",
     AVATAR: 'Invalid avatar link. Please use a valid image URL.',
     EMAIL: 'Invalid email address. Please use a valid email address.',
     PHONENUMBER:
