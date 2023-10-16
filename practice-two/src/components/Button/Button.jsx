@@ -6,6 +6,7 @@ import { BUTTON_VARIANTS } from "@constants";
 
 const Button = ({
   children,
+  type='button',
   variant = BUTTON_VARIANTS.PRIMARY,
   icon,
   onClick,
@@ -22,7 +23,7 @@ const Button = ({
 
   return (
     <button
-      type='button'
+      type={type}
       style={buttonStyle}
       onClick={onClick}
       className={`btn ${
