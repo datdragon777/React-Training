@@ -29,13 +29,4 @@
 .error__message {
   font-size: var(--fs-xx-sm);
   color: var(--cl-error);
-  visibility: hidden;
-}
-
-.input__field:invalid[focused='true'] {
-  border: 1px solid var(--cl-error);
-}
-
-.input__field:invalid[focused='true'] ~ .error__message {
-  visibility: visible;
 }
