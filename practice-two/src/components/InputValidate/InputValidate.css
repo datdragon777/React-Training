@@ -1,0 +1,41 @@
+.form__input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.input__choose {
+  margin-right: 5px;
+}
+
+.input__field {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--cl-gray);
+}
+
+.input__label {
+  font-size: var(--fs-sm);
+  color: var(--cl-secondary);
+  font-weight: var(--fw-lg);
+  margin-bottom: 10px;
+}
+
+.input__option {
+  font-size: var(--fs-md);
+}
+
+.error__message {
+  font-size: var(--fs-xx-sm);
+  color: var(--cl-error);
+  visibility: hidden;
+}
+
+.input__field:invalid[focused='true'] {
+  border: 1px solid var(--cl-error);
+}
+
+.input__field:invalid[focused='true'] ~ .error__message {
+  visibility: visible;
+}
