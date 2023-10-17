@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
 
-const FormValidation = () => {
+const FormValidation = (props) => {
+  const { handleShowForm } = props;
   const [formData, setFormData] = useState({
     username: '',
     avatar: '',
@@ -24,26 +25,44 @@ const FormValidation = () => {
     address: '',
   });
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback(
+    (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    },
+    [formData, setFormData]
+  );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleBlur = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      const errorMessage = Validation(name, value);
+      setErrors({
+        ...errors,
+        [name]: errorMessage,
+      });
+    },
+    [errors, setErrors]
+  );
 
-    const newErrors = {};
-    for (const field in formData) {
-      const errorMessage = Validation(field, formData[field]);
-      if (errorMessage) {
-        newErrors[field] = errorMessage;
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      const newErrors = {};
+      for (const field in formData) {
+        const errorMessage = Validation(field, formData[field]);
+        if (errorMessage) {
+          newErrors[field] = errorMessage;
+        }
       }
-    }
-    setErrors(newErrors);
+      setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      console.log(formData);
-    }
-  };
+      if (Object.keys(newErrors).length === 0) {
+        console.log(formData);
+      }
+    },
+    [formData, setErrors]
+  );
 
   return (
     <div className='form__background'>
@@ -54,13 +73,11 @@ const FormValidation = () => {
             <div className='form__input'>
               <label className='input__label'>Full name</label>
               <InputValidate
-                type='text'
                 value={formData.username}
                 errorMessage={errors.username}
-                onChange={onChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 name='username'
-                errors={errors}
-                setErrors={setErrors}
               />
             </div>
           </div>
@@ -68,14 +85,12 @@ const FormValidation = () => {
             <div className='form__input'>
               <label className='input__label'>Avatar</label>
               <InputValidate
-                type='text'
                 value={formData.avatar}
                 placeholder='Enter avatar URL'
                 errorMessage={errors.avatar}
-                onChange={onChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 name='avatar'
-                errors={errors}
-                setErrors={setErrors}
               />
             </div>
           </div>
@@ -85,14 +100,12 @@ const FormValidation = () => {
             <div className='form__input'>
               <label className='input__label'>Email</label>
               <InputValidate
-                type='text'
                 value={formData.email}
                 placeholder='example@gmail.com'
                 errorMessage={errors.email}
-                onChange={onChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 name='email'
-                errors={errors}
-                setErrors={setErrors}
               />
             </div>
           </div>
@@ -100,14 +113,12 @@ const FormValidation = () => {
             <div className='form__input'>
               <label className='input__label'>Phone number</label>
               <InputValidate
-                type='text'
                 value={formData.phonenumber}
                 placeholder='Vietnamese phone number'
                 errorMessage={errors.phonenumber}
-                onChange={onChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 name='phonenumber'
-                errors={errors}
-                setErrors={setErrors}
               />
             </div>
           </div>
@@ -117,13 +128,11 @@ const FormValidation = () => {
             <div className='form__input'>
               <label className='input__label'>Job</label>
               <InputValidate
-                type='text'
                 value={formData.description}
                 errorMessage={errors.description}
-                onChange={onChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 name='description'
-                errors={errors}
-                setErrors={setErrors}
               />
             </div>
           </div>
@@ -135,7 +144,7 @@ const FormValidation = () => {
                   type='radio'
                   placeholder=''
                   genderType='Male'
-                  onChange={onChange}
+                  onChange={handleChange}
                   name='gender'
                   value='male'
                   errorMessage=''
@@ -144,7 +153,7 @@ const FormValidation = () => {
                   type='radio'
                   placeholder=''
                   genderType='Female'
-                  onChange={onChange}
+                  onChange={handleChange}
                   name='gender'
                   value='female'
                   errorMessage=''
@@ -156,18 +165,18 @@ const FormValidation = () => {
         <div className='form__input'>
           <label className='input__label'>Address</label>
           <InputValidate
-            type='text'
             value={formData.address}
             errorMessage={errors.address}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
             name='address'
-            errors={errors}
-            setErrors={setErrors}
           />
         </div>
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.CANCEL}>Cancel</Button>
+          <Button variant={BUTTON_VARIANTS.CANCEL} onClick={handleShowForm}>
+            Cancel
+          </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
             Create
           </Button>
