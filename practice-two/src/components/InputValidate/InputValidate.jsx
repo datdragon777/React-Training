@@ -4,7 +4,6 @@ import { Validation } from '@helpers';
 import { MESSAGES } from '@constants';
 
 const InputValidate = (props) => {
-  // const [focused, setFocused] = useState(false);
   const {
     type,
     value,
