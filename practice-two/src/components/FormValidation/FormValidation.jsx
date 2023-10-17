@@ -56,7 +56,6 @@ const FormValidation = () => {
               <InputValidate
                 type='text'
                 value={formData.username}
-                placeholder='Please enter full name'
                 errorMessage={errors.username}
                 onChange={onChange}
                 name='username'
@@ -71,7 +70,7 @@ const FormValidation = () => {
               <InputValidate
                 type='text'
                 value={formData.avatar}
-                placeholder='Please enter URL avatar'
+                placeholder='Enter avatar URL'
                 errorMessage={errors.avatar}
                 onChange={onChange}
                 name='avatar'
@@ -88,7 +87,7 @@ const FormValidation = () => {
               <InputValidate
                 type='text'
                 value={formData.email}
-                placeholder='exmaple@gmail.com'
+                placeholder='example@gmail.com'
                 errorMessage={errors.email}
                 onChange={onChange}
                 name='email'
@@ -103,7 +102,7 @@ const FormValidation = () => {
               <InputValidate
                 type='text'
                 value={formData.phonenumber}
-                placeholder='E.g 5555-555-555'
+                placeholder='Vietnamese phone number'
                 errorMessage={errors.phonenumber}
                 onChange={onChange}
                 name='phonenumber'
@@ -120,7 +119,6 @@ const FormValidation = () => {
               <InputValidate
                 type='text'
                 value={formData.description}
-                placeholder='Please enter your job'
                 errorMessage={errors.description}
                 onChange={onChange}
                 name='description'
@@ -160,7 +158,6 @@ const FormValidation = () => {
           <InputValidate
             type='text'
             value={formData.address}
-            placeholder='Please enter your address'
             errorMessage={errors.address}
             onChange={onChange}
             name='address'
@@ -170,7 +167,7 @@ const FormValidation = () => {
         </div>
 
         <div className='form__button'>
-          <Button>Cancel</Button>
+          <Button variant={BUTTON_VARIANTS.CANCEL}>Cancel</Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
             Create
           </Button>

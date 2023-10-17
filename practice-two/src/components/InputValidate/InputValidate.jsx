@@ -57,7 +57,7 @@ InputValidate.propTypes = {
 
 InputValidate.defaultProps = {
   type: 'text',
-  placeholder: 'Please enter full name',
+  placeholder: '',
   errorMessage: MESSAGES.FORM.USERNAME,
   value: '',
   name: '',
