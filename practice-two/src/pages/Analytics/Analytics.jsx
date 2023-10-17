@@ -1,34 +1,46 @@
 // Library
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import useSWR from 'swr';
 
 // Import style for Analytics component
-import "./Analytics.css";
+import './Analytics.css';
 
 // Import service to call API
-import { getAllCustomerService } from "@services";
+import { getAllCustomerService } from '@services';
 
 // Import images or icons
-import { plusIcon, loadingData } from "@assets/images";
+import { plusIcon, loadingData } from '@assets/images';
 
 // Import components
-import { Button, SortData, CustomerItem, Toast } from "@components";
+import {
+  Button,
+  SortData,
+  CustomerItem,
+  Toast,
+  FormValidation,
+} from '@components';
 
 // Import constant
-import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from "@constants";
+import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from '@constants';
 
 // Import list data for Expand component
-import { SORT_TITLES } from "@data";
+import { SORT_TITLES } from '@data';
 
 // Import layout
-import { ProfileInfo } from "@layouts";
+import { ProfileInfo } from '@layouts';
 
 const Analytics = () => {
   // State variables
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
+  const [isShowForm, setIsShowForm] = useState(false);
+
+  //Handle disable form
+  const handleShowForm = () => {
+    setIsShowForm(!isShowForm);
+  };
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = (customer) => {
@@ -86,11 +98,15 @@ const Analytics = () => {
   return (
     <>
       <div
-        className={`analytics ${isShowProfileInfo ? "analytics--profile" : ""}`}
+        className={`analytics ${isShowProfileInfo ? 'analytics--profile' : ''}`}
       >
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>
+          <Button
+            variant={BUTTON_VARIANTS.SECONDARY}
+            icon={plusIcon}
+            onClick={handleShowForm}
+          >
             Add Customer
           </Button>
         </div>
@@ -126,6 +142,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
+      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
     </>
   );
 };
