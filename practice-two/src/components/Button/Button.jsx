@@ -28,7 +28,8 @@ const Button = ({
       onClick={onClick}
       className={`btn ${
         variant === BUTTON_VARIANTS.PRIMARY ||
-        variant === BUTTON_VARIANTS.DELETE
+        variant === BUTTON_VARIANTS.DELETE ||
+        variant === BUTTON_VARIANTS.CANCEL
           ? "btn__female"
           : "btn__male"
       }`}

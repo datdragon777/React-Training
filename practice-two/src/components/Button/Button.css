@@ -18,7 +18,7 @@
 
 .btn__female:hover {
   color: var(--cl-female-txt);
-  background-color: #fff7fb;
+  background-color: var(--cl-bg-female);
 }
 
 .btn__female:hover .icon__bonus {
