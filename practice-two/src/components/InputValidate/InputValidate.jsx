@@ -1,28 +1,19 @@
 import './InputValidate.css';
 import PropTypes from 'prop-types';
-import { Validation } from '@helpers';
-import { MESSAGES } from '@constants';
+import { memo } from 'react';
 
-const InputValidate = (props) => {
+const InputValidate = memo(function InputValidate(props) {
   const {
-    type,
+    type='text',
     value,
     errorMessage,
     genderType,
-    onChange,
-    errors,
-    setErrors,
+    handleChange,
+    handleBlur,
     ...inputProps
   } = props;
 
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-    const errorMessage = Validation(name, value);
-    setErrors({
-      ...errors,
-      [name]: errorMessage,
-    });
-  };
+  console.log("InputValidate is rendering");
 
   return (
     <div className='input__group'>
@@ -31,7 +22,7 @@ const InputValidate = (props) => {
         type={type}
         value={value}
         className={type === 'radio' ? 'input__choose' : 'input__field'}
-        onChange={onChange}
+        onChange={handleChange}
         defaultChecked={value === 'male'}
         onBlur={handleBlur}
         {...inputProps}
@@ -44,7 +35,7 @@ const InputValidate = (props) => {
       {errorMessage && <span className='error__message'>{errorMessage}</span>}
     </div>
   );
-};
+});
 
 InputValidate.propTypes = {
   type: PropTypes.oneOf(['text', 'radio']),
@@ -53,15 +44,6 @@ InputValidate.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string,
   genderType: PropTypes.string,
-};
-
-InputValidate.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  errorMessage: MESSAGES.FORM.USERNAME,
-  value: '',
-  name: '',
-  genderType: '',
 };
 
 export default InputValidate;

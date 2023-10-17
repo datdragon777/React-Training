@@ -18,20 +18,14 @@ export default {
 const Template = (args) => <InputValidate {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  errorMessage: MESSAGES.FORM.USERNAME,
+};
 
 export const Email = Template.bind({});
 Email.args = {
-  type: 'text',
   placeholder: 'example@gmail.com',
   errorMessage: MESSAGES.FORM.EMAIL,
-};
-
-export const PhoneNumber = Template.bind({});
-PhoneNumber.args = {
-  type: 'text',
-  placeholder: 'Please enter your phone number',
-  errorMessage: MESSAGES.FORM.PHONENUMBER,
 };
 
 export const GenderRadio = Template.bind({});
