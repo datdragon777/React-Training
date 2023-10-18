@@ -1,5 +1,5 @@
 // Library
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -38,9 +38,9 @@ const Analytics = () => {
   const [isShowForm, setIsShowForm] = useState(false);
 
   //Handle disable form
-  const handleShowForm = () => {
+  const handleShowForm = useCallback(() => {
     setIsShowForm(!isShowForm);
-  };
+  }, [isShowForm]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = (customer) => {
