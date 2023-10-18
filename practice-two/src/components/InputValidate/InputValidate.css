@@ -1,7 +1,14 @@
 .form__input {
   display: flex;
-  flex-direction: column;
   margin-bottom: 14px;
+}
+
+.form__input--field {
+  flex-direction: column;
+}
+
+.form__input--choose {
+  flex-direction: unset;
 }
 
 .input__choose {
@@ -16,6 +23,7 @@
 }
 
 .input__label {
+  display: block;
   font-size: var(--fs-sm);
   color: var(--cl-secondary);
   font-weight: var(--fw-lg);

@@ -6,6 +6,7 @@ export default {
   component: InputValidate,
   tags: ['autodocs'],
   argTypes: {
+    label: { control: 'text' },
     type: { control: 'select', options: ['text', 'radio'] },
     placeholder: { control: 'text' },
     errorMessage: { control: 'text' },
@@ -19,13 +20,17 @@ const Template = (args) => <InputValidate {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  label: 'Full name',
   errorMessage: MESSAGES.FORM.USERNAME,
+  name: 'username',
 };
 
 export const Email = Template.bind({});
 Email.args = {
+  label: 'Email',
   placeholder: 'example@gmail.com',
   errorMessage: MESSAGES.FORM.EMAIL,
+  name: 'email',
 };
 
 export const GenderRadio = Template.bind({});

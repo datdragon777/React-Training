@@ -4,7 +4,8 @@ import { memo } from 'react';
 
 const InputValidate = (props) => {
   const {
-    type='text',
+    label,
+    type = 'text',
     value,
     errorMessage,
     genderType,
@@ -13,10 +14,13 @@ const InputValidate = (props) => {
     ...inputProps
   } = props;
 
-  console.log("InputValidate is rendering");
-
   return (
-    <div className='input__group'>
+    <div
+      className={`form__input ${
+        type !== 'radio' ? 'form__input--field' : 'form__input--choose'
+      }`}
+    >
+      {label && <label className='input__label'>{label}</label>}
       <input
         id={genderType}
         type={type}
@@ -38,6 +42,7 @@ const InputValidate = (props) => {
 };
 
 InputValidate.propTypes = {
+  label: PropTypes.string,
   type: PropTypes.oneOf(['text', 'radio']),
   placeholder: PropTypes.string,
   errorMessage: PropTypes.string,
