@@ -25,22 +25,31 @@ const FormValidation = (props) => {
     address: '',
   });
 
-  const handleChange = useCallback((e) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [e.target.name]: e.target.value,
-    }));
-  }, []);
+  // Set value for form data
+  const handleChange = useCallback(
+    (e) => {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [setFormData]
+  );
 
-  const handleBlur = useCallback((e) => {
-    const { name, value } = e.target;
-    const errorMessage = Validation(name, value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: errorMessage,
-    }));
-  }, []);
+  // Check validate input when click outside
+  const handleBlur = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      const errorMessage = Validation(name, value);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: errorMessage,
+      }));
+    },
+    [setErrors]
+  );
 
+  // Submit form
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -67,108 +76,94 @@ const FormValidation = (props) => {
         <p className='form__title'>Add customer</p>
         <div className='form__row'>
           <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Full name</label>
-              <InputValidate
-                value={formData.username}
-                errorMessage={errors.username}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name='username'
-              />
-            </div>
+            <InputValidate
+              label='Full name'
+              value={formData.username}
+              errorMessage={errors.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name='username'
+            />
           </div>
           <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Avatar</label>
-              <InputValidate
-                value={formData.avatar}
-                placeholder='Enter avatar URL'
-                errorMessage={errors.avatar}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name='avatar'
-              />
-            </div>
+            <InputValidate
+              label='Avatar'
+              value={formData.avatar}
+              placeholder='Enter avatar URL'
+              errorMessage={errors.avatar}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name='avatar'
+            />
           </div>
         </div>
         <div className='form__row'>
           <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Email</label>
-              <InputValidate
-                value={formData.email}
-                placeholder='example@gmail.com'
-                errorMessage={errors.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name='email'
-              />
-            </div>
+            <InputValidate
+              label='Email'
+              value={formData.email}
+              placeholder='example@gmail.com'
+              errorMessage={errors.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name='email'
+            />
           </div>
           <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Phone number</label>
-              <InputValidate
-                value={formData.phonenumber}
-                placeholder='Vietnamese phone number'
-                errorMessage={errors.phonenumber}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name='phonenumber'
-              />
-            </div>
+            <InputValidate
+              label='Phone number'
+              value={formData.phonenumber}
+              placeholder='Vietnamese phone number'
+              errorMessage={errors.phonenumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name='phonenumber'
+            />
           </div>
         </div>
         <div className='form__row'>
           <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Job</label>
+            <InputValidate
+              label='Job'
+              value={formData.description}
+              errorMessage={errors.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name='description'
+            />
+          </div>
+          <div className='col-6'>
+            <label className='input__label'>Gender</label>
+            <div className='input__row'>
               <InputValidate
-                value={formData.description}
-                errorMessage={errors.description}
+                type='radio'
+                placeholder=''
+                genderType='Male'
                 onChange={handleChange}
-                onBlur={handleBlur}
-                name='description'
+                name='gender'
+                value='male'
+                errorMessage=''
+              />
+              <InputValidate
+                type='radio'
+                placeholder=''
+                genderType='Female'
+                onChange={handleChange}
+                name='gender'
+                value='female'
+                errorMessage=''
               />
             </div>
           </div>
-          <div className='col-6'>
-            <div className='form__input'>
-              <label className='input__label'>Gender</label>
-              <div className='input__row'>
-                <InputValidate
-                  type='radio'
-                  placeholder=''
-                  genderType='Male'
-                  onChange={handleChange}
-                  name='gender'
-                  value='male'
-                  errorMessage=''
-                />
-                <InputValidate
-                  type='radio'
-                  placeholder=''
-                  genderType='Female'
-                  onChange={handleChange}
-                  name='gender'
-                  value='female'
-                  errorMessage=''
-                />
-              </div>
-            </div>
-          </div>
         </div>
-        <div className='form__input'>
-          <label className='input__label'>Address</label>
-          <InputValidate
-            value={formData.address}
-            errorMessage={errors.address}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            name='address'
-          />
-        </div>
+        <InputValidate
+          label='Address'
+          value={formData.address}
+          errorMessage={errors.address}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name='address'
+        />
 
         <div className='form__button'>
           <Button variant={BUTTON_VARIANTS.CANCEL} onClick={handleShowForm}>

@@ -1,9 +1,9 @@
-import FormValidation from "./FormValidation";
+import FormValidation from './FormValidation';
 
 export default {
-  title: "Components/FormValidation",
+  title: 'Components/FormValidation',
   component: FormValidation,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 const Template = (args) => <FormValidation {...args} />;
