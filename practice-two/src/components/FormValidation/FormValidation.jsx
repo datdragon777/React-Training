@@ -25,24 +25,21 @@ const FormValidation = (props) => {
     address: '',
   });
 
-  const handleChange = useCallback(
-    (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    },
-    [formData, setFormData]
-  );
+  const handleChange = useCallback((e) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
+  }, []);
 
-  const handleBlur = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      const errorMessage = Validation(name, value);
-      setErrors({
-        ...errors,
-        [name]: errorMessage,
-      });
-    },
-    [errors, setErrors]
-  );
+  const handleBlur = useCallback((e) => {
+    const { name, value } = e.target;
+    const errorMessage = Validation(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMessage,
+    }));
+  }, []);
 
   const handleSubmit = useCallback(
     (e) => {

@@ -2,7 +2,7 @@ import './InputValidate.css';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 
-const InputValidate = memo(function InputValidate(props) {
+const InputValidate = (props) => {
   const {
     type='text',
     value,
@@ -35,7 +35,7 @@ const InputValidate = memo(function InputValidate(props) {
       {errorMessage && <span className='error__message'>{errorMessage}</span>}
     </div>
   );
-});
+};
 
 InputValidate.propTypes = {
   type: PropTypes.oneOf(['text', 'radio']),
@@ -46,4 +46,4 @@ InputValidate.propTypes = {
   genderType: PropTypes.string,
 };
 
-export default InputValidate;
+export default memo(InputValidate);
