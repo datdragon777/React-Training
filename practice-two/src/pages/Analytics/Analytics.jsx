@@ -37,10 +37,10 @@ const Analytics = () => {
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
 
-  //Handle disable form
+  // Handle open/close form
   const handleShowForm = useCallback(() => {
-    setIsShowForm(!isShowForm);
-  }, [isShowForm]);
+    setIsShowForm(true);
+  }, []);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = (customer) => {
@@ -142,7 +142,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
+      {isShowForm && <FormValidation handleShowForm={() => setIsShowForm(false)} />}
     </>
   );
 };

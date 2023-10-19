@@ -44,7 +44,7 @@ const FormValidation = (props) => {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: errorMessage,
-      }));
+      }));  
     },
     [setErrors]
   );
@@ -65,9 +65,10 @@ const FormValidation = (props) => {
 
       if (Object.keys(newErrors).length === 0) {
         console.log(formData);
+        handleShowForm()
       }
     },
-    [formData, setErrors]
+    [formData, setErrors, handleShowForm]
   );
 
   return (
