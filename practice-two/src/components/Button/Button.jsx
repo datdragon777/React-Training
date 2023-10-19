@@ -20,7 +20,6 @@ const Button = ({
     borderRadius: buttonVariant.borderRadius,
     justifyContent: buttonVariant.justifyContent,
   };
-console.log("btn");
   return (
     <button
       type={type}
