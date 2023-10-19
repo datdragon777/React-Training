@@ -39,8 +39,8 @@ const Analytics = () => {
 
   // Handle open/close form
   const handleShowForm = useCallback(() => {
-    setIsShowForm(true);
-  }, []);
+    setIsShowForm(!isShowForm);
+  }, [isShowForm]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = (customer) => {
@@ -142,7 +142,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation handleShowForm={() => setIsShowForm(false)} />}
+      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
     </>
   );
 };

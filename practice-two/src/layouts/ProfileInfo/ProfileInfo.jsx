@@ -1,4 +1,4 @@
-import React from "react";
+import {memo} from "react";
 import "./ProfileInfo.css";
 import { Info, Contact } from "@components";
 
@@ -15,4 +15,4 @@ const ProfileInfo = ({ selectedCustomer }) => {
   );
 };
 
-export default ProfileInfo;
+export default memo(ProfileInfo);

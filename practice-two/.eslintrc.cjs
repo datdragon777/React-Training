@@ -17,6 +17,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "react-refresh/only-export-components": "off",
     "react/jsx-uses-react": "error",   
     "react/jsx-uses-vars": "error" ,
     "react/prop-types": "off"

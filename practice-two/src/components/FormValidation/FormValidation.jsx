@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
@@ -44,7 +44,7 @@ const FormValidation = (props) => {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: errorMessage,
-      }));  
+      }));
     },
     [setErrors]
   );
@@ -64,8 +64,7 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        console.log(formData);
-        handleShowForm()
+        handleShowForm();
       }
     },
     [formData, setErrors, handleShowForm]
@@ -179,4 +178,4 @@ const FormValidation = (props) => {
   );
 };
 
-export default FormValidation;
+export default memo(FormValidation);
