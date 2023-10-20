@@ -72,6 +72,7 @@ practice-one
         |-- CustomerItem
         |-- Gender
         |-- Info
+        |-- InputValidate
         |-- Expand
         |-- TagLink
         |-- index.js
