@@ -1,5 +1,5 @@
 // Library
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -43,7 +43,7 @@ const Analytics = () => {
   }, [isShowForm]);
 
   // Event handler for clicking a customer
-  const handleShowProfileInfo = (customer) => {
+  const handleShowProfileInfo = useCallback((customer) => {
     // If clicked on the same customer that is already selected, toggle the profile show
     if (selectedCustomer && selectedCustomer.id === customer.id) {
       setIsShowProfileInfo(!isShowProfileInfo);
@@ -52,10 +52,10 @@ const Analytics = () => {
       setSelectedCustomer(customer);
       setIsShowProfileInfo(true);
     }
-  };
+  }, [selectedCustomer, isShowProfileInfo]);
 
   // Event handler for showing context menu
-  const handleShowContextMenu = (e, customer) => {
+  const handleShowContextMenu = useCallback((e, customer) => {
     e.stopPropagation();
     // If clicked on the same customer that is already selected, toggle the context menu show
     if (selectedCustomer && selectedCustomer.id === customer.id) {
@@ -65,7 +65,7 @@ const Analytics = () => {
       setSelectedCustomer(customer);
       setIsShowContextMenu(true);
     }
-  };
+  }, [selectedCustomer, isShowContextMenu]);
 
   // Fetch data from the server when the component mounts
   const {
@@ -142,9 +142,9 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
+      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
     </>
   );
 };
 
-export default Analytics;
+export default memo(Analytics);
