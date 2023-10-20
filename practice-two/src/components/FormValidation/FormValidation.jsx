@@ -5,7 +5,7 @@ import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
 
 const FormValidation = (props) => {
-  const { handleShowForm } = props;
+  const { onShowForm } = props;
   const [formData, setFormData] = useState({
     username: '',
     avatar: '',
@@ -64,10 +64,10 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        handleShowForm();
+        onShowForm();
       }
     },
-    [formData, setErrors, handleShowForm]
+    [formData, setErrors, onShowForm]
   );
 
   return (
@@ -166,7 +166,7 @@ const FormValidation = (props) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.CANCEL} onClick={handleShowForm}>
+          <Button variant={BUTTON_VARIANTS.CANCEL} onClick={onShowForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

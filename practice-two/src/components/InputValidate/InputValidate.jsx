@@ -9,8 +9,8 @@ const InputValidate = (props) => {
     value,
     errorMessage,
     genderType,
-    handleChange,
-    handleBlur,
+    onChange,
+    onBlur,
     ...inputProps
   } = props;
 
@@ -26,9 +26,9 @@ const InputValidate = (props) => {
         type={type}
         value={value}
         className={type === 'radio' ? 'input__choose' : 'input__field'}
-        onChange={handleChange}
+        onChange={onChange}
         defaultChecked={value === 'male'}
-        onBlur={handleBlur}
+        onBlur={onBlur}
         {...inputProps}
       />
       {type === 'radio' && (
