@@ -166,7 +166,7 @@ const FormValidation = (props) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.CANCEL} onClick={onShowForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onShowForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

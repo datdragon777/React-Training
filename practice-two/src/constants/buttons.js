@@ -3,5 +3,5 @@ export const BUTTON_VARIANTS = {
   SECONDARY: 'secondary',
   EDIT: 'edit',
   DELETE: 'delete',
-  CANCEL: 'cancel',
+  TOGGLE: 'toggle',
 };

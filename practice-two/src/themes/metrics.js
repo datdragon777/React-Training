@@ -34,7 +34,7 @@ const Metrics = {
       borderRadius: '5px',
       justifyContent: 'flex-start',
     },
-    cancel: {
+    toggle: {
       fontSize: 'var(--fs-md)',
       fontWeight: 'var(--fw-md)',
       width: '10rem',
