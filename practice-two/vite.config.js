@@ -20,6 +20,7 @@ export default defineConfig({
       '@pages': `${path.resolve(__dirname, './src/pages/')}`,
       '@router': `${path.resolve(__dirname, './src/router/')}`,
       '@services': `${path.resolve(__dirname, './src/services')}`,
+      '@stores': `${path.resolve(__dirname, './src/stores')}`,
       '@themes': `${path.resolve(__dirname, './src/themes/')}`,
     },
   },
