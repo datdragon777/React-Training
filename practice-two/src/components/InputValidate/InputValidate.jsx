@@ -1,11 +1,12 @@
 import './InputValidate.css';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
+import { INPUT_VARIANTS } from '@constants';
 
 const InputValidate = (props) => {
   const {
     label,
-    type = 'text',
+    type = INPUT_VARIANTS.TEXT,
     value,
     errorMessage,
     genderType,
@@ -14,10 +15,12 @@ const InputValidate = (props) => {
     ...inputProps
   } = props;
 
+  const isRadioInput = type === INPUT_VARIANTS.RADIO;
+
   return (
     <div
       className={`form__input ${
-        type !== 'radio' ? 'form__input--field' : 'form__input--choose'
+        !isRadioInput ? 'form__input--field' : 'form__input--choose'
       }`}
     >
       {label && <label className='input__label'>{label}</label>}
@@ -25,13 +28,13 @@ const InputValidate = (props) => {
         id={genderType}
         type={type}
         value={value}
-        className={type === 'radio' ? 'input__choose' : 'input__field'}
+        className={isRadioInput ? 'input__choose' : 'input__field'}
         onChange={onChange}
         defaultChecked={value === 'Male'}
         onBlur={onBlur}
         {...inputProps}
       />
-      {type === 'radio' && (
+      {isRadioInput && (
         <label className='input__option' htmlFor={genderType}>
           {genderType}
         </label>

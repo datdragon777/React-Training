@@ -1,12 +1,12 @@
-import { MESSAGES } from "@constants";
-import Toast from "./Toast";
+import { MESSAGES } from '@constants';
+import Toast from './Toast';
 
 export default {
-  title: "Components/Toast",
+  title: 'Components/Toast',
   component: Toast,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    message: { control: "text" },
+    message: { control: 'text' },
   },
 };
 
@@ -19,5 +19,5 @@ Default.args = {
 
 export const Danger = Template.bind({});
 Danger.args = {
-  message: MESSAGES.ERRORS.GET_API,
+  message: MESSAGES.GET.API_FAILED,
 };
