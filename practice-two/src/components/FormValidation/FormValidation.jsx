@@ -1,26 +1,30 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useContext, useState } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
+import { CustomerContext } from '@contexts';
+import { createCustomerService } from '@services';
 
 const FormValidation = (props) => {
   const { onShowForm } = props;
+  const { handleCreateCustomer } = useContext(CustomerContext);
+
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     avatar: '',
-    email: '',
-    phonenumber: '',
+    mail: '',
+    phoneNumber: '',
     description: '',
     address: '',
-    gender: 'male',
+    gender: 'Male',
   });
 
   const [errors, setErrors] = useState({
-    username: '',
+    name: '',
     avatar: '',
-    email: '',
-    phonenumber: '',
+    mail: '',
+    phoneNumber: '',
     description: '',
     address: '',
   });
@@ -64,10 +68,12 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
+        const createCustomer = createCustomerService(formData);
+        handleCreateCustomer(createCustomer);
         onShowForm();
       }
     },
-    [formData, setErrors, onShowForm]
+    [formData, setErrors, onShowForm, handleCreateCustomer]
   );
 
   return (
@@ -79,10 +85,10 @@ const FormValidation = (props) => {
             <InputValidate
               label='Full name'
               value={formData.username}
-              errorMessage={errors.username}
+              errorMessage={errors.name}
               onChange={handleChange}
               onBlur={handleBlur}
-              name='username'
+              name='name'
             />
           </div>
           <div className='col-6'>
@@ -103,21 +109,21 @@ const FormValidation = (props) => {
               label='Email'
               value={formData.email}
               placeholder='example@gmail.com'
-              errorMessage={errors.email}
+              errorMessage={errors.mail}
               onChange={handleChange}
               onBlur={handleBlur}
-              name='email'
+              name='mail'
             />
           </div>
           <div className='col-6'>
             <InputValidate
               label='Phone number'
-              value={formData.phonenumber}
+              value={formData.phoneNumber}
               placeholder='Vietnamese phone number'
-              errorMessage={errors.phonenumber}
+              errorMessage={errors.phoneNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-              name='phonenumber'
+              name='phoneNumber'
             />
           </div>
         </div>
@@ -141,7 +147,7 @@ const FormValidation = (props) => {
                 genderType='Male'
                 onChange={handleChange}
                 name='gender'
-                value='male'
+                value='Male'
                 errorMessage=''
               />
               <InputValidate
@@ -150,7 +156,7 @@ const FormValidation = (props) => {
                 genderType='Female'
                 onChange={handleChange}
                 name='gender'
-                value='female'
+                value='Female'
                 errorMessage=''
               />
             </div>

@@ -27,7 +27,7 @@ const InputValidate = (props) => {
         value={value}
         className={type === 'radio' ? 'input__choose' : 'input__field'}
         onChange={onChange}
-        defaultChecked={value === 'male'}
+        defaultChecked={value === 'Male'}
         onBlur={onBlur}
         {...inputProps}
       />

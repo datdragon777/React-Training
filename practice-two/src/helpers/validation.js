@@ -2,7 +2,7 @@ import { MESSAGES, REGEX } from '@constants';
 
 const Validation = (name, value) => {
   const validationRules = {
-    username: {
+    name: {
       regex: REGEX.USERNAME,
       message: MESSAGES.FORM.USERNAME,
     },
@@ -10,11 +10,11 @@ const Validation = (name, value) => {
       regex: REGEX.AVATAR,
       message: MESSAGES.FORM.AVATAR,
     },
-    email: {
+    mail: {
       regex: REGEX.EMAIL,
       message: MESSAGES.FORM.EMAIL,
     },
-    phonenumber: {
+    phoneNumber: {
       regex: REGEX.PHONENUMBER,
       message: MESSAGES.FORM.PHONENUMBER,
     },
