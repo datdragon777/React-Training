@@ -1,4 +1,4 @@
-module.exports = {
+"react-refresh/only-export-components": "off",module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
@@ -17,6 +17,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "react-refresh/only-export-components": "off",
     "react/jsx-uses-react": "error",   
     "react/jsx-uses-vars": "error" ,
     "react/prop-types": "off"
