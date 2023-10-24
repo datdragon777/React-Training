@@ -119,9 +119,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.GET.EMPTY_LIST}</p>
         )}
-        {isError && <Toast message={MESSAGES.GET.API_FAILED} />}
+        {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
       </div>
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />

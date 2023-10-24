@@ -19,5 +19,5 @@ Default.args = {
 
 export const Danger = Template.bind({});
 Danger.args = {
-  message: MESSAGES.GET.API_FAILED,
+  message: MESSAGES.GET.ERRORS.API_FAILED,
 };

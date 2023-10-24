@@ -1,12 +1,19 @@
 export const MESSAGES = {
   GET: {
-    API_FAILED: 'Having some issues on server',
+    ERRORS: {
+      ADD_FAILED: 'Create new customer failed',
+      UPDATE_FAILED: 'Update customer failed',
+      DELETE_FAILED: 'Delete customer failed',
+      API_FAILED: 'Having some issues on server',
+    },
+    SUCCESSES: {
+      ADD_SUCCESSED: 'Create new customer successfully',
+      UPDATE_SUCCESSED: 'Update customer successfully',
+      DELETE_SUCCESSED: 'Delete customer successfully',
+    },
+    EMPTY_LIST: 'Customer list is empty!',
   },
-  ERRORS: {
-    ADD_FAILED: 'Create new customer failed',
-    UPDATE_FAILED: 'Update customer failed',
-    DELETE_FAILED: 'Delete customer failed',
-  },
+
   FORM: {
     USERNAME: 'Username should be 3-16 characters.',
     AVATAR: 'Invalid avatar link. Please use a valid image URL.',
@@ -17,10 +24,4 @@ export const MESSAGES = {
     ADDRESS: 'The address must be at least 8 characters.',
     EMPTY: '',
   },
-  SUCCESSES: {
-    ADD_SUCCESSED: 'Create new customer successfully',
-    UPDATE_SUCCESSED: 'Update customer successfully',
-    DELETE_SUCCESSED: 'Delete customer successfully',
-  },
-  EMPTY_LIST: 'Customer list is empty!',
 };
