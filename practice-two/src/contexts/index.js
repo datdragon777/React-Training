@@ -1,1 +1,2 @@
-export { CustomerProvider, useCustomerContext } from './CustomerContext';
+export { default as CustomerProvider } from './CustomerContext';
+export { CustomerContext } from './CustomerContext';

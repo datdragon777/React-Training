@@ -1,4 +1,5 @@
 import { BASE_URL, PATH } from '@constants';
+import {mutate} from 'swr'
 
 const getAllCustomerService = async (url) => {
   const response = await fetch(url);
@@ -20,6 +21,7 @@ const request = async (path, method, data) => {
   });
 
   if (response.ok) {
+    mutate(url)
     return response.json();
   } else {
     throw new Error('Error while sending request');

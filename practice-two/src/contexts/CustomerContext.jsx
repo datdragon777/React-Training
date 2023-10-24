@@ -1,41 +1,41 @@
-import { createContext, useContext, useReducer } from 'react';
+import { useReducer, createContext } from 'react';
+import {
+  initialCustomer,
+  customerReducer,
+  createCustomer,
+  updateCustomer,
+  deleteCustomer,
+} from '@stores';
 
-const CustomerContext = createContext();
-
-const customerReducer = (state, action) => {
-  switch (action.type) {
-    case 'CREATE_CUSTOMER': {
-      return { ...state, customers: [...state.customers, action.payload] };
-    }
-    case 'UPDATE_CUSTOMER': {
-      const updatedCustomer = state.customers.map((customer) => {
-        if (customer.id === action.payload.id) {
-          return { ...customer, ...action.payload };
-        }
-        return customer;
-      });
-      return { ...state, customers: updatedCustomer };
-    }
-    case 'DELETE_CUSTOMER': {
-      const filteredCustomers = state.customers.filter(
-        (customer) => customer.id !== action.payload
-      );
-      return { ...state, customers: filteredCustomers };
-    }
-    default:
-      return state;
-  }
-};
+export const CustomerContext = createContext();
 
 const CustomerProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(customerReducer, { customer: [] });
+  const [state, dispatch] = useReducer(customerReducer, initialCustomer);
+
+  const handleCreateCustomer = (customer) => {
+    dispatch(createCustomer(customer));
+  };
+
+  const handleUpdateCustomer = (customer) => {
+    dispatch(updateCustomer(customer));
+  };
+
+  const handleDeleteCustomer = (customer) => {
+    dispatch(deleteCustomer(customer));
+  };
+
+  const constextValue = {
+    state,
+    handleCreateCustomer,
+    handleUpdateCustomer,
+    handleDeleteCustomer,
+  };
+
   return (
-    <CustomerProvider value={{ state, dispatch }}>{children}</CustomerProvider>
+    <CustomerContext.Provider value={constextValue}>
+      {children}
+    </CustomerContext.Provider>
   );
 };
 
-const useCustomerContext = () => {
-  return useContext(CustomerContext);
-};
-
-export { CustomerProvider, useCustomerContext };
+export default CustomerProvider;
