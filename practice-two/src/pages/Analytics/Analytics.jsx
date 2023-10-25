@@ -1,5 +1,5 @@
 // Library
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -13,7 +13,7 @@ import { getAllCustomerService } from '@services';
 import { plusIcon, loadingData } from '@assets/images';
 
 // Import components
-import { Button, SortData, CustomerItem, Toast } from '@components';
+import { Button, SortData, CustomerItem, Toast, FormValidation } from '@components';
 
 // Import constant
 import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from '@constants';
@@ -29,6 +29,12 @@ const Analytics = () => {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
+  const [isShowForm, setIsShowForm] = useState(false);
+
+  // Handle open/close form
+  const handleShowForm = useCallback(() => {
+    setIsShowForm(!isShowForm);
+  }, [isShowForm]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = (customer) => {
@@ -90,7 +96,11 @@ const Analytics = () => {
       >
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>
+          <Button
+            variant={BUTTON_VARIANTS.SECONDARY}
+            icon={plusIcon}
+            onClick={handleShowForm}
+          >
             Add Customer
           </Button>
         </div>
@@ -126,6 +136,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
+      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
     </>
   );
 };
