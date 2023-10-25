@@ -1,8 +1,8 @@
-import React from "react";
-import "./Button.css";
-import PropTypes from "prop-types";
-import { getButtonVariant } from "@themes";
-import { BUTTON_VARIANTS } from "@constants";
+import React from 'react';
+import './Button.css';
+import PropTypes from 'prop-types';
+import { getButtonVariant } from '@themes';
+import { BUTTON_VARIANTS } from '@constants';
 
 const Button = ({
   children,
@@ -27,9 +27,10 @@ const Button = ({
       onClick={onClick}
       className={`btn ${
         variant === BUTTON_VARIANTS.PRIMARY ||
-        variant === BUTTON_VARIANTS.DELETE
-          ? "btn__female"
-          : "btn__male"
+        variant === BUTTON_VARIANTS.DELETE ||
+        variant === BUTTON_VARIANTS.TOGGLE
+          ? 'btn__female'
+          : 'btn__male'
       }`}
     >
       {icon && (
@@ -55,8 +56,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  children: "Update now",
-  variant: "primary",
+  children: 'Update now',
+  variant: 'primary',
 };
 
 export default Button;
