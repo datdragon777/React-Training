@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./ContextMenu.css";
 import { Button } from "@components";
 import { BUTTON_VARIANTS } from "@constants/buttons";
@@ -21,4 +21,4 @@ const ContextMenu = () => {
   );
 };
 
-export default ContextMenu;
+export default memo(ContextMenu);

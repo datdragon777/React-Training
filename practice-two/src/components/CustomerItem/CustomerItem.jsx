@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./CustomerItem.css";
 import { PropTypes } from "prop-types";
 import { CustomerInfo, Gender, ContextMenu } from "@components";
@@ -55,4 +55,4 @@ CustomerItem.defaultProps = {
   },
 };
 
-export default CustomerItem;
+export default memo(CustomerItem);

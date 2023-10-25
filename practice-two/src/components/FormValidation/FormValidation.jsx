@@ -29,9 +29,10 @@ const FormValidation = (props) => {
   // Set value for form data
   const handleChange = useCallback(
     (e) => {
+      const { name, value } = e.target;
       setFormData((prevFormData) => ({
         ...prevFormData,
-        [e.target.name]: e.target.value,
+        [name]: value,
       }));
     },
     [setFormData]
