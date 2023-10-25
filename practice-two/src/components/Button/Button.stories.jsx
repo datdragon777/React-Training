@@ -1,24 +1,25 @@
-import Button from "./Button";
-import { plusIcon, editIcon, deleteIcon } from "@assets/images";
-import { BUTTON_VARIANTS } from "@constants";
+import Button from './Button';
+import { plusIcon, editIcon, deleteIcon } from '@assets/images';
+import { BUTTON_VARIANTS } from '@constants';
 
 export default {
-  title: "Components/Button",
+  title: 'Components/Button',
   component: Button,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    children: { control: { type: "text" } },
+    children: { control: { type: 'text' } },
     variant: {
-      control: "select",
+      control: 'select',
       options: [
         BUTTON_VARIANTS.PRIMARY,
         BUTTON_VARIANTS.SECONDARY,
         BUTTON_VARIANTS.EDIT,
         BUTTON_VARIANTS.DELETE,
+        BUTTON_VARIANTS.TOGGLE,
       ],
     },
-    icon: { control: { type: "file", accept: ".svg" } },
-    onClick: { action: "handleClick" },
+    icon: { control: { type: 'file', accept: '.svg' } },
+    onClick: { action: 'handleClick' },
   },
 };
 
@@ -37,14 +38,14 @@ Secondary.args = {
 
 export const AlignLeftEdit = Template.bind({});
 AlignLeftEdit.args = {
-  children: "Edit",
+  children: 'Edit',
   variant: BUTTON_VARIANTS.EDIT,
   icon: editIcon,
 };
 
 export const AlignLeftDelete = Template.bind({});
 AlignLeftDelete.args = {
-  children: "Delete",
+  children: 'Delete',
   variant: BUTTON_VARIANTS.DELETE,
   icon: deleteIcon,
 };
