@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './Button.css';
 import PropTypes from 'prop-types';
 import { getButtonVariant } from '@themes';
@@ -60,4 +60,4 @@ Button.defaultProps = {
   variant: 'primary',
 };
 
-export default Button;
+export default memo(Button);
