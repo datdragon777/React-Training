@@ -9,6 +9,7 @@ const Button = ({
   variant = BUTTON_VARIANTS.PRIMARY,
   icon,
   onClick,
+  type = 'button',
 }) => {
   const buttonVariant = getButtonVariant(variant);
   const buttonStyle = {
@@ -22,7 +23,7 @@ const Button = ({
 
   return (
     <button
-      type='button'
+      type={type}
       style={buttonStyle}
       onClick={onClick}
       className={`btn ${

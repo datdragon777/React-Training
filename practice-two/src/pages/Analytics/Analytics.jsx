@@ -1,5 +1,5 @@
 // Library
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -13,7 +13,13 @@ import { getAllCustomerService } from '@services';
 import { plusIcon, loadingData } from '@assets/images';
 
 // Import components
-import { Button, SortData, CustomerItem, Toast } from '@components';
+import {
+  Button,
+  SortData,
+  CustomerItem,
+  Toast,
+  FormValidation,
+} from '@components';
 
 // Import constant
 import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from '@constants';
@@ -29,31 +35,43 @@ const Analytics = () => {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
+  const [isShowForm, setIsShowForm] = useState(false);
+
+  // Handle open/close form
+  const handleShowForm = useCallback(() => {
+    setIsShowForm(!isShowForm);
+  }, [isShowForm]);
 
   // Event handler for clicking a customer
-  const handleShowProfileInfo = (customer) => {
-    // If clicked on the same customer that is already selected, toggle the profile show
-    if (selectedCustomer && selectedCustomer.id === customer.id) {
-      setIsShowProfileInfo(!isShowProfileInfo);
-    } else {
-      // If clicked on a different customer, select the new customer and show the new profile
-      setSelectedCustomer(customer);
-      setIsShowProfileInfo(true);
-    }
-  };
+  const handleShowProfileInfo = useCallback(
+    (customer) => {
+      // If clicked on the same customer that is already selected, toggle the profile show
+      if (selectedCustomer && selectedCustomer.id === customer.id) {
+        setIsShowProfileInfo(!isShowProfileInfo);
+      } else {
+        // If clicked on a different customer, select the new customer and show the new profile
+        setSelectedCustomer(customer);
+        setIsShowProfileInfo(true);
+      }
+    },
+    [selectedCustomer, isShowProfileInfo]
+  );
 
   // Event handler for showing context menu
-  const handleShowContextMenu = (e, customer) => {
-    e.stopPropagation();
-    // If clicked on the same customer that is already selected, toggle the context menu show
-    if (selectedCustomer && selectedCustomer.id === customer.id) {
-      setIsShowContextMenu(!isShowContextMenu);
-    } else {
-      // If clicked on a different customer, select the new customer and show the new context menu
-      setSelectedCustomer(customer);
-      setIsShowContextMenu(true);
-    }
-  };
+  const handleShowContextMenu = useCallback(
+    (e, customer) => {
+      e.stopPropagation();
+      // If clicked on the same customer that is already selected, toggle the context menu show
+      if (selectedCustomer && selectedCustomer.id === customer.id) {
+        setIsShowContextMenu(!isShowContextMenu);
+      } else {
+        // If clicked on a different customer, select the new customer and show the new context menu
+        setSelectedCustomer(customer);
+        setIsShowContextMenu(true);
+      }
+    },
+    [selectedCustomer, isShowContextMenu]
+  );
 
   // Fetch data from the server when the component mounts
   const {
@@ -90,7 +108,11 @@ const Analytics = () => {
       >
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
-          <Button variant={BUTTON_VARIANTS.SECONDARY} icon={plusIcon}>
+          <Button
+            variant={BUTTON_VARIANTS.SECONDARY}
+            icon={plusIcon}
+            onClick={handleShowForm}
+          >
             Add Customer
           </Button>
         </div>
@@ -126,6 +148,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
+      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
     </>
   );
 };
