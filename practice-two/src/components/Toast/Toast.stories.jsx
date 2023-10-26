@@ -14,7 +14,7 @@ const Template = (args) => <Toast {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  message: MESSAGES.SUCCESSES.ADD_SUCCESSED,
+  message: MESSAGES.GET.SUCCESSES.ADD_SUCCESSED,
 };
 
 export const Danger = Template.bind({});

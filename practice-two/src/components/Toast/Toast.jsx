@@ -23,7 +23,7 @@ const Toast = ({ message }) => {
   return (
     <div
       style={{
-        backgroundColor: Object.values(MESSAGES.ERRORS).includes(message)
+        backgroundColor: Object.values(MESSAGES.GET.ERRORS).includes(message)
           ? toastTheme.error
           : toastTheme.success,
       }}
@@ -40,7 +40,7 @@ Toast.propTypes = {
 };
 
 Toast.defaultProps = {
-  message: MESSAGES.SUCCESSES.ADD_SUCCESSED,
+  message: MESSAGES.GET.SUCCESSES.ADD_SUCCESSED,
 };
 
 export default Toast;
