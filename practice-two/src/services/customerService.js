@@ -13,19 +13,25 @@ const getAllCustomerService = async (url) => {
 
 const request = async (path, method, data) => {
   const url = `${BASE_URL}/${path}`;
-  const response = await fetch(url, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (response.ok) {
-    mutate(url);
-    return response.json();
-  } else {
-    throw new Error('Error while sending request');
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  
+    if (response.ok) {
+      mutate(url);
+      return {data: await response.json(), error: null};
+    } else {
+      const errorData = await response.json();
+      console.log(errorData.message);
+      throw new Error(errorData.message || 'Error while sending request');
+    }
+  } catch (error) {
+    return { data: null, error};
   }
 };
 

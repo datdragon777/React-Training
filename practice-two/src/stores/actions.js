@@ -1,20 +1,22 @@
+import { ACTION_TYPES } from '@constants';
+
 const createCustomer = (payload) => {
   return {
-    type: 'CREATE_CUSTOMER',
+    type: ACTION_TYPES.CREATE,
     payload,
   };
 };
 
 const updateCustomer = (payload) => {
   return {
-    type: 'UPDATE_CUSTOMER',
+    type: ACTION_TYPES.UPDATE,
     payload,
   };
 };
 
 const deleteCustomer = (payload) => {
   return {
-    type: 'DELETE_CUSTOMER',
+    type: ACTION_TYPES.DELETE,
     payload,
   };
 };

@@ -1,12 +1,14 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState, useContext } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
+import { CustomerContext } from '@contexts';
+import { createCustomerService } from '@services';
 
 const FormValidation = (props) => {
   const { onShowForm } = props;
-
+  const { handleCreateCustomer } = useContext(CustomerContext);
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -16,7 +18,6 @@ const FormValidation = (props) => {
     address: '',
     gender: 'Male',
   });
-
   const [errors, setErrors] = useState({
     name: '',
     avatar: '',
@@ -67,7 +68,12 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
+        const createCustomer = createCustomerService(formData);
+        handleCreateCustomer(createCustomer);
         onShowForm();
+      } else {
+        setIsCreateCustomerFailed(true);
+        return;
       }
     },
     [formData, setErrors, onShowForm]

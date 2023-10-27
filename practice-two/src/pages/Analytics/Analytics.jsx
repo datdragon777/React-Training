@@ -148,7 +148,7 @@ const Analytics = () => {
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
+      {isShowForm && <FormValidation onShowForm={handleShowForm}  />}
     </>
   );
 };

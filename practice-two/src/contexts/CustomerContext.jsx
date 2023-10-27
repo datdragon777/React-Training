@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext, useCallback } from 'react';
 import {
   initialCustomer,
   customerReducer,
@@ -12,19 +12,28 @@ export const CustomerContext = createContext();
 const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
 
-  const handleCreateCustomer = (customer) => {
-    dispatch(createCustomer(customer));
-  };
+  const handleCreateCustomer = useCallback(
+    (customer) => {
+      dispatch(createCustomer(customer));
+    },
+    [dispatch]
+  );
 
-  const handleUpdateCustomer = (customer) => {
-    dispatch(updateCustomer(customer));
-  };
+  const handleUpdateCustomer = useCallback(
+    (customer) => {
+      dispatch(updateCustomer(customer));
+    },
+    [dispatch]
+  );
 
-  const handleDeleteCustomer = (customer) => {
-    dispatch(deleteCustomer(customer));
-  };
+  const handleDeleteCustomer = useCallback(
+    (customer) => {
+      dispatch(deleteCustomer(customer));
+    },
+    [dispatch]
+  );
 
-  const constextValue = {
+  const contextValue = {
     state,
     handleCreateCustomer,
     handleUpdateCustomer,
@@ -32,7 +41,7 @@ const CustomerProvider = ({ children }) => {
   };
 
   return (
-    <CustomerContext.Provider value={constextValue}>
+    <CustomerContext.Provider value={contextValue}>
       {children}
     </CustomerContext.Provider>
   );

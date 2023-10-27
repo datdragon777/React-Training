@@ -1,13 +1,15 @@
+import { ACTION_TYPES } from '@constants';
+
 export const initialCustomer = {
   customers: [],
 };
 
 export const customerReducer = (state, action) => {
   switch (action.type) {
-    case 'CREATE_CUSTOMER': {
+    case ACTION_TYPES.CREATE: {
       return { customers: [...state.customers, action.payload], ...state };
     }
-    case 'UPDATE_CUSTOMER': {
+    case ACTION_TYPES.UPDATE: {
       const updatedCustomer = state.customers.map((customer) => {
         if (customer.id === action.payload.id) {
           return { ...customer, ...action.payload };
@@ -16,9 +18,9 @@ export const customerReducer = (state, action) => {
       });
       return { ...state, customers: updatedCustomer };
     }
-    case 'DELETE_CUSTOMER': {
+    case ACTION_TYPES.DELETE: {
       const filteredCustomers = state.customers.filter(
-        (customer) => customer.id !== action.payload
+        (customer) => customer.id !== action.payload.id
       );
       return { ...state, customers: filteredCustomers };
     }
