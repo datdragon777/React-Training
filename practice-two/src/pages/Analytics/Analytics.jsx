@@ -145,10 +145,12 @@ const Analytics = () => {
         )}
         {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
       </div>
+      
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation onShowForm={handleShowForm}  />}
+
+      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
     </>
   );
 };

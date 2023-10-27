@@ -5,22 +5,24 @@ export const initialCustomer = {
 };
 
 export const customerReducer = (state, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  const { customers } = state;
+  switch (type) {
     case ACTION_TYPES.CREATE: {
-      return { customers: [...state.customers, action.payload], ...state };
+      return { customers: [...customers, payload], ...state };
     }
     case ACTION_TYPES.UPDATE: {
-      const updatedCustomer = state.customers.map((customer) => {
-        if (customer.id === action.payload.id) {
-          return { ...customer, ...action.payload };
+      const updatedCustomer = customers.map((customer) => {
+        if (customer.id === payload.id) {
+          return { ...customer, ...payload };
         }
         return customer;
       });
       return { ...state, customers: updatedCustomer };
     }
     case ACTION_TYPES.DELETE: {
-      const filteredCustomers = state.customers.filter(
-        (customer) => customer.id !== action.payload.id
+      const filteredCustomers = customers.filter(
+        (customer) => customer.id !== payload.id
       );
       return { ...state, customers: filteredCustomers };
     }

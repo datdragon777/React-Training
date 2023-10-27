@@ -68,12 +68,8 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        const createCustomer = createCustomerService(formData);
-        handleCreateCustomer(createCustomer);
+        handleCreateCustomer(createCustomerService(formData));
         onShowForm();
-      } else {
-        setIsCreateCustomerFailed(true);
-        return;
       }
     },
     [formData, setErrors, onShowForm]
