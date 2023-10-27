@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import "./Toast.css";
 import PropTypes from "prop-types";
 import { MESSAGES } from "@constants";
@@ -43,4 +43,4 @@ Toast.defaultProps = {
   message: MESSAGES.GET.SUCCESSES.ADD_SUCCESSED,
 };
 
-export default Toast;
+export default memo(Toast);
