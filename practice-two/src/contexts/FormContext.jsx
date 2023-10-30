@@ -14,12 +14,6 @@ export const FormContext = createContext();
 export const FormProvider = ({ children }) => {
   const [isShowForm, setIsShowForm] = useState(false);
   const [createResult, setCreateResult] = useState(null);
-  const { handleCreateCustomer } = useContext(CustomerContext);
-
-  const handleShowForm = useCallback(() => {
-    setIsShowForm(!isShowForm);
-  }, [isShowForm]);
-
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -37,6 +31,11 @@ export const FormProvider = ({ children }) => {
     description: '',
     address: '',
   });
+  const { handleCreateCustomer } = useContext(CustomerContext);
+
+  const handleShowForm = useCallback(() => {
+    setIsShowForm(!isShowForm);
+  }, [isShowForm]);
 
   // Set value for form data
   const handleChange = useCallback(
@@ -104,6 +103,7 @@ export const FormProvider = ({ children }) => {
         if (response.error) {
           handleShowForm();
           setCreateResult('failed');
+          resetForm();
           return;
         } else {
           handleShowForm();

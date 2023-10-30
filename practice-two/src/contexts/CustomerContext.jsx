@@ -9,7 +9,7 @@ import {
 
 export const CustomerContext = createContext();
 
-const CustomerProvider = ({ children }) => {
+export const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
 
   const handleCreateCustomer = useCallback(
@@ -46,5 +46,3 @@ const CustomerProvider = ({ children }) => {
     </CustomerContext.Provider>
   );
 };
-
-export default CustomerProvider;

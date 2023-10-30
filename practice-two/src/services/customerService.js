@@ -40,12 +40,6 @@ const createCustomerService = async (customerData) => {
   return response;
 };
 
-// Get info customer to fill form
-const getCustomerByIdService = async (id) => {
-  const response = await request(`${PATH}/${id}`, 'GET');
-  return response;
-};
-
 // Update customer
 const updateCustomerService = async (id, customerData) => {
   const response = await request(`${PATH}/${id}`, 'PUT', customerData);
@@ -61,7 +55,6 @@ const deleteCustomerService = async (id) => {
 export {
   getAllCustomerService,
   createCustomerService,
-  getCustomerByIdService,
   updateCustomerService,
   deleteCustomerService,
 };
