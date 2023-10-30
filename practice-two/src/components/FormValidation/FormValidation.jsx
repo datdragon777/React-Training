@@ -1,22 +1,18 @@
-import { memo, useCallback, useState, useContext } from 'react';
+import { memo, useContext } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
-import { Validation } from '@helpers';
-import { CustomerContext, FormContext } from '@contexts';
-// import { createCustomerService } from '@services';
+import { FormContext } from '@contexts';
 
 const FormValidation = () => {
-  // const { handleCreateCustomer } = useContext(CustomerContext);
   const {
     formData,
     errors,
     handleShowForm,
     handleChange,
     handleBlur,
-    handleSubmit
+    handleSubmit,
   } = useContext(FormContext);
-  
 
   return (
     <div className='form__background'>

@@ -31,7 +31,7 @@ import { SORT_TITLES } from '@data';
 import { ProfileInfo } from '@layouts';
 
 // Context
-import { FormContext, CustomerContext } from '@contexts';
+import { FormContext } from '@contexts';
 
 const Analytics = () => {
   // State variables
@@ -39,7 +39,6 @@ const Analytics = () => {
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const { isShowForm, handleShowForm, createResult } = useContext(FormContext);
-  const { state } = useContext(CustomerContext);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -84,10 +83,9 @@ const Analytics = () => {
 
   // Render the list of customers
   const renderCustomerList = () => {
-    state.customers = customers
     return (
       <ul className='customer__list'>
-        {state.customers.map((customer) => (
+        {customers.map((customer) => (
           <CustomerItem
             key={uuidv4()}
             customer={customer}
@@ -146,16 +144,20 @@ const Analytics = () => {
         {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
       </div>
 
+      {/* Show information of selected customer */}
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
 
+      {/* Show form to create customer */}
       {isShowForm && <FormValidation />}
 
+      {/* Show Success Toast component when creating customer successfully */}
       {createResult === 'success' && (
         <Toast message={MESSAGES.GET.SUCCESSES.ADD_SUCCESSED} />
       )}
 
+      {/* Show Error Toast component when creating customer failed */}
       {createResult === 'failed' && (
         <Toast message={MESSAGES.GET.ERRORS.ADD_FAILED} />
       )}

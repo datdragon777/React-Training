@@ -1,4 +1,10 @@
-import { createContext, useState, useCallback, useContext } from 'react';
+import {
+  createContext,
+  useState,
+  useCallback,
+  useContext,
+  useRef,
+} from 'react';
 import { Validation } from '@helpers';
 import { createCustomerService } from '@services';
 import { CustomerContext } from './CustomerContext';
@@ -7,7 +13,6 @@ export const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
   const [isShowForm, setIsShowForm] = useState(false);
-  //   const [isCreateFailed, setIsCreateFailed] = useState(false);
   const [createResult, setCreateResult] = useState(null);
   const { handleCreateCustomer } = useContext(CustomerContext);
 
@@ -58,6 +63,26 @@ export const FormProvider = ({ children }) => {
     [setErrors]
   );
 
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      avatar: '',
+      mail: '',
+      phoneNumber: '',
+      description: '',
+      address: '',
+      gender: 'Male',
+    });
+    setErrors({
+      name: '',
+      avatar: '',
+      mail: '',
+      phoneNumber: '',
+      description: '',
+      address: '',
+    });
+  };
+
   // Submit form
   const handleSubmit = useCallback(
     async (e) => {
@@ -84,6 +109,7 @@ export const FormProvider = ({ children }) => {
           handleShowForm();
           handleCreateCustomer(response.data);
           setCreateResult('success');
+          resetForm();
         }
       }
     },
