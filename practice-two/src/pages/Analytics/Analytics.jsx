@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -30,17 +30,16 @@ import { SORT_TITLES } from '@data';
 // Import layout
 import { ProfileInfo } from '@layouts';
 
+// Context
+import { FormContext, CustomerContext } from '@contexts';
+
 const Analytics = () => {
   // State variables
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
-  const [isShowForm, setIsShowForm] = useState(false);
-
-  // Handle open/close form
-  const handleShowForm = useCallback(() => {
-    setIsShowForm(!isShowForm);
-  }, [isShowForm]);
+  const { isShowForm, handleShowForm, createResult } = useContext(FormContext);
+  const { state } = useContext(CustomerContext);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -85,9 +84,10 @@ const Analytics = () => {
 
   // Render the list of customers
   const renderCustomerList = () => {
+    state.customers = customers
     return (
       <ul className='customer__list'>
-        {customers.map((customer) => (
+        {state.customers.map((customer) => (
           <CustomerItem
             key={uuidv4()}
             customer={customer}
@@ -145,12 +145,20 @@ const Analytics = () => {
         )}
         {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
       </div>
-      
+
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
 
-      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
+      {isShowForm && <FormValidation />}
+
+      {createResult === 'success' && (
+        <Toast message={MESSAGES.GET.SUCCESSES.ADD_SUCCESSED} />
+      )}
+
+      {createResult === 'failed' && (
+        <Toast message={MESSAGES.GET.ERRORS.ADD_FAILED} />
+      )}
     </>
   );
 };

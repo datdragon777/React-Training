@@ -3,77 +3,20 @@ import './FormValidation.css';
 import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
-import { CustomerContext } from '@contexts';
-import { createCustomerService } from '@services';
+import { CustomerContext, FormContext } from '@contexts';
+// import { createCustomerService } from '@services';
 
-const FormValidation = (props) => {
-  const { onShowForm } = props;
-  const { handleCreateCustomer } = useContext(CustomerContext);
-  const [formData, setFormData] = useState({
-    name: '',
-    avatar: '',
-    mail: '',
-    phoneNumber: '',
-    description: '',
-    address: '',
-    gender: 'Male',
-  });
-  const [errors, setErrors] = useState({
-    name: '',
-    avatar: '',
-    mail: '',
-    phoneNumber: '',
-    description: '',
-    address: '',
-  });
-
-  // Set value for form data
-  const handleChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    },
-    [setFormData]
-  );
-
-  // Check validate input when click outside
-  const handleBlur = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      const errorMessage = Validation(name, value);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: errorMessage,
-      }));
-    },
-    [setErrors]
-  );
-
-  // Submit form
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      // Check validation form when submiting
-      const newErrors = {};
-      for (const field in formData) {
-        const errorMessage = Validation(field, formData[field]);
-        if (errorMessage) {
-          newErrors[field] = errorMessage;
-        }
-      }
-      setErrors(newErrors);
-
-      if (Object.keys(newErrors).length === 0) {
-        handleCreateCustomer(createCustomerService(formData));
-        onShowForm();
-      }
-    },
-    [formData, setErrors, onShowForm]
-  );
+const FormValidation = () => {
+  // const { handleCreateCustomer } = useContext(CustomerContext);
+  const {
+    formData,
+    errors,
+    handleShowForm,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  } = useContext(FormContext);
+  
 
   return (
     <div className='form__background'>
@@ -171,7 +114,7 @@ const FormValidation = (props) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onShowForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleShowForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

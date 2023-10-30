@@ -21,38 +21,41 @@ const request = async (path, method, data) => {
       },
       body: JSON.stringify(data),
     });
-  
+
     if (response.ok) {
       mutate(url);
-      return {data: await response.json(), error: null};
+      return { data: await response.json(), error: null };
     } else {
       const errorData = await response.json();
-      console.log(errorData.message);
-      throw new Error(errorData.message || 'Error while sending request');
+      return { data: null, error: errorData };
     }
   } catch (error) {
-    return { data: null, error};
+    return { data: null, error };
   }
 };
 
 // Create customer
-const createCustomerService = (customerData) => {
-  return request(`${PATH}`, 'POST', customerData);
+const createCustomerService = async (customerData) => {
+  const response = await request(`${PATH}`, 'POST', customerData);
+  return response;
 };
 
 // Get info customer to fill form
-const getCustomerByIdService = (id) => {
-  return request(`${PATH}/${id}`, 'GET');
+const getCustomerByIdService = async (id) => {
+  const response = await request(`${PATH}/${id}`, 'GET');
+  return response;
 };
 
 // Update customer
-const updateCustomerService = (id, customerData) => {
-  return request(`${PATH}/${id}`, 'PUT', customerData);
+const updateCustomerService = async (id, customerData) => {
+  const response = await request(`${PATH}/${id}`, 'PUT', customerData);
+  return response;
 };
 
 // Delete customer
-const deleteCustomerService = (id) => {
-  return request(`${PATH}/${id}`, 'DELETE');
+const deleteCustomerService = async (id) => {
+  const response = await request(`${PATH}/${id}`, 'DELETE');
+  return response;
 };
 
 export {
