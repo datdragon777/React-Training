@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -30,16 +30,18 @@ import { SORT_TITLES } from '@data';
 // Import layout
 import { ProfileInfo } from '@layouts';
 
-import { CustomerContext } from '@contexts';
+// Custom hook
+import { useStore } from '@hooks';
 
 const Analytics = () => {
   // State variables
-  const { state } = useContext(CustomerContext);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
   const [createResult, setCreateResult] = useState(null);
+  const [state] = useStore();
+  const { customers } = state;
 
   const handleShowForm = useCallback(() => {
     setIsShowForm(!isShowForm);
@@ -78,7 +80,7 @@ const Analytics = () => {
 
   // Fetch data from the server when the component mounts
   const {
-    data: customers,
+    data: customerData,
     error: isError,
     isLoading,
   } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
@@ -88,11 +90,9 @@ const Analytics = () => {
 
   // Render the list of customers
   const renderCustomerList = () => {
-    state.customers = customers;
-    console.log(state.customers);
     return (
       <ul className='customer__list'>
-        {state.customers.map((customer) => (
+        {customers.map((customer) => (
           <CustomerItem
             key={uuidv4()}
             customer={customer}
@@ -132,7 +132,7 @@ const Analytics = () => {
               height='200px'
             />
           </div>
-        ) : customers ? (
+        ) : customers.length > 0 ? (
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>

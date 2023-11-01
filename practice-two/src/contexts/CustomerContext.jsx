@@ -1,47 +1,14 @@
-import { useReducer, createContext, useCallback } from 'react';
-import {
-  initialCustomer,
-  customerReducer,
-  createCustomer,
-  updateCustomer,
-  deleteCustomer,
-} from '@stores';
+import { useReducer, createContext } from 'react';
+import { initialCustomer, customerReducer } from '@stores';
 
 export const CustomerContext = createContext();
 
 export const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
-
-  const handleCreateCustomer = useCallback(
-    (customer) => {
-      dispatch(createCustomer(customer));
-    },
-    [dispatch]
-  );
-
-  const handleUpdateCustomer = useCallback(
-    (customer) => {
-      dispatch(updateCustomer(customer));
-    },
-    [dispatch]
-  );
-
-  const handleDeleteCustomer = useCallback(
-    (customer) => {
-      dispatch(deleteCustomer(customer));
-    },
-    [dispatch]
-  );
-
-  const contextValue = {
-    state,
-    handleCreateCustomer,
-    handleUpdateCustomer,
-    handleDeleteCustomer,
-  };
+  console.log(state.customers);
 
   return (
-    <CustomerContext.Provider value={contextValue}>
+    <CustomerContext.Provider value={[state, dispatch]}>
       {children}
     </CustomerContext.Provider>
   );

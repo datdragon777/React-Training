@@ -22,6 +22,7 @@ export default defineConfig({
       '@services': `${path.resolve(__dirname, './src/services')}`,
       '@themes': `${path.resolve(__dirname, './src/themes/')}`,
       '@stores': `${path.resolve(__dirname, './src/stores/')}`,
+      '@hooks': `${path.resolve(__dirname, './src/hooks/')}`,
     },
   },
 });
