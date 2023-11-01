@@ -9,7 +9,7 @@ export const customerReducer = (state, action) => {
   const { customers } = state;
   switch (type) {
     case ACTION_TYPES.CREATE: {
-      return { customers: [...customers, payload], ...state };
+      return { ...state, customers: [...customers, payload] };
     }
     case ACTION_TYPES.UPDATE: {
       const updatedCustomer = customers.map((customer) => {

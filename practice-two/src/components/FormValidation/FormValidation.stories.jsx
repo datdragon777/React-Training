@@ -1,5 +1,5 @@
 import FormValidation from './FormValidation';
-import { CustomerProvider, FormProvider } from '@contexts';
+import { CustomerProvider } from '@contexts';
 
 export default {
   title: 'Components/FormValidation',
@@ -9,9 +9,7 @@ export default {
 
 const Template = (args) => (
   <CustomerProvider>
-    <FormProvider>
-      <FormValidation {...args} />
-    </FormProvider>
+    <FormValidation {...args} />
   </CustomerProvider>
 );
 

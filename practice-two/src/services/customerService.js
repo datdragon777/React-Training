@@ -1,5 +1,4 @@
 import { BASE_URL, PATH } from '@constants';
-import { mutate } from 'swr';
 
 // Get customer list
 const getAllCustomerService = async (url) => {
@@ -23,7 +22,6 @@ const request = async (path, method, data) => {
     });
 
     if (response.ok) {
-      mutate(url);
       return { data: await response.json(), error: null };
     } else {
       const errorData = await response.json();

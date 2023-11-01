@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -30,15 +30,20 @@ import { SORT_TITLES } from '@data';
 // Import layout
 import { ProfileInfo } from '@layouts';
 
-// Context
-import { FormContext } from '@contexts';
+import { CustomerContext } from '@contexts';
 
 const Analytics = () => {
   // State variables
+  const { state } = useContext(CustomerContext);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
-  const { isShowForm, handleShowForm, createResult } = useContext(FormContext);
+  const [isShowForm, setIsShowForm] = useState(false);
+  const [createResult, setCreateResult] = useState(null);
+
+  const handleShowForm = useCallback(() => {
+    setIsShowForm(!isShowForm);
+  }, [isShowForm]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -83,9 +88,11 @@ const Analytics = () => {
 
   // Render the list of customers
   const renderCustomerList = () => {
+    state.customers = customers;
+    console.log(state.customers);
     return (
       <ul className='customer__list'>
-        {customers.map((customer) => (
+        {state.customers.map((customer) => (
           <CustomerItem
             key={uuidv4()}
             customer={customer}
@@ -150,7 +157,12 @@ const Analytics = () => {
       )}
 
       {/* Show form to create customer */}
-      {isShowForm && <FormValidation />}
+      {isShowForm && (
+        <FormValidation
+          handleShowForm={handleShowForm}
+          setCreateResult={setCreateResult}
+        />
+      )}
 
       {/* Show Success Toast component when creating customer successfully */}
       {createResult === 'success' && (
