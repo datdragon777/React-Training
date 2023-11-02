@@ -1,5 +1,12 @@
 import { ACTION_TYPES } from '@constants';
 
+const getListCustomer = (payload) => {
+  return {
+    type: ACTION_TYPES.LIST,
+    payload,
+  };
+};
+
 const createCustomer = (payload) => {
   return {
     type: ACTION_TYPES.CREATE,
@@ -21,4 +28,4 @@ const deleteCustomer = (payload) => {
   };
 };
 
-export { createCustomer, updateCustomer, deleteCustomer };
+export { getListCustomer, createCustomer, updateCustomer, deleteCustomer };

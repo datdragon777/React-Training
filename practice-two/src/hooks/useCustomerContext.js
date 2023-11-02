@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { CustomerContext } from '@contexts';
 
-const useStore = () => {
+const useCustomerContext = () => {
   const [state, dispatch] = useContext(CustomerContext);
-
+ 
   return [state, dispatch];
 };
 
-export default useStore;
+export default useCustomerContext;

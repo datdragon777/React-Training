@@ -4,7 +4,7 @@ import { InputValidate, Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService } from '@services';
-import { useStore } from '@hooks';
+import { useCustomerContext } from '@hooks';
 import { createCustomer } from '@stores';
 
 const FormValidation = ({
@@ -28,7 +28,7 @@ const FormValidation = ({
     description: '',
     address: '',
   });
-  const [dispatch] = useStore();
+  const [_,dispatch] = useCustomerContext();
 
   // Set value for form data
   const handleChange = useCallback(

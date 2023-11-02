@@ -5,8 +5,7 @@ export const CustomerContext = createContext();
 
 export const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
-  console.log(state.customers);
-
+  
   return (
     <CustomerContext.Provider value={[state, dispatch]}>
       {children}

@@ -1,2 +1,2 @@
 export { initialCustomer, customerReducer } from './reducers';
-export { createCustomer, updateCustomer, deleteCustomer } from './actions';
+export { getListCustomer, createCustomer, updateCustomer, deleteCustomer } from './actions';
