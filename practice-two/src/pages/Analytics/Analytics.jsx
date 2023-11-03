@@ -40,8 +40,7 @@ const Analytics = () => {
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
-  const [createResult, setCreateResult] = useState(null);
-  const [state, dispatch] = useCustomerContext();
+  const { state, dispatch, showToastInfo } = useCustomerContext();
   const { customers } = state;
 
   const handleShowForm = useCallback(() => {
@@ -79,16 +78,16 @@ const Analytics = () => {
     [selectedCustomer, isShowContextMenu]
   );
 
-  const {
-    error: isError,
-    isLoading,
-  } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
-    refreshInterval: 1800000, // refresh component after 30 minutes
-    shouldRetryOnError: false, // avoiding call API continuously when occur error
-    onSuccess: (data) => {
-      dispatch(getListCustomer(data))
+  const { error: isError, isLoading } = useSWR(
+    `${BASE_URL}/${PATH}`,
+    getAllCustomerService,
+    {
+      shouldRetryOnError: false, // avoiding call API continuously when occur error
+      onSuccess: (data) => {
+        dispatch(getListCustomer(data));
+      },
     }
-  });
+  );
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -139,7 +138,10 @@ const Analytics = () => {
             {/* Start sort title */}
             <div className='customer__sort'>
               {SORT_TITLES.map((SORT_TITLE) => (
-                <div className='sort__item col-3' key={SORT_TITLE.title}>
+                <div
+                  className='sort__item col-3'
+                  key={SORT_TITLE.id + SORT_TITLE.title}
+                >
                   <SortData name={SORT_TITLE.title} />
                 </div>
               ))}
@@ -150,7 +152,7 @@ const Analytics = () => {
           // Show message when list is empty
           <p className='empty__message'>{MESSAGES.GET.EMPTY_LIST}</p>
         )}
-        {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
+        {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
       </div>
 
       {/* Show information of selected customer */}
@@ -159,22 +161,7 @@ const Analytics = () => {
       )}
 
       {/* Show form to create customer */}
-      {isShowForm && (
-        <FormValidation
-          handleShowForm={handleShowForm}
-          setCreateResult={setCreateResult}
-        />
-      )}
-
-      {/* Show Success Toast component when creating customer successfully */}
-      {createResult === 'success' && (
-        <Toast message={MESSAGES.GET.SUCCESSES.ADD_SUCCESSED} />
-      )}
-
-      {/* Show Error Toast component when creating customer failed */}
-      {createResult === 'failed' && (
-        <Toast message={MESSAGES.GET.ERRORS.ADD_FAILED} />
-      )}
+      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
     </>
   );
 };

@@ -2,7 +2,7 @@ import { ACTION_TYPES } from '@constants';
 
 const getListCustomer = (payload) => {
   return {
-    type: ACTION_TYPES.LIST,
+    type: ACTION_TYPES.GET_LIST,
     payload,
   };
 };

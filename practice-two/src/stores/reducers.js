@@ -8,7 +8,7 @@ export const customerReducer = (state, action) => {
   const { type, payload } = action;
   const { customers } = state;
   switch (type) {
-    case ACTION_TYPES.LIST: {
+    case ACTION_TYPES.GET_LIST: {
       return { ...state, customers: payload}
     }
     case ACTION_TYPES.CREATE: {

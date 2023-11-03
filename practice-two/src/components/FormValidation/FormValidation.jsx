@@ -1,16 +1,13 @@
-import { memo, useState, useContext, useCallback } from 'react';
+import { memo, useState, useCallback } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
-import { BUTTON_VARIANTS } from '@constants';
+import { BUTTON_VARIANTS, MESSAGES } from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
 import { createCustomer } from '@stores';
 
-const FormValidation = ({
-  handleShowForm,
-  setCreateResult,
-}) => {
+const FormValidation = ({ handleShowForm }) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -28,7 +25,7 @@ const FormValidation = ({
     description: '',
     address: '',
   });
-  const [_,dispatch] = useCustomerContext();
+  const { dispatch, showToastInfo } = useCustomerContext();
 
   // Set value for form data
   const handleChange = useCallback(
@@ -95,13 +92,13 @@ const FormValidation = ({
 
         if (response.error) {
           handleShowForm();
-          setCreateResult('failed');
+          showToastInfo(MESSAGES.GET.ERRORS.ADD_FAILED);
           resetForm();
           return;
         } else {
           handleShowForm();
-          dispatch(createCustomer(response.data))
-          setCreateResult('success');
+          dispatch(createCustomer(response.data));
+          showToastInfo(MESSAGES.GET.SUCCESSES.ADD_SUCCESSED);
           resetForm();
         }
       }

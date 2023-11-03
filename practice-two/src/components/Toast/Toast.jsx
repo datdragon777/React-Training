@@ -5,20 +5,20 @@ import { MESSAGES } from "@constants";
 import { toastTheme } from "@themes";
 
 const Toast = ({ message }) => {
-  const toastContainerRef = useRef(null);
+  // const toastContainerRef = useRef(null);
 
-  useEffect(() => {
-    if (toastContainerRef.current) {
-      const container = toastContainerRef.current;
-      const timeoutId = setTimeout(() => {
-        container.classList.add("toast__close");
-      }, 4000);
+  // useEffect(() => {
+  //   if (toastContainerRef.current) {
+  //     const container = toastContainerRef.current;
+  //     const timeoutId = setTimeout(() => {
+  //       container.classList.add("toast__close");
+  //     }, 4000);
 
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, []);
+  //     return () => {
+  //       clearTimeout(timeoutId);
+  //     };
+  //   }
+  // }, []);
 
   return (
     <div
@@ -27,7 +27,7 @@ const Toast = ({ message }) => {
           ? toastTheme.error
           : toastTheme.success,
       }}
-      ref={toastContainerRef}
+      // ref={toastContainerRef}
       className={`toast__container`}
     >
       <p className='toast__message'>{message}</p>

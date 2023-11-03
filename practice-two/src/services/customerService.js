@@ -10,7 +10,7 @@ const getAllCustomerService = async (url) => {
   return data;
 };
 
-const request = async (path, method, data) => {
+const service = async (path, method, data) => {
   const url = `${BASE_URL}/${path}`;
   try {
     const response = await fetch(url, {
@@ -25,28 +25,28 @@ const request = async (path, method, data) => {
       return { data: await response.json(), error: null };
     } else {
       const errorData = await response.json();
-      return { data: null, error: errorData };
+      return { error: errorData };
     }
   } catch (error) {
-    return { data: null, error };
+    return { error };
   }
 };
 
 // Create customer
 const createCustomerService = async (customerData) => {
-  const response = await request(`${PATH}`, 'POST', customerData);
+  const response = await service(`${PATH}`, 'POST', customerData);
   return response;
 };
 
 // Update customer
 const updateCustomerService = async (id, customerData) => {
-  const response = await request(`${PATH}/${id}`, 'PUT', customerData);
+  const response = await service(`${PATH}/${id}`, 'PUT', customerData);
   return response;
 };
 
 // Delete customer
 const deleteCustomerService = async (id) => {
-  const response = await request(`${PATH}/${id}`, 'DELETE');
+  const response = await service(`${PATH}/${id}`, 'DELETE');
   return response;
 };
 

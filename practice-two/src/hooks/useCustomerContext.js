@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { CustomerContext } from '@contexts';
 
 const useCustomerContext = () => {
-  const [state, dispatch] = useContext(CustomerContext);
+  const {state, dispatch, toastInfo, showToastInfo} = useContext(CustomerContext);
  
-  return [state, dispatch];
+  return {state, dispatch, toastInfo, showToastInfo};
 };
 
 export default useCustomerContext;
