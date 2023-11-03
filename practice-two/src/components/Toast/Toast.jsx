@@ -1,25 +1,10 @@
-import { memo, useEffect, useRef } from "react";
-import "./Toast.css";
-import PropTypes from "prop-types";
-import { MESSAGES } from "@constants";
-import { toastTheme } from "@themes";
+import { memo } from 'react';
+import './Toast.css';
+import PropTypes from 'prop-types';
+import { MESSAGES } from '@constants';
+import { toastTheme } from '@themes';
 
 const Toast = ({ message }) => {
-  // const toastContainerRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (toastContainerRef.current) {
-  //     const container = toastContainerRef.current;
-  //     const timeoutId = setTimeout(() => {
-  //       container.classList.add("toast__close");
-  //     }, 4000);
-
-  //     return () => {
-  //       clearTimeout(timeoutId);
-  //     };
-  //   }
-  // }, []);
-
   return (
     <div
       style={{
