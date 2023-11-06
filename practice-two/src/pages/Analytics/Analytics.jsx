@@ -43,7 +43,7 @@ const Analytics = () => {
   const { state, dispatch, showToastInfo } = useCustomerContext();
   const { customers } = state;
 
-  const handleShowForm = useCallback(() => {
+  const handleToggleForm = useCallback(() => {
     setIsShowForm(!isShowForm);
   }, [isShowForm]);
 
@@ -90,7 +90,7 @@ const Analytics = () => {
   );
 
   const handleShowCustomerForm = () => {
-    handleShowForm(selectedCustomer);
+    handleToggleForm(selectedCustomer);
   };
 
   // Render the list of customers
@@ -122,7 +122,7 @@ const Analytics = () => {
           <Button
             variant={BUTTON_VARIANTS.SECONDARY}
             icon={plusIcon}
-            onClick={handleShowForm}
+            onClick={handleToggleForm}
           >
             Add Customer
           </Button>
@@ -168,7 +168,7 @@ const Analytics = () => {
       {/* Show form to create customer */}
       {isShowForm && (
         <FormValidation
-          handleShowForm={handleShowForm}
+          handleToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
         />
       )}

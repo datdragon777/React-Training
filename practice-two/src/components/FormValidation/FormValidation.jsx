@@ -12,7 +12,7 @@ import { createCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
 import { actionReducerCustomer } from '@stores';
 
-const FormValidation = ({ handleShowForm, selectedCustomer }) => {
+const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -129,7 +129,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
         }
         resetForm();
         // To close form
-        handleShowForm();
+        handleToggleForm();
         showToastInfo(toastMessage);
       }
     },
@@ -236,7 +236,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleShowForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleToggleForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
