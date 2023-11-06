@@ -20,7 +20,7 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
     phoneNumber: '',
     description: '',
     address: '',
-    gender: 'Male',
+    gender: GENDER_TYPES.MALE,
   });
   const [errors, setErrors] = useState({
     name: '',
@@ -142,6 +142,16 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
         <p className='form__title'>
           {selectedCustomer ? 'Update customer' : 'Add customer'}
         </p>
+        <div className='form__row form__row--disable'>
+          <InputValidate
+            type='hidden'
+            value={formData.id}
+            errorMessage=''
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name='id'
+          />
+        </div>
         <div className='form__row'>
           <div className='col-6'>
             <InputValidate
@@ -206,20 +216,20 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
               <InputValidate
                 type='radio'
                 placeholder=''
-                genderType='Male'
+                genderType={GENDER_TYPES.MALE}
                 onChange={handleChange}
-                name='gender'
-                value='Male'
+                name={GENDER_TYPES.NAME}
+                value={GENDER_TYPES.MALE}
                 errorMessage=''
                 checked={formData.gender === GENDER_TYPES.MALE}
               />
               <InputValidate
                 type='radio'
                 placeholder=''
-                genderType='Female'
+                genderType={GENDER_TYPES.FEMALE}
                 onChange={handleChange}
-                name='gender'
-                value='Female'
+                name={GENDER_TYPES.NAME}
+                value={GENDER_TYPES.FEMALE}
                 errorMessage=''
                 checked={formData.gender === GENDER_TYPES.FEMALE}
               />
