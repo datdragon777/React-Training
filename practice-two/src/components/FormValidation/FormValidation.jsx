@@ -77,7 +77,6 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
       description: '',
       address: '',
     });
-    handleShowForm();
   };
 
   useEffect(() => {
@@ -122,16 +121,16 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
 
       if (Object.keys(newErrors).length === 0) {
         const response = await createCustomerService(formData);
-
+        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED
         if (response.error) {
-          showToastInfo(MESSAGES.GET.ERRORS.ADD_FAILED);
-          resetForm();
-          return;
+          toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED
         } else {
           dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
-          showToastInfo(MESSAGES.GET.SUCCESSES.ADD_SUCCESSED);
-          resetForm();
         }
+        resetForm();
+        // To close form
+        handleShowForm();
+        showToastInfo(toastMessage);
       }
     },
     [formData, setErrors]
@@ -237,7 +236,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={resetForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleShowForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
