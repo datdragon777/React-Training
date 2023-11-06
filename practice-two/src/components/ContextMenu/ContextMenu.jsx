@@ -1,13 +1,17 @@
-import React, { memo } from "react";
-import "./ContextMenu.css";
-import { Button } from "@components";
-import { BUTTON_VARIANTS } from "@constants/buttons";
-import { editIcon, deleteIcon } from "@assets/images";
+import React, { memo } from 'react';
+import './ContextMenu.css';
+import { Button } from '@components';
+import { BUTTON_VARIANTS } from '@constants/buttons';
+import { editIcon, deleteIcon } from '@assets/images';
 
-const ContextMenu = () => {
+const ContextMenu = ({ handleShowCustomerForm }) => {
   return (
-    <div className="context-menu">
-      <Button variant={BUTTON_VARIANTS.EDIT} icon={editIcon} onClick={() => {}}>
+    <div className='context-menu'>
+      <Button
+        variant={BUTTON_VARIANTS.EDIT}
+        icon={editIcon}
+        onClick={handleShowCustomerForm}
+      >
         Edit
       </Button>
       <Button
