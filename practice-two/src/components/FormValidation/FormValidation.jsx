@@ -60,7 +60,6 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
   // Reset form value
   const resetForm = () => {
     setFormData({
-      id: '',
       name: '',
       avatar: '',
       mail: '',
@@ -142,16 +141,6 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
         <p className='form__title'>
           {selectedCustomer ? 'Update customer' : 'Add customer'}
         </p>
-        <div className='form__row form__row--disable'>
-          <InputValidate
-            type='hidden'
-            value={formData.id}
-            errorMessage=''
-            onChange={handleChange}
-            onBlur={handleBlur}
-            name='id'
-          />
-        </div>
         <div className='form__row'>
           <div className='col-6'>
             <InputValidate
