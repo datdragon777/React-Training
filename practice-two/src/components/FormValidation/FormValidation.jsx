@@ -1,7 +1,12 @@
 import { memo, useState, useCallback, useEffect } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
-import { BUTTON_VARIANTS, MESSAGES, ACTION_TYPES } from '@constants';
+import {
+  BUTTON_VARIANTS,
+  MESSAGES,
+  ACTION_TYPES,
+  GENDER_TYPES,
+} from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
@@ -72,7 +77,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
       description: '',
       address: '',
     });
-    handleShowForm()
+    handleShowForm();
   };
 
   useEffect(() => {
@@ -120,13 +125,13 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
 
         if (response.error) {
           showToastInfo(MESSAGES.GET.ERRORS.ADD_FAILED);
-          resetForm
+          resetForm();
           return;
         } else {
           dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
           showToastInfo(MESSAGES.GET.SUCCESSES.ADD_SUCCESSED);
+          resetForm();
         }
-        resetForm
       }
     },
     [formData, setErrors]
@@ -207,7 +212,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
                 name='gender'
                 value='Male'
                 errorMessage=''
-                checked={formData.gender === 'Male'}
+                checked={formData.gender === GENDER_TYPES.MALE}
               />
               <InputValidate
                 type='radio'
@@ -217,7 +222,7 @@ const FormValidation = ({ handleShowForm, selectedCustomer }) => {
                 name='gender'
                 value='Female'
                 errorMessage=''
-                checked={formData.gender === 'Female'}
+                checked={formData.gender === GENDER_TYPES.FEMALE}
               />
             </div>
           </div>
