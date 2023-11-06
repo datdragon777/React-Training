@@ -66,7 +66,7 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
       phoneNumber: '',
       description: '',
       address: '',
-      gender: 'Male',
+      gender: GENDER_TYPES.MALE,
     });
     setErrors({
       name: '',
