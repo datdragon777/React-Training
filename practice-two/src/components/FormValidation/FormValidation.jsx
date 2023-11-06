@@ -1,13 +1,13 @@
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useEffect } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
-import { BUTTON_VARIANTS, MESSAGES } from '@constants';
+import { BUTTON_VARIANTS, MESSAGES, ACTION_TYPES } from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
-import { createCustomer } from '@stores';
+import { actionReducerCustomer } from '@stores';
 
-const FormValidation = ({ handleShowForm }) => {
+const FormValidation = ({ handleShowForm, selectedCustomer }) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -52,8 +52,10 @@ const FormValidation = ({ handleShowForm }) => {
     [setErrors]
   );
 
+  // Reset form value
   const resetForm = () => {
     setFormData({
+      id: '',
       name: '',
       avatar: '',
       mail: '',
@@ -70,7 +72,33 @@ const FormValidation = ({ handleShowForm }) => {
       description: '',
       address: '',
     });
+    handleShowForm()
   };
+
+  useEffect(() => {
+    if (selectedCustomer && selectedCustomer.id) {
+      const {
+        id,
+        name,
+        avatar,
+        mail,
+        phoneNumber,
+        description,
+        address,
+        gender,
+      } = selectedCustomer;
+      setFormData({
+        id: id,
+        name: name,
+        avatar: avatar,
+        mail: mail,
+        phoneNumber: phoneNumber,
+        description: description,
+        address: address,
+        gender: gender,
+      });
+    }
+  }, [selectedCustomer]);
 
   // Submit form
   const handleSubmit = useCallback(
@@ -91,25 +119,25 @@ const FormValidation = ({ handleShowForm }) => {
         const response = await createCustomerService(formData);
 
         if (response.error) {
-          handleShowForm();
           showToastInfo(MESSAGES.GET.ERRORS.ADD_FAILED);
-          resetForm();
+          resetForm
           return;
         } else {
-          handleShowForm();
-          dispatch(createCustomer(response.data));
+          dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
           showToastInfo(MESSAGES.GET.SUCCESSES.ADD_SUCCESSED);
-          resetForm();
         }
+        resetForm
       }
     },
-    [formData, setErrors, handleShowForm]
+    [formData, setErrors]
   );
 
   return (
     <div className='form__background'>
       <form className='form__validation' onSubmit={handleSubmit}>
-        <p className='form__title'>Add customer</p>
+        <p className='form__title'>
+          {selectedCustomer ? 'Update customer' : 'Add customer'}
+        </p>
         <div className='form__row'>
           <div className='col-6'>
             <InputValidate
@@ -179,6 +207,7 @@ const FormValidation = ({ handleShowForm }) => {
                 name='gender'
                 value='Male'
                 errorMessage=''
+                checked={formData.gender === 'Male'}
               />
               <InputValidate
                 type='radio'
@@ -188,6 +217,7 @@ const FormValidation = ({ handleShowForm }) => {
                 name='gender'
                 value='Female'
                 errorMessage=''
+                checked={formData.gender === 'Female'}
               />
             </div>
           </div>
@@ -202,7 +232,7 @@ const FormValidation = ({ handleShowForm }) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleShowForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={resetForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

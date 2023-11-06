@@ -5,3 +5,4 @@ export { MESSAGES } from './messages';
 export { INPUT_VARIANTS } from './inputs';
 export { REGEX } from './regexp';
 export { ACTION_TYPES } from './action-types';
+export { SERVICE_TYPES } from './service-types';

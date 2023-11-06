@@ -1,4 +1,4 @@
-import { BASE_URL, PATH } from '@constants';
+import { BASE_URL, PATH, SERVICE_TYPES } from '@constants';
 
 // Get customer list
 const getAllCustomerService = async (url) => {
@@ -10,7 +10,7 @@ const getAllCustomerService = async (url) => {
   return data;
 };
 
-const service = async (path, method, data) => {
+const services = async (path, method, data) => {
   const url = `${BASE_URL}/${path}`;
   try {
     const response = await fetch(url, {
@@ -21,11 +21,12 @@ const service = async (path, method, data) => {
       body: JSON.stringify(data),
     });
 
+    const dataResponse = await response.json();
+
     if (response.ok) {
-      return { data: await response.json(), error: null };
+      return { data: dataResponse, error: null };
     } else {
-      const errorData = await response.json();
-      return { error: errorData };
+      return { error: dataResponse };
     }
   } catch (error) {
     return { error };
@@ -34,20 +35,17 @@ const service = async (path, method, data) => {
 
 // Create customer
 const createCustomerService = async (customerData) => {
-  const response = await service(`${PATH}`, 'POST', customerData);
-  return response;
+  return await services(`${PATH}`, SERVICE_TYPES.CREATE_CUSTOMER, customerData);
 };
 
 // Update customer
 const updateCustomerService = async (id, customerData) => {
-  const response = await service(`${PATH}/${id}`, 'PUT', customerData);
-  return response;
+  return await services(`${PATH}/${id}`, SERVICE_TYPES.UPDATE_CUSTOMER, customerData);
 };
 
 // Delete customer
 const deleteCustomerService = async (id) => {
-  const response = await service(`${PATH}/${id}`, 'DELETE');
-  return response;
+  return await services(`${PATH}/${id}`, SERVICE_TYPES.DELETE_CUSTOMER);
 };
 
 export {

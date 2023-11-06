@@ -22,7 +22,7 @@ import {
 } from '@components';
 
 // Import constant
-import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from '@constants';
+import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES, ACTION_TYPES } from '@constants';
 
 // Import list data for Expand component
 import { SORT_TITLES } from '@data';
@@ -32,7 +32,7 @@ import { ProfileInfo } from '@layouts';
 
 // Custom hook
 import { useCustomerContext } from '@hooks';
-import { getListCustomer } from '@stores';
+import { actionReducerCustomer } from '@stores';
 
 const Analytics = () => {
   // State variables
@@ -84,10 +84,14 @@ const Analytics = () => {
     {
       shouldRetryOnError: false, // avoiding call API continuously when occur error
       onSuccess: (data) => {
-        dispatch(getListCustomer(data));
+        dispatch(actionReducerCustomer(ACTION_TYPES.GET_LIST, data));
       },
     }
   );
+
+  const handleShowCustomerForm = () => {
+    handleShowForm(selectedCustomer);
+  };
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -101,6 +105,7 @@ const Analytics = () => {
             isShowContextMenu={isShowContextMenu}
             handleShowContextMenu={handleShowContextMenu}
             handleShowProfileInfo={handleShowProfileInfo}
+            handleShowCustomerForm={handleShowCustomerForm}
           />
         ))}
       </ul>
@@ -133,7 +138,7 @@ const Analytics = () => {
               height='200px'
             />
           </div>
-        ) : customers.length > 0 ? (
+        ) : customers.length ? (
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>
@@ -161,7 +166,12 @@ const Analytics = () => {
       )}
 
       {/* Show form to create customer */}
-      {isShowForm && <FormValidation handleShowForm={handleShowForm} />}
+      {isShowForm && (
+        <FormValidation
+          handleShowForm={handleShowForm}
+          selectedCustomer={selectedCustomer}
+        />
+      )}
     </>
   );
 };
