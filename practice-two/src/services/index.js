@@ -1,1 +1,6 @@
-export { default as getAllCustomerService } from "./customerService";
+export {
+  getAllCustomerService,
+  createCustomerService,
+  updateCustomerService,
+  deleteCustomerService,
+} from './customerService';

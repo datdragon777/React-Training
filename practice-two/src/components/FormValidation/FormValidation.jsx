@@ -1,12 +1,22 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useState, useCallback, useEffect } from 'react';
 import './FormValidation.css';
 import { InputValidate, Button } from '@components';
-import { BUTTON_VARIANTS } from '@constants';
+import {
+  BUTTON_VARIANTS,
+  MESSAGES,
+  ACTION_TYPES,
+  GENDER_TYPES,
+} from '@constants';
 import { Validation } from '@helpers';
+import { createCustomerService } from '@services';
+import { useCustomerContext } from '@hooks';
+import { actionReducerCustomer } from '@stores';
 
-const FormValidation = (props) => {
-  const { onShowForm } = props;
-
+const FormValidation = ({
+  handleToggleForm,
+  selectedCustomer,
+  setSelectedCustomer
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -14,9 +24,8 @@ const FormValidation = (props) => {
     phoneNumber: '',
     description: '',
     address: '',
-    gender: 'Male',
+    gender: GENDER_TYPES.MALE,
   });
-
   const [errors, setErrors] = useState({
     name: '',
     avatar: '',
@@ -25,6 +34,7 @@ const FormValidation = (props) => {
     description: '',
     address: '',
   });
+  const { dispatch, showToastInfo } = useCustomerContext();
 
   // Set value for form data
   const handleChange = useCallback(
@@ -51,9 +61,53 @@ const FormValidation = (props) => {
     [setErrors]
   );
 
+  // Reset form value
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      avatar: '',
+      mail: '',
+      phoneNumber: '',
+      description: '',
+      address: '',
+      gender: GENDER_TYPES.MALE,
+    });
+    setErrors({
+      name: '',
+      avatar: '',
+      mail: '',
+      phoneNumber: '',
+      description: '',
+      address: '',
+    });
+  };
+
+  const handleCancelForm = () => {
+    if(selectedCustomer) {
+      setSelectedCustomer(null)
+    }
+    handleToggleForm()
+  }
+ 
+  useEffect(() => {
+    if (selectedCustomer && selectedCustomer.id) {
+      const { name, avatar, mail, phoneNumber, description, address, gender } =
+        selectedCustomer;
+      setFormData({
+        name: name,
+        avatar: avatar,
+        mail: mail,
+        phoneNumber: phoneNumber,
+        description: description,
+        address: address,
+        gender: gender,
+      });
+    }
+  }, [selectedCustomer]);
+
   // Submit form
   const handleSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
 
       // Check validation form when submiting
@@ -67,16 +121,28 @@ const FormValidation = (props) => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        onShowForm();
+        const response = await createCustomerService(formData);
+        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED;
+        if (response.error) {
+          toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED;
+        } else {
+          dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
+        }
+        resetForm();
+        // To close form
+        handleToggleForm();
+        showToastInfo(toastMessage);
       }
     },
-    [formData, setErrors, onShowForm]
+    [formData, setErrors]
   );
 
   return (
     <div className='form__background'>
       <form className='form__validation' onSubmit={handleSubmit}>
-        <p className='form__title'>Add customer</p>
+        <p className='form__title'>
+          {selectedCustomer ? 'Update customer' : 'Add customer'}
+        </p>
         <div className='form__row'>
           <div className='col-6'>
             <InputValidate
@@ -141,20 +207,22 @@ const FormValidation = (props) => {
               <InputValidate
                 type='radio'
                 placeholder=''
-                genderType='Male'
+                genderType={GENDER_TYPES.MALE}
                 onChange={handleChange}
-                name='gender'
-                value='Male'
+                name={GENDER_TYPES.NAME}
+                value={GENDER_TYPES.MALE}
                 errorMessage=''
+                checked={formData.gender === GENDER_TYPES.MALE}
               />
               <InputValidate
                 type='radio'
                 placeholder=''
-                genderType='Female'
+                genderType={GENDER_TYPES.FEMALE}
                 onChange={handleChange}
-                name='gender'
-                value='Female'
+                name={GENDER_TYPES.NAME}
+                value={GENDER_TYPES.FEMALE}
                 errorMessage=''
+                checked={formData.gender === GENDER_TYPES.FEMALE}
               />
             </div>
           </div>
@@ -169,7 +237,7 @@ const FormValidation = (props) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onShowForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleCancelForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

@@ -12,6 +12,7 @@ const InputValidate = (props) => {
     genderType,
     onChange,
     onBlur,
+    checked,
     ...inputProps
   } = props;
 
@@ -30,7 +31,7 @@ const InputValidate = (props) => {
         value={value}
         className={isRadioInput ? 'input__choose' : 'input__field'}
         onChange={onChange}
-        defaultChecked={value === 'Male'}
+        checked={checked}
         onBlur={onBlur}
         {...inputProps}
       />

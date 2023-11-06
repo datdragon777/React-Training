@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR from 'swr';
 
@@ -17,12 +17,17 @@ import {
   Button,
   SortData,
   CustomerItem,
-  Toast,
   FormValidation,
 } from '@components';
 
 // Import constant
-import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES } from '@constants';
+import {
+  BUTTON_VARIANTS,
+  BASE_URL,
+  PATH,
+  MESSAGES,
+  ACTION_TYPES,
+} from '@constants';
 
 // Import list data for Expand component
 import { SORT_TITLES } from '@data';
@@ -30,15 +35,20 @@ import { SORT_TITLES } from '@data';
 // Import layout
 import { ProfileInfo } from '@layouts';
 
+// Custom hook
+import { useCustomerContext } from '@hooks';
+import { actionReducerCustomer } from '@stores';
+
 const Analytics = () => {
   // State variables
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
+  const { state, dispatch, showToastInfo } = useCustomerContext();
+  const { customers } = state;
 
-  // Handle open/close form
-  const handleShowForm = useCallback(() => {
+  const handleToggleForm = useCallback(() => {
     setIsShowForm(!isShowForm);
   }, [isShowForm]);
 
@@ -73,15 +83,20 @@ const Analytics = () => {
     [selectedCustomer, isShowContextMenu]
   );
 
-  // Fetch data from the server when the component mounts
-  const {
-    data: customers,
-    error: isError,
-    isLoading,
-  } = useSWR(`${BASE_URL}/${PATH}`, getAllCustomerService, {
-    refreshInterval: 1800000, // refresh component after 30 minutes
-    shouldRetryOnError: false, // avoiding call API continuously when occur error
-  });
+  const { error: isError, isLoading } = useSWR(
+    `${BASE_URL}/${PATH}`,
+    getAllCustomerService,
+    {
+      shouldRetryOnError: false, // avoiding call API continuously when occur error
+      onSuccess: (data) => {
+        dispatch(actionReducerCustomer(ACTION_TYPES.GET_LIST, data));
+      },
+    }
+  );
+
+  const handleShowCustomerForm = () => {
+    handleToggleForm(selectedCustomer);
+  };
 
   // Render the list of customers
   const renderCustomerList = () => {
@@ -95,6 +110,7 @@ const Analytics = () => {
             isShowContextMenu={isShowContextMenu}
             handleShowContextMenu={handleShowContextMenu}
             handleShowProfileInfo={handleShowProfileInfo}
+            handleShowCustomerForm={handleShowCustomerForm}
           />
         ))}
       </ul>
@@ -104,14 +120,14 @@ const Analytics = () => {
   return (
     <>
       <div
-        className={`analytics ${isShowProfileInfo ? 'analytics--profile' : ''}`}
+        className='analytics'
       >
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
           <Button
             variant={BUTTON_VARIANTS.SECONDARY}
             icon={plusIcon}
-            onClick={handleShowForm}
+            onClick={handleToggleForm}
           >
             Add Customer
           </Button>
@@ -127,12 +143,15 @@ const Analytics = () => {
               height='200px'
             />
           </div>
-        ) : customers ? (
+        ) : customers.length ? (
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>
               {SORT_TITLES.map((SORT_TITLE) => (
-                <div className='sort__item col-3' key={uuidv4()}>
+                <div
+                  className='sort__item col-3'
+                  key={SORT_TITLE.id + SORT_TITLE.title}
+                >
                   <SortData name={SORT_TITLE.title} />
                 </div>
               ))}
@@ -143,12 +162,22 @@ const Analytics = () => {
           // Show message when list is empty
           <p className='empty__message'>{MESSAGES.GET.EMPTY_LIST}</p>
         )}
-        {isError && <Toast message={MESSAGES.GET.ERRORS.API_FAILED} />}
+        {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
       </div>
+
+      {/* Show information of selected customer */}
       {selectedCustomer && isShowProfileInfo && (
         <ProfileInfo selectedCustomer={selectedCustomer} />
       )}
-      {isShowForm && <FormValidation onShowForm={handleShowForm} />}
+
+      {/* Show form to create customer */}
+      {isShowForm && (
+        <FormValidation
+          handleToggleForm={handleToggleForm}
+          selectedCustomer={selectedCustomer}
+          setSelectedCustomer={setSelectedCustomer}
+        />
+      )}
     </>
   );
 };

@@ -1,15 +1,16 @@
-import React, { memo } from "react";
-import "./CustomerItem.css";
-import { PropTypes } from "prop-types";
-import { CustomerInfo, Gender, ContextMenu } from "@components";
-import { menuDot, infoAvatar } from "@assets/images";
+import React, { memo } from 'react';
+import './CustomerItem.css';
+import { PropTypes } from 'prop-types';
+import { CustomerInfo, Gender, ContextMenu } from '@components';
+import { menuDot, infoAvatar } from '@assets/images';
 
 const CustomerItem = ({
   customer,
   selectedCustomer,
   isShowContextMenu,
   handleShowContextMenu,
-  handleShowProfileInfo
+  handleShowProfileInfo,
+  handleShowCustomerForm,
 }) => {
   return (
     <li
@@ -32,7 +33,7 @@ const CustomerItem = ({
           <img src={menuDot} width='14' height='4' alt='dot icon' />
           <div className='customer__context-menu'>
             {selectedCustomer?.id === customer.id && isShowContextMenu && (
-              <ContextMenu />
+              <ContextMenu handleShowCustomerForm={handleShowCustomerForm} />
             )}
           </div>
         </div>
@@ -48,10 +49,10 @@ CustomerItem.propTypes = {
 CustomerItem.defaultProps = {
   customer: {
     avatar: infoAvatar,
-    name: "Chrodinger Openheimer",
-    mail: "Nuclear_weapon@destroy.com",
-    phoneNumber: "0563489512",
-    gender: "Male",
+    name: 'Chrodinger Openheimer',
+    mail: 'Nuclear_weapon@destroy.com',
+    phoneNumber: '0563489512',
+    gender: 'Male',
   },
 };
 
