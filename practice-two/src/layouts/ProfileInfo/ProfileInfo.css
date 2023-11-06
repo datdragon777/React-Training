@@ -1,6 +1,4 @@
 .profile-info {
-  position: fixed;
-  right: 0;
   width: 302px;
   height: 100vmax;
   background-color: var(--cl-primary);

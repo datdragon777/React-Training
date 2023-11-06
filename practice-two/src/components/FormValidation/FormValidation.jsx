@@ -12,7 +12,11 @@ import { createCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
 import { actionReducerCustomer } from '@stores';
 
-const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
+const FormValidation = ({
+  handleToggleForm,
+  selectedCustomer,
+  setSelectedCustomer
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -78,20 +82,18 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
     });
   };
 
+  const handleCancelForm = () => {
+    if(selectedCustomer) {
+      setSelectedCustomer(null)
+    }
+    handleToggleForm()
+  }
+ 
   useEffect(() => {
     if (selectedCustomer && selectedCustomer.id) {
-      const {
-        id,
-        name,
-        avatar,
-        mail,
-        phoneNumber,
-        description,
-        address,
-        gender,
-      } = selectedCustomer;
+      const { name, avatar, mail, phoneNumber, description, address, gender } =
+        selectedCustomer;
       setFormData({
-        id: id,
         name: name,
         avatar: avatar,
         mail: mail,
@@ -120,9 +122,9 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
 
       if (Object.keys(newErrors).length === 0) {
         const response = await createCustomerService(formData);
-        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED
+        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED;
         if (response.error) {
-          toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED
+          toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED;
         } else {
           dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
         }
@@ -235,7 +237,7 @@ const FormValidation = ({ handleToggleForm, selectedCustomer }) => {
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleToggleForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleCancelForm}>
             Cancel
           </Button>
           <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>

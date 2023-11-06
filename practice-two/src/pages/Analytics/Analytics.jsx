@@ -17,12 +17,17 @@ import {
   Button,
   SortData,
   CustomerItem,
-  Toast,
   FormValidation,
 } from '@components';
 
 // Import constant
-import { BUTTON_VARIANTS, BASE_URL, PATH, MESSAGES, ACTION_TYPES } from '@constants';
+import {
+  BUTTON_VARIANTS,
+  BASE_URL,
+  PATH,
+  MESSAGES,
+  ACTION_TYPES,
+} from '@constants';
 
 // Import list data for Expand component
 import { SORT_TITLES } from '@data';
@@ -115,7 +120,7 @@ const Analytics = () => {
   return (
     <>
       <div
-        className={`analytics ${isShowProfileInfo ? 'analytics--profile' : ''}`}
+        className='analytics'
       >
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
@@ -170,6 +175,7 @@ const Analytics = () => {
         <FormValidation
           handleToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
+          setSelectedCustomer={setSelectedCustomer}
         />
       )}
     </>
