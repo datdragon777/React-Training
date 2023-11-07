@@ -33,12 +33,12 @@
 
 ## Deploy:
 
-- App: [Here](https://practice-one-react-training.vercel.app/)
-- Storybook: [Here](https://storybook-react-practice-one.vercel.app/?path=/docs/components-account--docs)
+- App: [Here](https://react-training-9zys5nyy0-datdragon777.vercel.app/analytics)
+- Storybook: [Here](https://react-training-storybook-practice-two.vercel.app/?path=/docs/components-account--docs)
 
 ## Information:
 
-- Time line: 05/10/2023 -> 11/10/2023 (actually: 00/00/2023)
+- Time line: 05/10/2023 -> 12/10/2023 (actually: 08/11/2023)
 - Editor: Visual Studio Code
 - Supported browser: Chrome lasted
 
