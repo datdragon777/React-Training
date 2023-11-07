@@ -17,6 +17,7 @@
   --cl-dark-white: #e6e8ea;
   --cl-success: #5cb85c;
   --cl-error: #d9534f;
+  --bg-opacity: rgba(0, 0, 0, 0.7);
 
   /* Font sizes */
   --fs-xxx-sm: 0.7025rem;

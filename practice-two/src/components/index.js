@@ -11,4 +11,5 @@ export { default as ContactDetail } from './ContactDetail/ContactDetail';
 export { default as Info } from './Info/Info';
 export { default as Toast } from './Toast/Toast';
 export { default as InputValidate } from './InputValidate/InputValidate';
-export {default as FormValidation } from './FormValidation/FormValidation'
+export { default as FormValidation } from './FormValidation/FormValidation';
+export { default as ConfirmDeletePopup } from './ConfirmDeletePopup/ConfirmDeletePopup';

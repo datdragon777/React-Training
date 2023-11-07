@@ -11,6 +11,7 @@ const CustomerItem = ({
   handleShowContextMenu,
   handleShowProfileInfo,
   handleToggleForm,
+  handleToggleDeletePopup,
 }) => {
   return (
     <li
@@ -33,7 +34,10 @@ const CustomerItem = ({
           <img src={menuDot} width='14' height='4' alt='dot icon' />
           <div className='customer__context-menu'>
             {selectedCustomer?.id === customer.id && isShowContextMenu && (
-              <ContextMenu handleToggleForm={handleToggleForm} />
+              <ContextMenu
+                handleToggleForm={handleToggleForm}
+                handleToggleDeletePopup={handleToggleDeletePopup}
+              />
             )}
           </div>
         </div>
