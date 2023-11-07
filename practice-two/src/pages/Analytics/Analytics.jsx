@@ -106,9 +106,9 @@ const Analytics = () => {
             customer={customer}
             selectedCustomer={selectedCustomer}
             isShowContextMenu={isShowContextMenu}
-            handleShowContextMenu={handleShowContextMenu}
-            handleShowProfileInfo={handleShowProfileInfo}
-            handleToggleForm={handleToggleForm}
+            onShowContextMenu={handleShowContextMenu}
+            onShowProfileInfo={handleShowProfileInfo}
+            onToggleForm={handleToggleForm}
           />
         ))}
       </ul>
@@ -169,7 +169,7 @@ const Analytics = () => {
       {/* Show form to create customer */}
       {isShowForm && (
         <FormValidation
-          handleToggleForm={handleToggleForm}
+          onToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}
         />
