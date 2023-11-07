@@ -69,11 +69,11 @@ const Analytics = () => {
 
   // Handle delete customer
   const handleDeleteCustomer = useCallback(async () => {
-    let toastMessage = MESSAGES.GET.SUCCESSES.DELETE_SUCCESSED;
+    let toastMessage = MESSAGES.DELETE.SUCCESS;
     const response = await deleteCustomerService(selectedCustomer.id);
     if (selectedCustomer) {
       if (response.error) {
-        toastMessage = MESSAGES.GET.ERRORS.DELETE_FAILED;
+        toastMessage = MESSAGES.DELETE.FAIL;
       } else {
         dispatch(actionReducerCustomer(ACTION_TYPES.DELETE, response.data));
         setSelectedCustomer(null);
@@ -138,6 +138,7 @@ const Analytics = () => {
             onShowContextMenu={handleShowContextMenu}
             onShowProfileInfo={handleShowProfileInfo}
             onToggleForm={handleToggleForm}
+            onToggleDeletePopup={handleToggleDeletePopup}
           />
         ))}
       </ul>
@@ -207,8 +208,8 @@ const Analytics = () => {
       {/* Show delete popup */}
       {isShowConfirmDelete && (
         <ConfirmDeletePopup
-          handleToggleDeletePopup={handleToggleDeletePopup}
-          handleDeleteCustomer={handleDeleteCustomer}
+          onToggleDeletePopup={handleToggleDeletePopup}
+          onDeleteCustomer={handleDeleteCustomer}
         />
       )}
     </>

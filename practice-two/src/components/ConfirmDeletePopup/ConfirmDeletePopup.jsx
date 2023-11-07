@@ -4,8 +4,8 @@ import { Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants';
 
 const ConfirmDeletePopup = ({
-  handleToggleDeletePopup,
-  handleDeleteCustomer,
+  onToggleDeletePopup,
+  onDeleteCustomer,
 }) => {
   return (
     <div className='confirm__popup'>
@@ -14,13 +14,13 @@ const ConfirmDeletePopup = ({
         <div className='confirm__btn'>
           <Button
             variant={BUTTON_VARIANTS.TOGGLE}
-            onClick={handleToggleDeletePopup}
+            onClick={onToggleDeletePopup}
           >
             Cancel
           </Button>
           <Button
             variant={BUTTON_VARIANTS.SECONDARY}
-            onClick={handleDeleteCustomer}
+            onClick={onDeleteCustomer}
           >
             Delete
           </Button>

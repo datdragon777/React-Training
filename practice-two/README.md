@@ -65,16 +65,19 @@ practice-one
     |-- components
         |-- Account
         |-- Button
+        |-- ConfirmDeletePopup
         |-- Contact
         |-- ContactDetail
         |-- ContextMenu
         |-- CustomerInfo
         |-- CustomerItem
+        |-- FormValidation
         |-- Gender
         |-- Info
         |-- InputValidate
-        |-- Expand
+        |-- SortData
         |-- TagLink
+        |-- Toast
         |-- index.js
     |-- constants
         |-- ...
@@ -144,16 +147,16 @@ git clone https://github.com/datdragon777/React-Training.git
 ```
 
 - Step 03: Open project folder using VsCode
-- Step 04: Change brach to feature/practice-one:
+- Step 04: Change brach to feature/practice-two:
 
 ```
-git checkout feature/practice-one
+git checkout feature/practice-two
 ```
 
 - Step 05: Move to project folder
 
 ```
-cd practice-one/
+cd practice-two/
 ```
 
 - Step 06: Start using pnpm to install
