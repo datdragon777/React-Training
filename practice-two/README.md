@@ -38,7 +38,7 @@
 
 ## Information:
 
-- Time line: 05/10/2023 -> 12/10/2023 (actually: 08/11/2023)
+- Time line: 05/10/2023 -> 17/10/2023 (actually: 08/11/2023)
 - Editor: Visual Studio Code
 - Supported browser: Chrome lasted
 
