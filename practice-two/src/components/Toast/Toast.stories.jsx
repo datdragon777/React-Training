@@ -14,10 +14,10 @@ const Template = (args) => <Toast {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  message: MESSAGES.GET.SUCCESSES.ADD_SUCCESSED,
+  message: MESSAGES.ADD.SUCCESS,
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  message: MESSAGES.GET.ERRORS.API_FAILED,
+  message: MESSAGES.ADD.FAIL,
 };

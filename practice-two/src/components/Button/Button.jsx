@@ -10,6 +10,7 @@ const Button = ({
   icon,
   onClick,
   type = 'button',
+  disabled,
 }) => {
   const buttonVariant = getButtonVariant(variant);
   const buttonStyle = {
@@ -33,6 +34,7 @@ const Button = ({
           ? 'btn__female'
           : 'btn__male'
       }`}
+      disabled={disabled}
     >
       {icon && (
         <div className='btn__icon'>

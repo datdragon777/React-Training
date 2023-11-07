@@ -13,12 +13,7 @@ import { getAllCustomerService } from '@services';
 import { plusIcon, loadingData } from '@assets/images';
 
 // Import components
-import {
-  Button,
-  SortData,
-  CustomerItem,
-  FormValidation,
-} from '@components';
+import { Button, SortData, CustomerItem, FormValidation } from '@components';
 
 // Import constant
 import {
@@ -48,9 +43,16 @@ const Analytics = () => {
   const { state, dispatch, showToastInfo } = useCustomerContext();
   const { customers } = state;
 
+  // Open or Close form
   const handleToggleForm = useCallback(() => {
     setIsShowForm(!isShowForm);
   }, [isShowForm]);
+
+  // Open create customer form
+  const handleShowCreateForm = useCallback(() => {
+    setSelectedCustomer(null); // Clear the selected customer data
+    handleToggleForm();
+  }, []);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -94,10 +96,6 @@ const Analytics = () => {
     }
   );
 
-  const handleShowCustomerForm = () => {
-    handleToggleForm(selectedCustomer);
-  };
-
   // Render the list of customers
   const renderCustomerList = () => {
     return (
@@ -108,9 +106,9 @@ const Analytics = () => {
             customer={customer}
             selectedCustomer={selectedCustomer}
             isShowContextMenu={isShowContextMenu}
-            handleShowContextMenu={handleShowContextMenu}
-            handleShowProfileInfo={handleShowProfileInfo}
-            handleShowCustomerForm={handleShowCustomerForm}
+            onShowContextMenu={handleShowContextMenu}
+            onShowProfileInfo={handleShowProfileInfo}
+            onToggleForm={handleToggleForm}
           />
         ))}
       </ul>
@@ -119,15 +117,13 @@ const Analytics = () => {
 
   return (
     <>
-      <div
-        className='analytics'
-      >
+      <div className='analytics'>
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
           <Button
             variant={BUTTON_VARIANTS.SECONDARY}
             icon={plusIcon}
-            onClick={handleToggleForm}
+            onClick={handleShowCreateForm}
           >
             Add Customer
           </Button>
@@ -160,7 +156,7 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.GET.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
         {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
       </div>
@@ -173,7 +169,7 @@ const Analytics = () => {
       {/* Show form to create customer */}
       {isShowForm && (
         <FormValidation
-          handleToggleForm={handleToggleForm}
+          onToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}
         />

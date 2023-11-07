@@ -8,14 +8,14 @@ const CustomerItem = ({
   customer,
   selectedCustomer,
   isShowContextMenu,
-  handleShowContextMenu,
-  handleShowProfileInfo,
-  handleShowCustomerForm,
+  onShowContextMenu,
+  onShowProfileInfo,
+  onToggleForm,
 }) => {
   return (
     <li
       className='customer__item'
-      onClick={() => handleShowProfileInfo(customer)}
+      onClick={() => onShowProfileInfo(customer)}
     >
       <CustomerInfo avatar={customer.avatar} name={customer.name} />
       <div className='col-3 col-md-3 customer__align'>
@@ -28,12 +28,12 @@ const CustomerItem = ({
         <Gender gender={customer.gender} />
         <div
           className='customer__option'
-          onClick={(e) => handleShowContextMenu(e, customer)}
+          onClick={(e) => onShowContextMenu(e, customer)}
         >
           <img src={menuDot} width='14' height='4' alt='dot icon' />
           <div className='customer__context-menu'>
             {selectedCustomer?.id === customer.id && isShowContextMenu && (
-              <ContextMenu handleShowCustomerForm={handleShowCustomerForm} />
+              <ContextMenu onToggleForm={onToggleForm} />
             )}
           </div>
         </div>

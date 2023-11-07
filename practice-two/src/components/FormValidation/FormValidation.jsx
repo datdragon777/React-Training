@@ -8,14 +8,14 @@ import {
   GENDER_TYPES,
 } from '@constants';
 import { Validation } from '@helpers';
-import { createCustomerService } from '@services';
+import { createCustomerService, updateCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
 import { actionReducerCustomer } from '@stores';
 
 const FormValidation = ({
-  handleToggleForm,
+  onToggleForm,
   selectedCustomer,
-  setSelectedCustomer
+  setSelectedCustomer,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -82,13 +82,7 @@ const FormValidation = ({
     });
   };
 
-  const handleCancelForm = () => {
-    if(selectedCustomer) {
-      setSelectedCustomer(null)
-    }
-    handleToggleForm()
-  }
- 
+  // Set data to input field
   useEffect(() => {
     if (selectedCustomer && selectedCustomer.id) {
       const { name, avatar, mail, phoneNumber, description, address, gender } =
@@ -105,37 +99,35 @@ const FormValidation = ({
     }
   }, [selectedCustomer]);
 
+  // Render the button based on form emptiness
+  const isFormEmpty = Object.values(formData).some((value) => value === '');
+
   // Submit form
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
 
-      // Check validation form when submiting
-      const newErrors = {};
-      for (const field in formData) {
-        const errorMessage = Validation(field, formData[field]);
-        if (errorMessage) {
-          newErrors[field] = errorMessage;
-        }
-      }
-      setErrors(newErrors);
+    const type = selectedCustomer ? 'UPDATE' : 'ADD';
+    let response = null;
+    let toastMessage = '';
+    if (selectedCustomer) {
+      response = await updateCustomerService(selectedCustomer.id, formData);
+    } else {
+      response = await createCustomerService(formData);
+    }
 
-      if (Object.keys(newErrors).length === 0) {
-        const response = await createCustomerService(formData);
-        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED;
-        if (response.error) {
-          toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED;
-        } else {
-          dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
-        }
-        resetForm();
-        // To close form
-        handleToggleForm();
-        showToastInfo(toastMessage);
-      }
-    },
-    [formData, setErrors]
-  );
+    const { data, error } = response;
+    if (error) {
+      toastMessage = MESSAGES[type].FAIL;
+    } else {
+      toastMessage = MESSAGES[type].SUCCESS;
+      dispatch(actionReducerCustomer(ACTION_TYPES[type], data));
+      selectedCustomer && setSelectedCustomer(data)
+    }
+
+    onToggleForm(); // To close form
+    resetForm();
+    showToastInfo(toastMessage);
+  });
 
   return (
     <div className='form__background'>
@@ -237,11 +229,15 @@ const FormValidation = ({
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleCancelForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onToggleForm}>
             Cancel
           </Button>
-          <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
-            Create
+          <Button
+            type='submit'
+            variant={BUTTON_VARIANTS.SECONDARY}
+            disabled={isFormEmpty}
+          >
+            {selectedCustomer ? 'Update' : 'Create'}
           </Button>
         </div>
       </form>
