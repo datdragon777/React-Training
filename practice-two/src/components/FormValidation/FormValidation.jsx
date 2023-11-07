@@ -34,7 +34,6 @@ const FormValidation = ({
     description: '',
     address: '',
   });
-  const [isFormValid, setIsFormValid] = useState(true);
   const { dispatch, showToastInfo } = useCustomerContext();
 
   // Set value for form data
@@ -59,7 +58,7 @@ const FormValidation = ({
         [name]: errorMessage,
       }));
     },
-    [setErrors, errors]
+    [setErrors]
   );
 
   // Reset form value
@@ -100,10 +99,8 @@ const FormValidation = ({
     }
   }, [selectedCustomer]);
 
-  useEffect(() => {
-    const isFormEmpty = Object.values(formData).some((value) => value === '');
-    setIsFormValid(!isFormEmpty);
-  }, [formData]);
+  // Render the button based on form emptiness
+  const isFormEmpty = Object.values(formData).some((value) => value === '');
 
   // Submit form
   const handleSubmit = useCallback(async (e) => {
@@ -127,8 +124,8 @@ const FormValidation = ({
       selectedCustomer && setSelectedCustomer(data)
     }
 
-    resetForm();
     onToggleForm(); // To close form
+    resetForm();
     showToastInfo(toastMessage);
   });
 
@@ -238,7 +235,7 @@ const FormValidation = ({
           <Button
             type='submit'
             variant={BUTTON_VARIANTS.SECONDARY}
-            disabled={!isFormValid}
+            disabled={isFormEmpty}
           >
             {selectedCustomer ? 'Update' : 'Create'}
           </Button>
