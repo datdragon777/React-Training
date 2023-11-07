@@ -12,7 +12,11 @@ import { createCustomerService, updateCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
 import { actionReducerCustomer } from '@stores';
 
-const FormValidation = ({ handleToggleForm, selectedCustomer, setSelectedCustomer }) => {
+const FormValidation = ({
+  onToggleForm,
+  selectedCustomer,
+  setSelectedCustomer,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     avatar: '',
@@ -30,6 +34,7 @@ const FormValidation = ({ handleToggleForm, selectedCustomer, setSelectedCustome
     description: '',
     address: '',
   });
+  const [isFormValid, setIsFormValid] = useState(true);
   const { dispatch, showToastInfo } = useCustomerContext();
 
   // Set value for form data
@@ -54,7 +59,7 @@ const FormValidation = ({ handleToggleForm, selectedCustomer, setSelectedCustome
         [name]: errorMessage,
       }));
     },
-    [setErrors]
+    [setErrors, errors]
   );
 
   // Reset form value
@@ -95,50 +100,37 @@ const FormValidation = ({ handleToggleForm, selectedCustomer, setSelectedCustome
     }
   }, [selectedCustomer]);
 
+  useEffect(() => {
+    const isFormEmpty = Object.values(formData).some((value) => value === '');
+    setIsFormValid(!isFormEmpty);
+  }, [formData]);
+
   // Submit form
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
 
-      // Check validation form when submiting
-      const newErrors = {};
-      for (const field in formData) {
-        const errorMessage = Validation(field, formData[field]);
-        if (errorMessage) {
-          newErrors[field] = errorMessage;
-        }
-      }
-      setErrors(newErrors);
+    const type = selectedCustomer ? 'UPDATE' : 'ADD';
+    let response = null;
+    let toastMessage = '';
+    if (selectedCustomer) {
+      response = await updateCustomerService(selectedCustomer.id, formData);
+    } else {
+      response = await createCustomerService(formData);
+    }
 
-      if (Object.keys(newErrors).length === 0) {
-        let toastMessage = MESSAGES.GET.SUCCESSES.ADD_SUCCESSED;
-        if (selectedCustomer) {
-          // Update customer
-          const response = await updateCustomerService(selectedCustomer.id, formData);
-          if (response.error) {
-            toastMessage = MESSAGES.GET.ERRORS.UPDATE_FAILED;
-          } else {
-            toastMessage = MESSAGES.GET.SUCCESSES.UPDATE_SUCCESSED
-            dispatch(actionReducerCustomer(ACTION_TYPES.UPDATE, response.data));
-            setSelectedCustomer(response.data)
-          }
-        } else {
-          // Create customer
-          const response = await createCustomerService(formData);
-          if (response.error) {
-            toastMessage = MESSAGES.GET.ERRORS.ADD_FAILED;
-          } else {
-            dispatch(actionReducerCustomer(ACTION_TYPES.CREATE, response.data));
-          }
-        }
-        resetForm();
-        // To close form
-        handleToggleForm();
-        showToastInfo(toastMessage);
-      }
-    },
-    [formData, setErrors]
-  );
+    const { data, error } = response;
+    if (error) {
+      toastMessage = MESSAGES[type].FAIL;
+    } else {
+      toastMessage = MESSAGES[type].SUCCESS;
+      dispatch(actionReducerCustomer(ACTION_TYPES[type], data));
+      selectedCustomer && setSelectedCustomer(data)
+    }
+
+    resetForm();
+    onToggleForm(); // To close form
+    showToastInfo(toastMessage);
+  });
 
   return (
     <div className='form__background'>
@@ -240,10 +232,14 @@ const FormValidation = ({ handleToggleForm, selectedCustomer, setSelectedCustome
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={handleToggleForm}>
+          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onToggleForm}>
             Cancel
           </Button>
-          <Button type='submit' variant={BUTTON_VARIANTS.SECONDARY}>
+          <Button
+            type='submit'
+            variant={BUTTON_VARIANTS.SECONDARY}
+            disabled={!isFormValid}
+          >
             {selectedCustomer ? 'Update' : 'Create'}
           </Button>
         </div>

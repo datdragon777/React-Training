@@ -4,13 +4,13 @@ import { Button } from '@components';
 import { BUTTON_VARIANTS } from '@constants/buttons';
 import { editIcon, deleteIcon } from '@assets/images';
 
-const ContextMenu = ({ handleToggleForm, handleToggleDeletePopup }) => {
+const ContextMenu = ({ onToggleForm }) => {
   return (
     <div className='context-menu'>
       <Button
         variant={BUTTON_VARIANTS.EDIT}
         icon={editIcon}
-        onClick={handleToggleForm}
+        onClick={onToggleForm}
       >
         Edit
       </Button>

@@ -135,10 +135,9 @@ const Analytics = () => {
             customer={customer}
             selectedCustomer={selectedCustomer}
             isShowContextMenu={isShowContextMenu}
-            handleShowContextMenu={handleShowContextMenu}
-            handleShowProfileInfo={handleShowProfileInfo}
-            handleToggleForm={handleToggleForm}
-            handleToggleDeletePopup={handleToggleDeletePopup}
+            onShowContextMenu={handleShowContextMenu}
+            onShowProfileInfo={handleShowProfileInfo}
+            onToggleForm={handleToggleForm}
           />
         ))}
       </ul>
@@ -186,7 +185,7 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.GET.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
         {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
       </div>
@@ -199,7 +198,7 @@ const Analytics = () => {
       {/* Show form to create customer */}
       {isShowForm && (
         <FormValidation
-          handleToggleForm={handleToggleForm}
+          onToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}
         />

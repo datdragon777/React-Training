@@ -1,18 +1,20 @@
 export const MESSAGES = {
-  GET: {
-    ERRORS: {
-      ADD_FAILED: 'Create new customer failed',
-      UPDATE_FAILED: 'Update customer failed',
-      DELETE_FAILED: 'Delete customer failed',
-      API_FAILED: 'Having some issues on server',
-    },
-    SUCCESSES: {
-      ADD_SUCCESSED: 'Create new customer successfully',
-      UPDATE_SUCCESSED: 'Update customer successfully',
-      DELETE_SUCCESSED: 'Delete customer successfully',
-    },
-    EMPTY_LIST: 'Customer list is empty!',
+  ADD: {
+    SUCCESS: 'Create new customer successfully',
+    FAIL: 'Create new customer failed',
   },
+
+  UPDATE: {
+    SUCCESS: 'Update customer successfully',
+    FAIL: 'Update customer failed',
+  },
+
+  DELETE: {
+    SUCCESS: 'Delete customer successfully',
+    FAIL: 'Delete customer failed',
+  },
+
+  EMPTY_LIST: 'Customer list is empty!',
 
   FORM: {
     USERNAME: 'Username should be 3-16 characters.',
