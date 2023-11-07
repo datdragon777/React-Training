@@ -5,14 +5,17 @@ import { MESSAGES } from '@constants';
 import { toastTheme } from '@themes';
 
 const Toast = ({ message }) => {
+  const isFailureMessage =
+    message === MESSAGES.ADD.FAIL ||
+    message === MESSAGES.UPDATE.FAIL ||
+    message === MESSAGES.DELETE.FAIL;
   return (
     <div
       style={{
-        backgroundColor: Object.values(MESSAGES.GET.ERRORS).includes(message)
+        backgroundColor: isFailureMessage
           ? toastTheme.error
           : toastTheme.success,
       }}
-      // ref={toastContainerRef}
       className={`toast__container`}
     >
       <p className='toast__message'>{message}</p>
@@ -25,7 +28,7 @@ Toast.propTypes = {
 };
 
 Toast.defaultProps = {
-  message: MESSAGES.GET.SUCCESSES.ADD_SUCCESSED,
+  message: MESSAGES.ADD.SUCCESS,
 };
 
 export default memo(Toast);

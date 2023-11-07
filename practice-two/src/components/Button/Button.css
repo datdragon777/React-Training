@@ -10,10 +10,13 @@
   height: var(--btn-height, auto);
 }
 
+.btn[disabled]{
+  cursor: no-drop;
+}
+
 .btn__female {
   color: var(--cl-primary);
   background-color: var(--cl-female-txt);
-  /* border: 1px solid var(--cl-female-txt); */
 }
 
 .btn__female:hover {

@@ -11,7 +11,7 @@ export const customerReducer = (state, action) => {
     case ACTION_TYPES.GET_LIST: {
       return { ...state, customers: payload}
     }
-    case ACTION_TYPES.CREATE: {
+    case ACTION_TYPES.ADD: {
       return { ...state, customers: [payload, ...customers] };
     }
     case ACTION_TYPES.UPDATE: {
