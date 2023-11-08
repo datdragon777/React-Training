@@ -71,13 +71,11 @@ const Analytics = () => {
   const handleDeleteCustomer = useCallback(async () => {
     let toastMessage = MESSAGES.DELETE.SUCCESS;
     const response = await deleteCustomerService(selectedCustomer.id);
-    if (selectedCustomer) {
-      if (response.error) {
-        toastMessage = MESSAGES.DELETE.FAIL;
-      } else {
-        dispatch(actionReducerCustomer(ACTION_TYPES.DELETE, response.data));
-        setSelectedCustomer(null);
-      }
+    if (response.error) {
+      toastMessage = MESSAGES.DELETE.FAIL;
+    } else {
+      dispatch(actionReducerCustomer(ACTION_TYPES.DELETE, response.data));
+      setSelectedCustomer(null);
     }
     handleToggleDeletePopup(); // To close delete popup
     showToastInfo(toastMessage);
@@ -188,7 +186,7 @@ const Analytics = () => {
           // Show message when list is empty
           <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
-        {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
+        {isError && showToastInfo(MESSAGES.API_FAIL)}
       </div>
 
       {/* Show information of selected customer */}

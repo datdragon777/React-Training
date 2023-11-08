@@ -15,7 +15,7 @@ export default {
 };
 
 const Template = (args) => (
-  <div className="customer__item">
+  <div style={{width: 1000}}>
     <CustomerItem {...args} />
   </div>
 );

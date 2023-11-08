@@ -10,7 +10,7 @@ const ConfirmDeletePopup = ({
   return (
     <div className='confirm__popup'>
       <div className='confirm__content'>
-        <p className='confirm__title'>Do you want to delete this customer?</p>
+        <p className='confirm__title'>Are you sure to delete customer?</p>
         <div className='confirm__btn'>
           <Button
             variant={BUTTON_VARIANTS.TOGGLE}
