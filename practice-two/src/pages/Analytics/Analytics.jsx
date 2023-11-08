@@ -1,19 +1,24 @@
 // Library
-import React, { useState, useCallback, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useCallback } from 'react';
 import useSWR from 'swr';
 
 // Import style for Analytics component
 import './Analytics.css';
 
 // Import service to call API
-import { getAllCustomerService } from '@services';
+import { getAllCustomerService, deleteCustomerService } from '@services';
 
 // Import images or icons
 import { plusIcon, loadingData } from '@assets/images';
 
 // Import components
-import { Button, SortData, CustomerItem, FormValidation } from '@components';
+import {
+  Button,
+  SortData,
+  CustomerItem,
+  FormValidation,
+  ConfirmDeletePopup,
+} from '@components';
 
 // Import constant
 import {
@@ -32,6 +37,8 @@ import { ProfileInfo } from '@layouts';
 
 // Custom hook
 import { useCustomerContext } from '@hooks';
+
+// Import Store
 import { actionReducerCustomer } from '@stores';
 
 const Analytics = () => {
@@ -39,6 +46,7 @@ const Analytics = () => {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
+  const [isShowConfirmDelete, setIsShowConfirmDelete] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
   const { state, dispatch, showToastInfo } = useCustomerContext();
   const { customers } = state;
@@ -53,6 +61,25 @@ const Analytics = () => {
     setSelectedCustomer(null); // Clear the selected customer data
     handleToggleForm();
   }, []);
+
+  // Open or close delete popup
+  const handleToggleDeletePopup = useCallback(() => {
+    setIsShowConfirmDelete(!isShowConfirmDelete);
+  }, [isShowConfirmDelete]);
+
+  // Handle delete customer
+  const handleDeleteCustomer = useCallback(async () => {
+    let toastMessage = MESSAGES.DELETE.SUCCESS;
+    const response = await deleteCustomerService(selectedCustomer.id);
+    if (response.error) {
+      toastMessage = MESSAGES.DELETE.FAIL;
+    } else {
+      dispatch(actionReducerCustomer(ACTION_TYPES.DELETE, response.data));
+      setSelectedCustomer(null);
+    }
+    handleToggleDeletePopup(); // To close delete popup
+    showToastInfo(toastMessage);
+  }, [selectedCustomer, handleToggleDeletePopup]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -102,13 +129,14 @@ const Analytics = () => {
       <ul className='customer__list'>
         {customers.map((customer) => (
           <CustomerItem
-            key={uuidv4()}
+            key={customer.id + customer.name}
             customer={customer}
             selectedCustomer={selectedCustomer}
             isShowContextMenu={isShowContextMenu}
             onShowContextMenu={handleShowContextMenu}
             onShowProfileInfo={handleShowProfileInfo}
             onToggleForm={handleToggleForm}
+            onToggleDeletePopup={handleToggleDeletePopup}
           />
         ))}
       </ul>
@@ -156,9 +184,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.HAS_EMPTY_LIST}</p>
         )}
-        {isError && showToastInfo(MESSAGES.GET.ERRORS.API_FAILED)}
+        {isError && showToastInfo(MESSAGES.TAKE_API_FAIL)}
       </div>
 
       {/* Show information of selected customer */}
@@ -172,6 +200,14 @@ const Analytics = () => {
           onToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}
+        />
+      )}
+
+      {/* Show delete popup */}
+      {isShowConfirmDelete && (
+        <ConfirmDeletePopup
+          onToggleDeletePopup={handleToggleDeletePopup}
+          onDeleteCustomer={handleDeleteCustomer}
         />
       )}
     </>
