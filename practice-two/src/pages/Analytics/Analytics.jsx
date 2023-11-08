@@ -184,9 +184,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.HAS_EMPTY_LIST}</p>
         )}
-        {isError && showToastInfo(MESSAGES.API_FAIL)}
+        {isError && showToastInfo(MESSAGES.TAKE_API_FAIL)}
       </div>
 
       {/* Show information of selected customer */}
