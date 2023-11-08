@@ -13,3 +13,4 @@ export { default as Toast } from './Toast/Toast';
 export { default as InputValidate } from './InputValidate/InputValidate';
 export { default as FormValidation } from './FormValidation/FormValidation';
 export { default as ConfirmDeletePopup } from './ConfirmDeletePopup/ConfirmDeletePopup';
+export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
