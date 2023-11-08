@@ -101,7 +101,9 @@ const FormValidation = ({
 
   // Render the button based on form emptiness
   const isFormEmpty = Object.values(formData).some((value) => value === '');
-
+  const isFormError = Object.values(errors).some((error) => error !== '')
+  const isValidForm = isFormEmpty || isFormError
+ 
   // Submit form
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
@@ -127,7 +129,7 @@ const FormValidation = ({
     onToggleForm(); // To close form
     resetForm();
     showToastInfo(toastMessage);
-  });
+  }, [formData]);
 
   return (
     <div className='form__background'>
@@ -235,7 +237,7 @@ const FormValidation = ({
           <Button
             type='submit'
             variant={BUTTON_VARIANTS.SECONDARY}
-            disabled={isFormEmpty}
+            disabled={isValidForm}
           >
             {selectedCustomer ? 'Update' : 'Create'}
           </Button>
