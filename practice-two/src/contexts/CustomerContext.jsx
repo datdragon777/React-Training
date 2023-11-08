@@ -5,27 +5,28 @@ export const CustomerContext = createContext();
 
 export const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
-  const [toastInfo, setToastInfo] = useState(null);
+  // const [toastInfo, setToastInfo] = useState([]);
+  // const [showToast, setShowToast] = useState(false);
 
-  const showToastInfo = (message) => {
-    setToastInfo(message);
-  };
+  // const showToastInfo = (message, type) => {
+  //   setToastInfo([message, type]);
+  //   setShowToast(!showToast);
+  // };
 
-  useEffect(() => {
-    if (toastInfo) {
-      const timeout = setTimeout(() => {
-        setToastInfo(null); 
-      }, 4000);
+  // useEffect(() => {
+  //   if (toastInfo) {
+  //     const timeout = setTimeout(() => {
+  //       setToastInfo([]);
+  //       setShowToast(!showToast);
+  //     }, 4000);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [toastInfo, setToastInfo]);
-   
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [toastInfo, showToast]);
+
   const customerContextValue = {
     state,
     dispatch,
-    toastInfo,
-    showToastInfo,
   };
 
   return (

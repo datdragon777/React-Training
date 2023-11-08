@@ -17,7 +17,7 @@ import {
   SortData,
   CustomerItem,
   FormValidation,
-  ConfirmDeletePopup,
+  ConfirmPopup,
 } from '@components';
 
 // Import constant
@@ -26,11 +26,12 @@ import {
   BASE_URL,
   PATH,
   MESSAGES,
-  ACTION_TYPES,
+  ACTION_TYPES_CUSTOMER,
+  TOAST_TYPES,
 } from '@constants';
 
 // Import list data for Expand component
-import { SORT_TITLES } from '@data';
+import { sortTitles } from '@mocks';
 
 // Import layout
 import { ProfileInfo } from '@layouts';
@@ -41,14 +42,14 @@ import { useCustomerContext } from '@hooks';
 // Import Store
 import { actionReducerCustomer } from '@stores';
 
-const Analytics = () => {
+const Analytics = ({ onShowToast }) => {
   // State variables
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowConfirmDelete, setIsShowConfirmDelete] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
-  const { state, dispatch, showToastInfo } = useCustomerContext();
+  const { state, dispatch } = useCustomerContext();
   const { customers } = state;
 
   // Open or Close form
@@ -70,15 +71,19 @@ const Analytics = () => {
   // Handle delete customer
   const handleDeleteCustomer = useCallback(async () => {
     let toastMessage = MESSAGES.DELETE.SUCCESS;
+    let toastType = TOAST_TYPES.SUCCESS;
     const response = await deleteCustomerService(selectedCustomer.id);
     if (response.error) {
       toastMessage = MESSAGES.DELETE.FAIL;
+      toastType = TOAST_TYPES.FAIL;
     } else {
-      dispatch(actionReducerCustomer(ACTION_TYPES.DELETE, response.data));
+      dispatch(
+        actionReducerCustomer(ACTION_TYPES_CUSTOMER.DELETE, response.data)
+      );
       setSelectedCustomer(null);
     }
     handleToggleDeletePopup(); // To close delete popup
-    showToastInfo(toastMessage);
+    onShowToast(toastMessage, toastType);
   }, [selectedCustomer, handleToggleDeletePopup]);
 
   // Event handler for clicking a customer
@@ -118,13 +123,13 @@ const Analytics = () => {
     {
       shouldRetryOnError: false, // avoiding call API continuously when occur error
       onSuccess: (data) => {
-        dispatch(actionReducerCustomer(ACTION_TYPES.GET_LIST, data));
+        dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.GET_LIST, data));
       },
     }
   );
 
   // Render the list of customers
-  const renderCustomerList = () => {
+  const renderCustomerList = useCallback(() => {
     return (
       <ul className='customer__list'>
         {customers.map((customer) => (
@@ -141,7 +146,7 @@ const Analytics = () => {
         ))}
       </ul>
     );
-  };
+  }, [customers, selectedCustomer, isShowContextMenu]);
 
   return (
     <>
@@ -149,12 +154,11 @@ const Analytics = () => {
         <div className='analytics__header'>
           <h2 className='title__page'>Customer List</h2>
           <Button
+            btnName='Add Customer'
             variant={BUTTON_VARIANTS.SECONDARY}
             icon={plusIcon}
             onClick={handleShowCreateForm}
-          >
-            Add Customer
-          </Button>
+          />
         </div>
         {isLoading ? (
           // Check loading status
@@ -171,12 +175,12 @@ const Analytics = () => {
           <div className='customer__table'>
             {/* Start sort title */}
             <div className='customer__sort'>
-              {SORT_TITLES.map((SORT_TITLE) => (
+              {sortTitles.map((sortTitle) => (
                 <div
                   className='sort__item col-3'
-                  key={SORT_TITLE.id + SORT_TITLE.title}
+                  key={sortTitle.id + sortTitle.title}
                 >
-                  <SortData name={SORT_TITLE.title} />
+                  <SortData name={sortTitle.title} />
                 </div>
               ))}
             </div>
@@ -184,9 +188,9 @@ const Analytics = () => {
           </div>
         ) : (
           // Show message when list is empty
-          <p className='empty__message'>{MESSAGES.HAS_EMPTY_LIST}</p>
+          <p className='empty__message'>{MESSAGES.EMPTY_LIST}</p>
         )}
-        {isError && showToastInfo(MESSAGES.TAKE_API_FAIL)}
+        {isError && onShowToast(MESSAGES.GET.FAIL, TOAST_TYPES.FAIL)}
       </div>
 
       {/* Show information of selected customer */}
@@ -200,14 +204,16 @@ const Analytics = () => {
           onToggleForm={handleToggleForm}
           selectedCustomer={selectedCustomer}
           setSelectedCustomer={setSelectedCustomer}
+          onShowToast={onShowToast}
         />
       )}
 
       {/* Show delete popup */}
       {isShowConfirmDelete && (
-        <ConfirmDeletePopup
-          onToggleDeletePopup={handleToggleDeletePopup}
-          onDeleteCustomer={handleDeleteCustomer}
+        <ConfirmPopup
+          questionConfirm='Are you sure to delete customer?'
+          onTogglePopup={handleToggleDeletePopup}
+          onConfirm={handleDeleteCustomer}
         />
       )}
     </>

@@ -8,19 +8,17 @@ const ContextMenu = ({ onToggleForm, onToggleDeletePopup }) => {
   return (
     <div className='context-menu'>
       <Button
+        btnName='Edit'
         variant={BUTTON_VARIANTS.EDIT}
         icon={editIcon}
         onClick={onToggleForm}
-      >
-        Edit
-      </Button>
+      />
       <Button
+        btnName='Delete'
         variant={BUTTON_VARIANTS.DELETE}
         icon={deleteIcon}
         onClick={onToggleDeletePopup}
-      >
-        Delete
-      </Button>
+      />
     </div>
   );
 };

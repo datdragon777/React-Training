@@ -1,8 +1,4 @@
-export const getButtonVariant = (variant) => {
-  return Metrics.button[variant];
-};
-
-const Metrics = {
+export const metrics = {
   button: {
     primary: {
       fontSize: 'var(--fs-xx-sm)',

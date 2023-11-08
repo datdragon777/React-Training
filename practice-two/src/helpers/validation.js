@@ -1,33 +1,6 @@
-import { MESSAGES, REGEX } from '@constants';
+import { validationRules } from '@mocks';
 
-const Validation = (name, value) => {
-  const validationRules = {
-    name: {
-      regex: REGEX.USERNAME,
-      message: MESSAGES.FORM.USERNAME,
-    },
-    avatar: {
-      regex: REGEX.AVATAR,
-      message: MESSAGES.FORM.AVATAR,
-    },
-    mail: {
-      regex: REGEX.EMAIL,
-      message: MESSAGES.FORM.EMAIL,
-    },
-    phoneNumber: {
-      regex: REGEX.PHONENUMBER,
-      message: MESSAGES.FORM.PHONENUMBER,
-    },
-    description: {
-      regex: REGEX.DESCRIPTION,
-      message: MESSAGES.FORM.DESCRIPTION,
-    },
-    address: {
-      regex: REGEX.ADDRESS,
-      message: MESSAGES.FORM.ADDRESS,
-    },
-  };
-
+export const Validation = (name, value) => {
   if (!value.trim()) {
     return 'This field is required.';
   }
@@ -41,5 +14,3 @@ const Validation = (name, value) => {
 
   return '';
 };
-
-export default Validation;

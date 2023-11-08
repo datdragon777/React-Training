@@ -9,7 +9,7 @@ import {
   logoutIcon,
   accountAvatar,
 } from "@assets/images";
-import { TAG_LINKS } from "@data";
+import { tagLinks } from "@mocks";
 import { BUTTON_VARIANTS } from "@constants/buttons";
 
 const Sidebar = () => {
@@ -30,8 +30,8 @@ const Sidebar = () => {
         </a>
       </div>
       <ul className="sidebar__list">
-        {TAG_LINKS.map((tag_link) => {
-          const { icon, name, path } = tag_link;
+        {tagLinks.map((tagLink) => {
+          const { icon, name, path } = tagLink;
           const isAnalytics = name === "Analytics";
           return (
             <li key={uuidv4()} className={`sidebar__item`}>
@@ -64,7 +64,7 @@ const Sidebar = () => {
           />
         </div>
         <div className="decoration__wrapper">
-          <Button variant={BUTTON_VARIANTS.PRIMARY}>Update now</Button>
+          <Button btnName='Update now' variant={BUTTON_VARIANTS.PRIMARY} icon='' />
         </div>
       </div>
 

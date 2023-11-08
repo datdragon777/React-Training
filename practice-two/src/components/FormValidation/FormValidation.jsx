@@ -4,8 +4,9 @@ import { InputValidate, Button } from '@components';
 import {
   BUTTON_VARIANTS,
   MESSAGES,
-  ACTION_TYPES,
+  ACTION_TYPES_CUSTOMER,
   GENDER_TYPES,
+  TOAST_TYPES,
 } from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService, updateCustomerService } from '@services';
@@ -16,6 +17,7 @@ const FormValidation = ({
   onToggleForm,
   selectedCustomer,
   setSelectedCustomer,
+  onShowToast,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -34,7 +36,7 @@ const FormValidation = ({
     description: '',
     address: '',
   });
-  const { dispatch, showToastInfo } = useCustomerContext();
+  const { dispatch } = useCustomerContext();
 
   // Set value for form data
   const handleChange = useCallback(
@@ -101,35 +103,41 @@ const FormValidation = ({
 
   // Render the button based on form emptiness
   const isFormEmpty = Object.values(formData).some((value) => value === '');
-  const isFormError = Object.values(errors).some((error) => error !== '')
-  const isValidForm = isFormEmpty || isFormError
- 
+  const isFormError = Object.values(errors).some((error) => error !== '');
+  const isValidForm = isFormEmpty || isFormError;
+
   // Submit form
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    const type = selectedCustomer ? 'UPDATE' : 'ADD';
-    let response = null;
-    let toastMessage = '';
-    if (selectedCustomer) {
-      response = await updateCustomerService(selectedCustomer.id, formData);
-    } else {
-      response = await createCustomerService(formData);
-    }
+      const type = selectedCustomer ? 'UPDATE' : 'ADD';
+      let response = null;
+      let toastMessage = '';
+      let toastType = '';
+      if (selectedCustomer) {
+        response = await updateCustomerService(selectedCustomer.id, formData);
+      } else {
+        response = await createCustomerService(formData);
+      }
 
-    const { data, error } = response;
-    if (error) {
-      toastMessage = MESSAGES[type].FAIL;
-    } else {
-      toastMessage = MESSAGES[type].SUCCESS;
-      dispatch(actionReducerCustomer(ACTION_TYPES[type], data));
-      selectedCustomer && setSelectedCustomer(data)
-    }
+      const { data, error } = response;
+      if (error) {
+        toastMessage = MESSAGES[type].FAIL;
+        toastType = TOAST_TYPES.FAIL;
+      } else {
+        toastMessage = MESSAGES[type].SUCCESS;
+        toastType = TOAST_TYPES.SUCCESS;
+        dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER[type], data));
+        selectedCustomer && setSelectedCustomer(data);
+      }
 
-    onToggleForm(); // To close form
-    resetForm();
-    showToastInfo(toastMessage);
-  }, [formData]);
+      onToggleForm(); // To close form
+      resetForm();
+      onShowToast(toastMessage, toastType);
+    },
+    [formData]
+  );
 
   return (
     <div className='form__background'>
@@ -203,7 +211,7 @@ const FormValidation = ({
                 placeholder=''
                 genderType={GENDER_TYPES.MALE}
                 onChange={handleChange}
-                name={GENDER_TYPES.NAME}
+                name='gender'
                 value={GENDER_TYPES.MALE}
                 errorMessage=''
                 checked={formData.gender === GENDER_TYPES.MALE}
@@ -213,7 +221,7 @@ const FormValidation = ({
                 placeholder=''
                 genderType={GENDER_TYPES.FEMALE}
                 onChange={handleChange}
-                name={GENDER_TYPES.NAME}
+                name='gender'
                 value={GENDER_TYPES.FEMALE}
                 errorMessage=''
                 checked={formData.gender === GENDER_TYPES.FEMALE}
@@ -231,16 +239,20 @@ const FormValidation = ({
         />
 
         <div className='form__button'>
-          <Button variant={BUTTON_VARIANTS.TOGGLE} onClick={onToggleForm}>
-            Cancel
-          </Button>
           <Button
+            btnName='Cancel'
+            variant={BUTTON_VARIANTS.TOGGLE}
+            onClick={onToggleForm}
+            icon=''
+          />
+
+          <Button
+            btnName={selectedCustomer ? 'Update' : 'Create'}
             type='submit'
             variant={BUTTON_VARIANTS.SECONDARY}
             disabled={isValidForm}
-          >
-            {selectedCustomer ? 'Update' : 'Create'}
-          </Button>
+            icon=''
+          />
         </div>
       </form>
     </div>

@@ -14,9 +14,12 @@ export const MESSAGES = {
     FAIL: 'Delete customer failed',
   },
 
-  HAS_EMPTY_LIST: 'Customer list is empty!',
+  GET: {
+    SUCCESS: 'Get customer data successfully',
+    FAIL: 'Having some errors from server',
+  },
 
-  TAKE_API_FAIL: 'Having some errors from server',
+  EMPTY_LIST: 'Customer list is empty!',
 
   FORM: {
     USERNAME: 'Username should be 3-16 characters.',

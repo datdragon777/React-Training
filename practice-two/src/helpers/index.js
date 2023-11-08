@@ -1,1 +1,2 @@
-export { default as Validation } from './validation';
+export { Validation } from './validation';
+export { GetButtonVariant } from './buttonVariant';

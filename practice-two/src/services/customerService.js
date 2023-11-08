@@ -1,4 +1,4 @@
-import { BASE_URL, PATH, SERVICE_TYPES } from '@constants';
+import { BASE_URL, PATH, SERVICE_TYPES_CUSTOMER } from '@constants';
 
 // Get customer list
 const getAllCustomerService = async (url) => {
@@ -35,17 +35,17 @@ const services = async (path, method, data) => {
 
 // Create customer
 const createCustomerService = async (customerData) => {
-  return await services(`${PATH}`, SERVICE_TYPES.CREATE_CUSTOMER, customerData);
+  return await services(`${PATH}`, SERVICE_TYPES_CUSTOMER.CREATE, customerData);
 };
 
 // Update customer
 const updateCustomerService = async (id, customerData) => {
-  return await services(`${PATH}/${id}`, SERVICE_TYPES.UPDATE_CUSTOMER, customerData);
+  return await services(`${PATH}/${id}`, SERVICE_TYPES_CUSTOMER.UPDATE, customerData);
 };
 
 // Delete customer
 const deleteCustomerService = async (id) => {
-  return await services(`${PATH}/${id}`, SERVICE_TYPES.DELETE_CUSTOMER);
+  return await services(`${PATH}/${id}`, SERVICE_TYPES_CUSTOMER.DELETE);
 };
 
 export {

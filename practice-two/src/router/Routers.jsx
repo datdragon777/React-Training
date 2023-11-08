@@ -11,12 +11,12 @@ import {
   Settings,
 } from "@pages";
 
-const Routers = () => {
+const Routers = ({onShowToast}) => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/analytics" />} />
       <Route path="/" element={<Home />} />
-      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/analytics" element={<Analytics onShowToast={onShowToast} />} />
       <Route path="/invoice" element={<Invoice />} />
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/calendar" element={<Calendar />} />
