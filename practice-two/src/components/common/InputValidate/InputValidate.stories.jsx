@@ -2,7 +2,7 @@ import { MESSAGES } from '@constants';
 import InputValidate from './InputValidate';
 
 export default {
-  title: 'Components/InputValidate',
+  title: 'Components/Commons/InputValidate',
   component: InputValidate,
   tags: ['autodocs'],
   argTypes: {

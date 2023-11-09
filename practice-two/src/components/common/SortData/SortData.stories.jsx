@@ -1,7 +1,7 @@
 import SortData from "./SortData";
 
 export default {
-  title: "Components/SortData",
+  title: "Components/Commons/SortData",
   component: SortData,
   tags: ["autodocs"],
   argTypes: {

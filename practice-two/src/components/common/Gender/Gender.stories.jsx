@@ -1,7 +1,7 @@
 import Gender from "./Gender";
 
 export default {
-  title: "Components/Gender",
+  title: "Components/Commons/Gender",
   component: Gender,
   tags: ["autodocs"],
   argTypes: {

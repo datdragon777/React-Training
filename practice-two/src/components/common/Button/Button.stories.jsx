@@ -3,7 +3,7 @@ import { plusIcon, editIcon, deleteIcon } from '@assets/images';
 import { BUTTON_VARIANTS } from '@constants';
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/Commons/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {

@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { dashboard } from "@assets/images";
 
 export default {
-  title: "Components/Tag Link",
+  title: "Components/Commons/Tag Link",
   component: TagLink,
   tags: ["autodocs"],
   argTypes: {

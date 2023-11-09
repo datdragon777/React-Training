@@ -2,7 +2,7 @@ import Account from "./Account";
 import { accountAvatar, logoutIcon } from "@assets/images";
 
 export default {
-  title: "Components/Account",
+  title: "Components/Commons/Account",
   component: Account,
   tags: ["autodocs"],
   argTypes: {

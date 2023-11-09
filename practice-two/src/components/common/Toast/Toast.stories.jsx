@@ -2,7 +2,7 @@ import { MESSAGES, TOAST_TYPES } from '@constants';
 import Toast from './Toast';
 
 export default {
-  title: 'Components/Toast',
+  title: 'Components/Commons/Toast',
   component: Toast,
   tags: ['autodocs'],
   argTypes: {

@@ -1,7 +1,7 @@
 import Info from "./Info";
 import { infoAvatar } from "@assets/images";
 export default {
-  title: "Components/Info",
+  title: "Components/Commons/Info",
   component: Info,
   tags: ["autodocs"],
   argTypes: {

@@ -19,6 +19,8 @@ export const MESSAGES = {
     FAIL: 'Having some errors from server',
   },
 
+  CRASH_COMPONENT: 'Having error, please try again!',
+
   EMPTY_LIST: 'Customer list is empty!',
 
   FORM: {

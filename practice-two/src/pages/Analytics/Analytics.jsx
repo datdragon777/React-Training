@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, lazy, Suspense } from 'react';
 import useSWR from 'swr';
 
 // Import style for Analytics component
@@ -9,7 +9,7 @@ import './Analytics.css';
 import { getAllCustomerService, deleteCustomerService } from '@services';
 
 // Import images or icons
-import { plusIcon, loadingData } from '@assets/images';
+import { plusIcon } from '@assets/images';
 
 // Import components
 import {
@@ -17,7 +17,9 @@ import {
   SortData,
   CustomerItem,
   FormValidation,
-  ConfirmPopup,
+  Popup,
+  ProfileInfo,
+  Loading,
 } from '@components';
 
 // Import constant
@@ -33,21 +35,23 @@ import {
 // Import list data for Expand component
 import { sortTitles } from '@mocks';
 
-// Import layout
-import { ProfileInfo } from '@layouts';
-
 // Custom hook
 import { useCustomerContext } from '@hooks';
 
 // Import Store
 import { actionReducerCustomer } from '@stores';
 
+const FormValidationLazy = lazy(() =>
+  import('../../components/FormValidation/FormValidation')
+);
+const PopupLazy = lazy(() => import('../../components/Popup/Popup'));
+
 const Analytics = ({ onShowToast }) => {
   // State variables
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isShowProfileInfo, setIsShowProfileInfo] = useState(false);
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
-  const [isShowConfirmDelete, setIsShowConfirmDelete] = useState(false);
+  const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
   const { state, dispatch } = useCustomerContext();
   const { customers } = state;
@@ -61,12 +65,12 @@ const Analytics = ({ onShowToast }) => {
   const handleShowCreateForm = useCallback(() => {
     setSelectedCustomer(null); // Clear the selected customer data
     handleToggleForm();
-  }, []);
+  }, [handleToggleForm]);
 
   // Open or close delete popup
-  const handleToggleDeletePopup = useCallback(() => {
-    setIsShowConfirmDelete(!isShowConfirmDelete);
-  }, [isShowConfirmDelete]);
+  const handleTogglePopup = useCallback(() => {
+    setIsShowPopup(!isShowPopup);
+  }, [isShowPopup]);
 
   // Handle delete customer
   const handleDeleteCustomer = useCallback(async () => {
@@ -82,9 +86,9 @@ const Analytics = ({ onShowToast }) => {
       );
       setSelectedCustomer(null);
     }
-    handleToggleDeletePopup(); // To close delete popup
+    handleTogglePopup(); // To close delete popup
     onShowToast(toastMessage, toastType);
-  }, [selectedCustomer, handleToggleDeletePopup]);
+  }, [selectedCustomer, handleTogglePopup]);
 
   // Event handler for clicking a customer
   const handleShowProfileInfo = useCallback(
@@ -141,12 +145,18 @@ const Analytics = ({ onShowToast }) => {
             onShowContextMenu={handleShowContextMenu}
             onShowProfileInfo={handleShowProfileInfo}
             onToggleForm={handleToggleForm}
-            onToggleDeletePopup={handleToggleDeletePopup}
+            onToggleDeletePopup={handleTogglePopup}
           />
         ))}
       </ul>
     );
-  }, [customers, selectedCustomer, isShowContextMenu]);
+  }, [
+    customers,
+    selectedCustomer,
+    isShowContextMenu,
+    handleShowProfileInfo,
+    handleTogglePopup,
+  ]);
 
   return (
     <>
@@ -162,15 +172,7 @@ const Analytics = ({ onShowToast }) => {
         </div>
         {isLoading ? (
           // Check loading status
-          <div className='customer__loading'>
-            <img
-              src={loadingData}
-              className='loading__scene'
-              alt='loading-data...'
-              width='200px'
-              height='200px'
-            />
-          </div>
+          <Loading />
         ) : customers.length ? (
           <div className='customer__table'>
             {/* Start sort title */}
@@ -200,21 +202,53 @@ const Analytics = ({ onShowToast }) => {
 
       {/* Show form to create customer */}
       {isShowForm && (
-        <FormValidation
-          onToggleForm={handleToggleForm}
-          selectedCustomer={selectedCustomer}
-          setSelectedCustomer={setSelectedCustomer}
-          onShowToast={onShowToast}
-        />
+        <Suspense
+          fallback={
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Loading />
+            </div>
+          }
+        >
+          <FormValidationLazy
+            onToggleForm={handleToggleForm}
+            selectedCustomer={selectedCustomer}
+            setSelectedCustomer={setSelectedCustomer}
+            onShowToast={onShowToast}
+          />
+        </Suspense>
       )}
 
       {/* Show delete popup */}
-      {isShowConfirmDelete && (
-        <ConfirmPopup
-          questionConfirm='Are you sure to delete customer?'
-          onTogglePopup={handleToggleDeletePopup}
-          onConfirm={handleDeleteCustomer}
-        />
+      {isShowPopup && (
+        <Suspense
+          fallback={
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Loading />
+            </div>
+          }
+        >
+          <PopupLazy
+            popupText='Are you sure to delete customer?'
+            onTogglePopup={handleTogglePopup}
+            onConfirm={handleDeleteCustomer}
+          />
+        </Suspense>
       )}
     </>
   );

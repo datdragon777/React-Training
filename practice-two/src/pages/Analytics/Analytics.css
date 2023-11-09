@@ -74,8 +74,3 @@
   font-size: var(--fs-xxx-lg);
   font-weight: var(--fw-lg);
 }
-
-.customer__loading {
-  display: flex;
-  justify-content: center;
-}

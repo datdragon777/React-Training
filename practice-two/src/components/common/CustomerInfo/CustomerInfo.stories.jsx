@@ -2,7 +2,7 @@ import CustomerInfo from "./CustomerInfo";
 import { accountAvatar } from "@assets/images";
 
 export default {
-  title: "Components/CustomerInfo",
+  title: "Components/Commons/CustomerInfo",
   component: CustomerInfo,
   tags: ["autodocs"],
   argTypes: {

@@ -2,7 +2,7 @@ import ContactDetail from "./ContactDetail";
 import { email, phone, location } from "@assets/images";
 
 export default {
-  title: "Components/ContactDetail",
+  title: "Components/Commons/ContactDetail",
   component: ContactDetail,
   tags: ["autodocs"],
   argTypes: {

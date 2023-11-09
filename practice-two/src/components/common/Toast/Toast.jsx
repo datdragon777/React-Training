@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react';
+import { memo } from 'react';
 import './Toast.css';
 import PropTypes from 'prop-types';
 import { MESSAGES } from '@constants';
@@ -7,21 +7,9 @@ import { TOAST_TYPES } from '@constants';
 
 const Toast = ({ message, type }) => {
   const isFailType = type === TOAST_TYPES.FAIL;
-  const toastRef = useRef();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (toastRef.current) {
-        toastRef.current.classList.add('toast__close')
-      }
-    }, 4000);
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <div
-      ref={toastRef}
       style={{
         backgroundColor: isFailType ? toastTheme.error : toastTheme.success,
       }}
