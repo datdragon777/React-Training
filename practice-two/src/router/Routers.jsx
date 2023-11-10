@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import {
   Home,
@@ -14,8 +14,6 @@ import {
 import { CustomerProvider } from '@contexts';
 import { ErrorBoundary, Loading } from '@components';
 
-const AnalyticsLazy = lazy(() => import('../pages/Analytics/Analytics'));
-
 const Routers = ({ onShowToast }) => {
   return (
     <Routes>
@@ -26,23 +24,6 @@ const Routers = ({ onShowToast }) => {
         element={
           <ErrorBoundary fallback={<Error />}>
             <CustomerProvider>
-              {/* <Suspense
-                fallback={
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Loading />
-                  </div>
-                }
-              >
-                <AnalyticsLazy onShowToast={onShowToast} />
-              </Suspense> */}
               <Analytics onShowToast={onShowToast} />
             </CustomerProvider>
           </ErrorBoundary>
