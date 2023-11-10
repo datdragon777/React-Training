@@ -95,6 +95,7 @@ const Analytics = ({ onShowToast }) => {
     (customer) => {
       // If clicked on the same customer that is already selected, toggle the profile show
       if (selectedCustomer && selectedCustomer.id === customer.id) {
+        setSelectedCustomer(null)
         setIsShowProfileInfo(!isShowProfileInfo);
       } else {
         // If clicked on a different customer, select the new customer and show the new profile
