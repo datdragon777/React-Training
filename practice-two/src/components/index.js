@@ -16,4 +16,4 @@ export { default as Popup } from './Popup/Popup';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as ProfileInfo } from './ProfileInfo/ProfileInfo';
 export { default as Loading } from './common/Loading/Loading';
-export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
+export { default as ErrorBoundary } from './common/ErrorBoundary/ErrorBoundary';

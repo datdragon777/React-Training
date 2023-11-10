@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './Loading.css';
 import { loadingData } from '@assets/images';
 
@@ -16,4 +16,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default memo(Loading);

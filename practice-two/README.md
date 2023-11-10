@@ -63,29 +63,39 @@ practice-one
             |-- ...
             |-- index.js
     |-- components
-        |-- Account
-        |-- Button
-        |-- ConfirmDeletePopup
+        |-- common
+            |-- Account
+            |-- Button
+            |-- ContactDetail
+            |-- CustomerInfo
+            |-- ErrorBoundary
+            |-- Gender
+            |-- Info
+            |-- InputValidate
+            |-- Loading
+            |-- SortData
+            |-- TagLink
+            |-- Toast
         |-- Contact
-        |-- ContactDetail
         |-- ContextMenu
-        |-- CustomerInfo
         |-- CustomerItem
         |-- FormValidation
-        |-- Gender
-        |-- Info
-        |-- InputValidate
-        |-- SortData
-        |-- TagLink
-        |-- Toast
+        |-- Popup
+        |-- ProfileInfo
+        |-- Sidebar
         |-- index.js
     |-- constants
         |-- ...
-    |-- data
+    |-- contexts
+        |-- ...
+    |-- helpers
+        |-- ...
+    |-- hooks
+        |-- ...
+    |-- mocks
         |-- ...
     |-- layouts
-        |-- ProfileInfo
-        |-- Sidebar
+        |-- Layout
         |-- index.js
     |-- pages
         |-- ...
