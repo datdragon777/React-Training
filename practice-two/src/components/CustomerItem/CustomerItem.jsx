@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import './CustomerItem.css';
 import { PropTypes } from 'prop-types';
 import { CustomerInfo, Gender, ContextMenu } from '@components';
@@ -13,8 +13,20 @@ const CustomerItem = ({
   onToggleForm,
   onToggleDeletePopup,
 }) => {
+  
+  const handleClickProfileInfo = useCallback(() => {
+    onShowProfileInfo(customer)
+  }, [customer, onShowProfileInfo])
+
+  const handleClickContextMenu = useCallback(
+    (e) => {
+      onShowContextMenu(e, customer);
+    },
+    [onShowContextMenu, customer]
+  );
+
   return (
-    <li className='customer__item' onClick={() => onShowProfileInfo(customer)}>
+    <li className='customer__item' onClick={handleClickProfileInfo}>
       <CustomerInfo avatar={customer.avatar} name={customer.name} />
       <div className='col-3 col-md-3 customer__align'>
         <p className='customer__text'>{customer.mail}</p>
@@ -24,10 +36,7 @@ const CustomerItem = ({
       </div>
       <div className='col-3 col-md-3 customer__last'>
         <Gender gender={customer.gender} />
-        <div
-          className='customer__option'
-          onClick={(e) => onShowContextMenu(e, customer)}
-        >
+        <div className='customer__option' onClick={handleClickContextMenu}>
           <img src={menuDot} width='14' height='4' alt='dot icon' />
           <div className='customer__context-menu'>
             {selectedCustomer?.id === customer.id && isShowContextMenu && (

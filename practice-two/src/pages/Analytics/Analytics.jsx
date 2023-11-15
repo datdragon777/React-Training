@@ -1,5 +1,5 @@
 // Library
-import React, { useState, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useCallback, lazy, Suspense, useMemo } from 'react';
 import useSWR from 'swr';
 
 // Import style for Analytics component
@@ -53,7 +53,8 @@ const Analytics = ({ onShowToast }) => {
   const [isShowContextMenu, setIsShowContextMenu] = useState(false);
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowForm, setIsShowForm] = useState(false);
-  const { state, dispatch } = useCustomerContext();
+  const { state, getListCustomerDispatch, deleteCustomerDispatch } =
+    useCustomerContext();
   const { customers } = state;
 
   // Open or Close form
@@ -81,9 +82,7 @@ const Analytics = ({ onShowToast }) => {
       toastMessage = MESSAGES.DELETE.FAIL;
       toastType = TOAST_TYPES.FAIL;
     } else {
-      dispatch(
-        actionReducerCustomer(ACTION_TYPES_CUSTOMER.DELETE, response.data)
-      );
+      deleteCustomerDispatch(response.data);
       setSelectedCustomer(null);
     }
     handleTogglePopup(); // To close delete popup
@@ -95,7 +94,7 @@ const Analytics = ({ onShowToast }) => {
     (customer) => {
       // If clicked on the same customer that is already selected, toggle the profile show
       if (selectedCustomer && selectedCustomer.id === customer.id) {
-        setSelectedCustomer(null)
+        setSelectedCustomer(null);
         setIsShowProfileInfo(!isShowProfileInfo);
       } else {
         // If clicked on a different customer, select the new customer and show the new profile
@@ -128,7 +127,7 @@ const Analytics = ({ onShowToast }) => {
     {
       shouldRetryOnError: false, // avoiding call API continuously when occur error
       onSuccess: (data) => {
-        dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.GET_LIST, data));
+        getListCustomerDispatch(data);
       },
     }
   );

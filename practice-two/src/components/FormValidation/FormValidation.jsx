@@ -4,14 +4,12 @@ import { InputValidate, Button } from '@components';
 import {
   BUTTON_VARIANTS,
   MESSAGES,
-  ACTION_TYPES_CUSTOMER,
   GENDER_TYPES,
   TOAST_TYPES,
 } from '@constants';
 import { Validation } from '@helpers';
 import { createCustomerService, updateCustomerService } from '@services';
 import { useCustomerContext } from '@hooks';
-import { actionReducerCustomer } from '@stores';
 
 const FormValidation = ({
   onToggleForm,
@@ -36,7 +34,8 @@ const FormValidation = ({
     description: '',
     address: '',
   });
-  const { dispatch } = useCustomerContext();
+  const { createCustomerDispatch, updateCustomerDispatch } =
+    useCustomerContext();
 
   // Set value for form data
   const handleChange = useCallback(
@@ -106,6 +105,12 @@ const FormValidation = ({
   const isFormError = Object.values(errors).some((error) => error !== '');
   const isValidForm = isFormEmpty || isFormError;
 
+  const dispatchCustomerAction = (data) => {
+    const action = selectedCustomer ? updateCustomerDispatch : createCustomerDispatch
+    action(data)
+    selectedCustomer && setSelectedCustomer(data);
+  }
+
   // Submit form
   const handleSubmit = useCallback(
     async (e) => {
@@ -128,8 +133,7 @@ const FormValidation = ({
       } else {
         toastMessage = MESSAGES[type].SUCCESS;
         toastType = TOAST_TYPES.SUCCESS;
-        dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER[type], data));
-        selectedCustomer && setSelectedCustomer(data);
+        dispatchCustomerAction(data)
       }
 
       onToggleForm(); // To close form

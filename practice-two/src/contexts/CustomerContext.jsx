@@ -1,32 +1,35 @@
-import { useReducer, createContext, useState, useEffect } from 'react';
+import { useReducer, createContext } from 'react';
 import { initialCustomer, customerReducer } from '@stores';
+import { actionReducerCustomer } from '@stores';
+import { ACTION_TYPES_CUSTOMER } from '@constants';
 
 export const CustomerContext = createContext();
 
 export const CustomerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(customerReducer, initialCustomer);
-  // const [toastInfo, setToastInfo] = useState([]);
-  // const [showToast, setShowToast] = useState(false);
 
-  // const showToastInfo = (message, type) => {
-  //   setToastInfo([message, type]);
-  //   setShowToast(!showToast);
-  // };
+  const getListCustomerDispatch = (data) => {
+    dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.GET_LIST, data));
+  };
 
-  // useEffect(() => {
-  //   if (toastInfo) {
-  //     const timeout = setTimeout(() => {
-  //       setToastInfo([]);
-  //       setShowToast(!showToast);
-  //     }, 4000);
+  const createCustomerDispatch = (data) => {
+    dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.ADD, data));
+  };
 
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [toastInfo, showToast]);
+  const updateCustomerDispatch = (data) => {
+    dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.UPDATE, data));
+  };
+
+  const deleteCustomerDispatch = (data) => {
+    dispatch(actionReducerCustomer(ACTION_TYPES_CUSTOMER.DELETE, data));
+  };
 
   const customerContextValue = {
     state,
-    dispatch,
+    getListCustomerDispatch,
+    createCustomerDispatch,
+    updateCustomerDispatch,
+    deleteCustomerDispatch,
   };
 
   return (
