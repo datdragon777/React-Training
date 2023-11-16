@@ -33,7 +33,7 @@
 
 ## Deploy:
 
-- App: [Here](https://react-training-9zys5nyy0-datdragon777.vercel.app/analytics)
+- App: [Here](https://react-training-9zys5nyy0-datdragon777.vercel.app)
 - Storybook: [Here](https://react-training-storybook-practice-two.vercel.app/?path=/docs/components-account--docs)
 
 ## Information:
