@@ -9,7 +9,7 @@
 - Apply storybook
 - Using HTML-CSS training
 - Creating mocking data: write a JSON file and import it into your JSX
-- Deploy to verce
+- Deploy to vercel
 
 ## Features: ##
 - Render UI
