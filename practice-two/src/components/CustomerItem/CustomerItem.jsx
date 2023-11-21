@@ -23,7 +23,7 @@ const CustomerItem = ({
       onShowContextMenu(e, customer);
     },
     [onShowContextMenu, customer]
-  );
+  );                                                                                                                                                                      
 
   return (
     <li className='customer__item' onClick={handleClickProfileInfo}>
